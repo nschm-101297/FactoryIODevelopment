@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FC_AnalogInputValueHandling" Id="{7a3e07f7-bd82-4be6-b731-6cd987c87b4d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FC_AnalogInputValueHandling
+VAR_INPUT
+	RowValue	:	WORD;	//Rohwert Sensor
+	UpperLimit	:	REAL;	//Obere Grenze Umrechnungsbereich
+	LowerLimit	:	REAL;	//Untere Grenze Umrechnungsbereich
+END_VAR
+VAR_OUTPUT
+	ConvertedValue	:	REAL;	//Berechneter Wert
+END_VAR
+VAR
+	tempConvertedRowValue	:	REAL;
+	tempInputValueRange	:	REAL;
+	tempCalculatedValue	:	REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[tempConvertedRowValue := TO_REAL(RowValue);
+tempInputValueRange := tempConvertedRowValue / 100.0;
+tempCalculatedValue := (tempInputValueRange * (UpperLimit - LowerLimit) / 10) + LowerLimit;
+
+ConvertedValue := tempCalculatedValue;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

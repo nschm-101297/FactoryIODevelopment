@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36811.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryIOHMI", "FactoryIOHMI\FactoryIOHMI.csproj", "{B56A791C-B4D3-4F26-9FD2-6AD3C07944FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B56A791C-B4D3-4F26-9FD2-6AD3C07944FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B56A791C-B4D3-4F26-9FD2-6AD3C07944FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B56A791C-B4D3-4F26-9FD2-6AD3C07944FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B56A791C-B4D3-4F26-9FD2-6AD3C07944FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F334695B-8965-47C6-B5AA-3425BE953F27}
+	EndGlobalSection
+EndGlobal

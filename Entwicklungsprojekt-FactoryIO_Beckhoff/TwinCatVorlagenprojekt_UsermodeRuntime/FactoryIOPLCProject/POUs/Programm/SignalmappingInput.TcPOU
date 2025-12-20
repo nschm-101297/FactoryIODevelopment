@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="SignalmappingInput" Id="{729d2361-3cc3-4a8e-b7fa-add898f7db27}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION SignalmappingInput
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* ==================================== Digitale Eingaenge ====================================*)
+BauteilVorEmitter := GVL.mb_Output_Coils[0];
+BetrMan := GVL.mb_Output_Coils[1];
+BetrAuto := GVL.mb_Output_Coils[2];
+StartButton := GVL.mb_Output_Coils[3];
+StopButton := GVL.mb_Output_Coils[4];
+HomeButton := GVL.mb_Output_Coils[5];
+ResetButton := GVL.mb_Output_Coils[6];
+QuitButton	:= GVL.mb_Output_Coils[7]; 
+E_Stop := GVL.mb_Output_Coils[8];
+Sensor_Band_Einlauf := GVL.mb_Output_Coils[9];
+Sensor_Band_Auslauf := GVL.mb_Output_Coils[10];
+AufzugSensorEinlaufFoerderband := GVL.mb_Output_Coils[11];
+AufzugSensorAuslaufFoerderband := GVL.mb_Output_Coils[12];
+RBGEndlageMitte := GVL.mb_Output_Coils[13];
+RBGEndlageLinks := GVL.mb_Output_Coils[14];
+RBGEndlageRechts := GVL.mb_Output_Coils[15];
+(* ==================================== Analoge Eingaenge ====================================*)
+AufzugIstwert := GVL.mb_Output_Registers[0];
+RBGIstwertX := GVL.mb_Output_Registers[1];
+RBGIstwertZ := GVL.mb_Output_Registers[2];
+RFIDCommandID := GVL.mb_Output_Registers[3];
+RFIDReadData := GVL.mb_Output_Registers[4];
+RFIDStatus := GVL.mb_Output_Registers[5];]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

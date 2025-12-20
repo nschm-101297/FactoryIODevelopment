@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="Elevator" Id="{4fe7e48e-4868-4340-aa32-2af6f80c9da8}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	AufzugSensorEinlaufFoerderband	:	BOOL;
+	AufzugSensorAuslaufFoerderband	:	BOOL;
+	AufzugFoerderbandVorwaerts	:	BOOL;
+	AufzugFoerderbandRueckwaerts	:	BOOL;
+	AufzugSollwert	:	WORD;
+	AufzugIstwert	:	WORD;
+	
+	(*======================= Simulation* =======================*)
+	IstPositionConverted	:	REAL;
+	SollPosition	:	REAL;
+	AufzugInPosition	:	BOOL;
+	AufzugBewegen	:	BOOL;
+	AufzugFoerderbandVor	: BOOL;
+	AufzugFoerderbandRueck	: BOOL;
+	AufzugFoerderbandStop	: BOOL;
+	instFBElevator	:	FB_Elevator;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

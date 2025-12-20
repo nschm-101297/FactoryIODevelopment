@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="_OperatingMode" Id="{34ffaabe-f8d9-4fe2-bc0c-cc8d7dfe158e}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	(* ==================================== Buttons ====================================*)
+	BetrMan		:	BOOL;	//Betriebsart Manuell
+	BetrAuto	:	BOOL;	//Betriebsart Auto
+	StartButton	:	BOOL;	//Start-Button
+	StopButton	:	BOOL;	//Stop-Button
+	HomeButton	:	BOOL;	//Grundstellungsbutton
+	ResetButton	:	BOOL;	//Reset-Button
+	QuitButton	:	BOOL;	//Quit-Button
+	E_Stop		:	BOOL;	//Not-Aus
+	(* ==================================== LED's ====================================*)
+	StartLED	:	BOOL;	//LED-Start
+	StopLED		:	BOOL;	//LED-Stop
+	HomeLED		:	BOOL;	//LED-Grundstellung
+	ResetLED	:	BOOL;	//LED-Reset
+	QuitLED		:	BOOL;	//LED-Quit
+	
+	(* ==================================== Simulation signals ====================================*)
+	instOperatingMode	:	FB_OperatingMode;
+	simPermissionHardware	:	BOOL;
+	simPermissionSafety		:	BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

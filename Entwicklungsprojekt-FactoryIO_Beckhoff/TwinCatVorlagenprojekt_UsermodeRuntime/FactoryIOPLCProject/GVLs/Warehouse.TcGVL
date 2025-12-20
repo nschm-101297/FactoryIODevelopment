@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="Warehouse" Id="{77d69743-90e2-4276-a87d-95431fe3fc7c}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	RBGEndlageMitte	:	BOOL;
+	RBGEndlageLinks	:	BOOL;
+	RBGEndlageRechts :	BOOL;
+	RBGIstwertX	:	WORD;
+	RBGIstwertZ	:	WORD;
+	RBGGabelLinks	:	BOOL;
+	RBGGabelRechts	:	BOOL;
+	RBGSollwertX	:	WORD;
+	RBGSollwertZ	:	WORD;
+(*======================= Simulation* =======================*)
+	RBGStartMove	:	BOOL;
+	RBGStartForkLeftMove	:	BOOL;
+	RBGStartForkRightMove	:	BOOL;
+	RBGStartForkMiddleMove	:	BOOL;
+	RBGSollwertXSimu	:	REAL;
+	RBGSollwertZSimu	:	REAL;
+	instStackerCrane	:	FB_StackerCrane;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

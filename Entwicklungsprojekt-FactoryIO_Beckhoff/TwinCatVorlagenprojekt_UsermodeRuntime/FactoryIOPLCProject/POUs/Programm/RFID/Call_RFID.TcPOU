@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_RFID" Id="{b4feced4-53b6-4283-a62f-8d8b9dc5ca1c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_RFID
+VAR
+	tempCounter	:	INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+instFBRFID(PermissionHardware := simPermissionHardware,
+		   QuitError := instOperatingMode.StateOperatingMode.Quit.IsActive,
+		   Reset := instOperatingMode.StateOperatingMode.Reset.IsActive,
+		   SensorPartDetected := Sensor_Band_Einlauf,
+		   CommandID := RFIDCommandID,
+		   ReadData := RFIDReadData,
+		   Status := RFIDStatus,
+		   ExecuteCommand => RFIDExecuteCommand,
+		   Command => RFIDCommand,
+		   WriteData => RFIDWriteData,
+		   MemoryIndex => RFIDMemoryIndex,
+		   ReadDataTag => RFIDCompleteDataToReadSimu);
+
+FOR tempCounter := 0 TO 127 DO
+	RFIDCompleteDataToWriteSimu[tempCounter] := tempCounter;
+END_FOR		   
+instFBRFID.ReadSerialNumber(RFIDReadSerialNumberSimu);
+instFBRFID.WriteDataComplete(RFIDWriteDataSimu, RFIDCompleteDataToWriteSimu);
+instFBRFID.ReadDataComplete(RFIDReadDataSimu);
+IF RFIDReadSerialNumberSimu OR RFIDWriteDataSimu OR RFIDReadDataSimu THEN
+	RFIDReadSerialNumberSimu := FALSE;
+	RFIDWriteDataSimu := FALSE;
+	RFIDReadDataSimu := FALSE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

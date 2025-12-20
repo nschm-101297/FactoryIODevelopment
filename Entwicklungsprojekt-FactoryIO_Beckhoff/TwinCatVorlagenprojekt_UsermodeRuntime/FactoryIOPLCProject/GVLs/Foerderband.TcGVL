@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="Foerderband" Id="{bb75c0ed-a3c6-4516-8db3-568b63f08f95}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	Sensor_Band_Einlauf	:	BOOL;	//Sensor am Band Anfang
+	Sensor_Band_Auslauf	:	BOOL;	//Sensor am Band Ende
+	Foerderband_Vorwaerts	:	BOOL;	//Foerdreband Motor vorwaerts drehen
+	Foerderband_Rueckwaerts	:	BOOL;	//Foerderband Motor ruechwaerts drehen
+	
+	(* ==================================== Simulation signals ====================================*)
+	instFoerderband6	:	FB_Foerderband;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

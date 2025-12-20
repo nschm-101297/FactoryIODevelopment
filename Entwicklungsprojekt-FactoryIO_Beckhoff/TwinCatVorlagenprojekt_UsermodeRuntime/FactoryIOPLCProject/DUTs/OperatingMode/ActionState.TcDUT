@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ActionState" Id="{9db9beef-3dc7-4065-befb-3aaed0f3090c}">
+    <Declaration><![CDATA[TYPE ActionState :
+STRUCT
+	PreconditionsFullfilled	:	BOOL;
+	IsActive	:	BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

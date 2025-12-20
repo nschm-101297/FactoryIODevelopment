@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_Emitter" Id="{5eabb001-0730-44e4-adc3-7873d5c9fd23}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_Emitter
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[instEmitter(PartPresent:= BauteilVorEmitter, 
+			CreatePart=> Emitter_Rollenband4m);
+			
+IF CreateNewPart THEN
+	instEmitter.Create();
+END_IF
+
+IF BauteilVorEmitter THEN
+	CreateNewPart := FALSE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

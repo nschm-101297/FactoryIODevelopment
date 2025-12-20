@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_RFID" Id="{8226cfd8-3a2e-42d6-8287-cb29816b45ee}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RFID
+VAR_INPUT
+	PermissionHardware	:	BOOL;	//Freigabe Hardware
+	QuitError	:	BOOL;	//Fehler quittieren
+	Reset	:	BOOL;	//Reset Commands
+	SensorPartDetected	:	BOOL;	//Sensor Teil erkannt
+	CommandID	:	WORD;	//Wird nach einem Befehl immer um 1 erhoeht
+	ReadData	:	WORD;	//Gelesener Wert an der Stelle vom MemoryIndex
+	Status	:	WORD;	//Status ungleich 0 = Fehler
+END_VAR
+VAR_OUTPUT
+	ExecuteCommand	:	BOOL;
+	FMReadingSerialNumber	:	BOOL;	//Fertigmeldung Lesen Seriennummer
+	FMReadingData	:	BOOL;	//Fertigmeldung Lesen
+	FMWritingData	:	BOOL;	//Fertigmeldung Schreiben
+	Error	:	BOOL;	//Fehler
+	ErrorID	:	WORD;	//Fehler-ID
+	Command	:	WORD;	//Command-ID:
+	WriteData	:	WORD;	//Daten die geschrieben werden
+	MemoryIndex	:	WORD;	//Angewaehlten Memory-Index der gelesen/geschrieben werden soll
+	ReadDataTag	:	ARRAY[0..127] OF WORD;	//Array mit allen gelesenen Daten
+END_VAR
+VAR
+	statReadingSerialNumber	:	BOOL;
+	statExecuteCommand	:	BOOL;
+	statReadingData	:	BOOL;
+	statWritingData	:	BOOL;
+	statErrorActive	:	BOOL;
+	statReadingSerialnumberFinished	:	BOOL;
+	statReadingDataFinished	:	BOOL;
+	statWritingDataFinished	:	BOOL;
+	statSelectedCommand	:	WORD;
+	statErrorID	:	WORD;
+	statLastCommandID	:	WORD;
+	statReadSerialNumber	:	WORD;
+	statDataToWrite	:	WORD;
+	statSelectedMemoryIndex	:	WORD;
+	statReadDataCompelete	:	ARRAY[0..127] OF WORD;
+	statCompleteDataToWrite	:	ARRAY[0..127] OF WORD;
+	statStateReadSerialNumber	:	RFIDReadSerialnumberStates;
+	statStateWriteData	:	RFIDReadWriteDataStates;
+	statStateReadData	:	RFIDReadWriteDataStates;
+	statRisingEdgeNewOrder	:	R_TRIG;
+	statTONDelayWritting	:	TON;
+	statTONDelayReading	:	TON;
+	debugStepMemory	:	INT;
+END_VAR
+VAR CONSTANT
+	NOCOMMAND	:	WORD := 0;
+	READSERIALNUMBERCOMMAND	:	WORD := 1;
+	READDATACOMMAND	:	WORD := 2;
+	WRITEDATACOMMAND	:	WORD := 3;
+	CLEARALLDATACOMMAND	:	WORD := 4;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== Error Handling =====================*)
+IF QuitError AND statErrorActive THEN
+	statErrorActive := FALSE;
+	statErrorID := 0;
+END_IF
+IF Status <> 0 THEN
+	statErrorActive := TRUE;
+	statErrorID := Status;
+END_IF
+IF PermissionHardware AND SensorPartDetected THEN
+	(*===================== Reset Data =====================*)
+	statRisingEdgeNewOrder(CLK:= statReadingSerialNumber OR statReadingData OR 
+								 statWritingData);
+	IF NOT SensorPartDetected OR statRisingEdgeNewOrder.Q
+	THEN
+		ResetData_On();
+	ELSIF Reset THEN
+		ResetData_On();
+		statSelectedCommand := NOCOMMAND;
+		statStateReadSerialNumber := RFIDReadSerialnumberStates.WAITINGTRIGGER;	
+		statStateWriteData := RFIDReadWriteDataStates.WAITINGTRIGGER;
+	END_IF
+	IF CommandID = 0 AND statLastCommandID <> 0 THEN
+		statLastCommandID := 0;
+	END_IF
+	(*===================== Read Serialnumber =====================*)
+	CASE statStateReadSerialNumber OF
+		RFIDReadSerialnumberStates.WAITINGTRIGGER :
+		debugStepMemory := RFIDReadSerialnumberStates.WAITINGTRIGGER;
+			IF statReadingSerialNumber THEN
+				statReadingSerialNumber := FALSE;
+				statStateReadSerialNumber := RFIDReadSerialnumberStates.SETTRIGGER;
+			END_IF
+		RFIDReadSerialnumberStates.SETTRIGGER:
+			debugStepMemory := RFIDReadSerialnumberStates.SETTRIGGER;
+			statExecuteCommand := TRUE;
+			statSelectedCommand := READSERIALNUMBERCOMMAND;
+			statStateReadSerialNumber := RFIDReadSerialnumberStates.WAITINGRESPONSE;
+		RFIDReadSerialnumberStates.WAITINGRESPONSE:
+			debugStepMemory := RFIDReadSerialnumberStates.WAITINGRESPONSE;
+			IF statErrorActive THEN
+				statStateReadSerialNumber := RFIDReadSerialnumberStates.ERRORACTIVE;
+			ELSIF CommandID <> statLastCommandID THEN
+				statStateReadSerialNumber := RFIDReadSerialnumberStates.RESPONSE;
+				statExecuteCommand := FALSE;
+				statSelectedCommand := NOCOMMAND;
+			END_IF
+		RFIDReadSerialnumberStates.RESPONSE:
+			debugStepMemory := RFIDReadSerialnumberStates.RESPONSE;
+			statReadSerialNumber := ReadData;
+			statReadingSerialnumberFinished := TRUE;
+			statStateReadSerialNumber := RFIDReadSerialnumberStates.WAITINGTRIGGER;
+		RFIDReadSerialnumberStates.ERRORACTIVE:
+			debugStepMemory := RFIDReadSerialnumberStates.ERRORACTIVE;
+			IF NOT statErrorActive THEN
+				statStateReadSerialNumber := RFIDReadSerialnumberStates.WAITINGTRIGGER;
+			END_IF
+	END_CASE;
+	(*===================== Read Data =====================*)
+	statTONDelayReading(IN:= statStateReadData = RFIDReadWriteDataStates.SETTRIGGER, 
+						 PT:= T#100MS);
+	CASE statStateReadData OF
+		RFIDReadWriteDataStates.WAITINGTRIGGER :
+		debugStepMemory := RFIDReadWriteDataStates.WAITINGTRIGGER;
+			IF statReadingData THEN
+				statReadingData := FALSE;
+				statSelectedCommand := READDATACOMMAND;
+				statSelectedMemoryIndex := 1;
+				statStateReadData := RFIDReadWriteDataStates.SETTRIGGER;
+			END_IF
+		RFIDReadWriteDataStates.SETTRIGGER:
+			debugStepMemory := RFIDReadWriteDataStates.SETTRIGGER;
+			IF statTONDelayReading.Q THEN
+				statExecuteCommand := TRUE;
+				statStateReadData := RFIDReadWriteDataStates.WAITINGRESPONSE;
+			END_IF
+		RFIDReadWriteDataStates.WAITINGRESPONSE:
+			debugStepMemory := RFIDReadWriteDataStates.WAITINGRESPONSE;
+			IF statErrorActive THEN
+				statStateReadData := RFIDReadWriteDataStates.ERRORACTIVE;
+			ELSIF CommandID <> statLastCommandID THEN
+				statStateReadData := RFIDReadWriteDataStates.RESPONSE;
+ 				statExecuteCommand := FALSE;
+			END_IF
+		RFIDReadWriteDataStates.RESPONSE:
+			debugStepMemory := RFIDReadWriteDataStates.RESPONSE;
+			statReadDataCompelete[statSelectedMemoryIndex -1] := ReadData;
+			IF statSelectedMemoryIndex >= 127 THEN
+				statStateReadData := RFIDReadWriteDataStates.FINISHED;	
+			ELSE
+				statSelectedMemoryIndex := statSelectedMemoryIndex + 1;
+				statStateReadData := RFIDReadWriteDataStates.SETTRIGGER;	
+			END_IF
+		RFIDReadWriteDataStates.ERRORACTIVE:
+			debugStepMemory := RFIDReadWriteDataStates.ERRORACTIVE;
+			IF NOT statErrorActive THEN
+				statStateReadData := RFIDReadWriteDataStates.WAITINGTRIGGER;
+			END_IF
+		RFIDReadWriteDataStates.FINISHED:
+			statReadingDataFinished := TRUE;
+			statSelectedCommand := NOCOMMAND;
+			statStateReadData := RFIDReadWriteDataStates.WAITINGTRIGGER;
+	END_CASE;
+	(*===================== Write Data =====================*)
+	statTONDelayWritting(IN:= statStateWriteData = RFIDReadWriteDataStates.SETTRIGGER, 
+						 PT:= T#100MS);
+	CASE statStateWriteData OF
+		RFIDReadWriteDataStates.WAITINGTRIGGER :
+		debugStepMemory := RFIDReadWriteDataStates.WAITINGTRIGGER;
+			IF statWritingData THEN
+				statWritingData := FALSE;
+				statSelectedCommand := WRITEDATACOMMAND;
+				statSelectedMemoryIndex := 1;
+				statStateWriteData := RFIDReadWriteDataStates.SETTRIGGER;
+			END_IF
+		RFIDReadWriteDataStates.SETTRIGGER:
+			debugStepMemory := RFIDReadWriteDataStates.SETTRIGGER;
+			IF statTONDelayWritting.Q THEN
+				statExecuteCommand := TRUE;
+				statDataToWrite := statCompleteDataToWrite[statSelectedMemoryIndex - 1];
+				statStateWriteData := RFIDReadWriteDataStates.WAITINGRESPONSE;
+			END_IF
+		RFIDReadWriteDataStates.WAITINGRESPONSE:
+			debugStepMemory := RFIDReadWriteDataStates.WAITINGRESPONSE;
+			IF statErrorActive THEN
+				statStateWriteData := RFIDReadWriteDataStates.ERRORACTIVE;
+			ELSIF CommandID <> statLastCommandID THEN
+				statStateWriteData := RFIDReadWriteDataStates.RESPONSE;
+ 				statExecuteCommand := FALSE;
+			END_IF
+		RFIDReadWriteDataStates.RESPONSE:
+			debugStepMemory := RFIDReadWriteDataStates.RESPONSE;
+			IF statSelectedMemoryIndex >= 127 THEN
+				statStateWriteData := RFIDReadWriteDataStates.FINISHED;	
+			ELSE
+				statSelectedMemoryIndex := statSelectedMemoryIndex + 1;
+				statStateWriteData := RFIDReadWriteDataStates.SETTRIGGER;	
+			END_IF
+		RFIDReadWriteDataStates.ERRORACTIVE:
+			debugStepMemory := RFIDReadWriteDataStates.ERRORACTIVE;
+			IF NOT statErrorActive THEN
+				statStateWriteData := RFIDReadWriteDataStates.WAITINGTRIGGER;
+			END_IF
+		RFIDReadWriteDataStates.FINISHED:
+			statWritingDataFinished := TRUE;
+			statSelectedCommand := NOCOMMAND;
+			statStateWriteData := RFIDReadWriteDataStates.WAITINGTRIGGER;
+	END_CASE;
+	(*===================== Save Data =====================*)
+	statLastCommandID := CommandID;
+ELSE
+	statReadingSerialNumber := FALSE;	
+	statReadingData := FALSE;
+	statWritingData := FALSE;
+	statExecuteCommand := FALSE;
+	statReadingSerialnumberFinished := FALSE;
+	statReadingDataFinished := FALSE;
+	statWritingDataFinished := FALSE;
+	statSelectedCommand := NOCOMMAND;
+END_IF
+(*===================== Outputs =====================*)
+ExecuteCommand := statExecuteCommand;
+FMReadingSerialNumber := statReadingSerialnumberFinished;
+FMReadingData := statReadingDataFinished;
+FMWritingData := statWritingDataFinished;
+Error := statErrorActive;
+ErrorID := statErrorID;
+Command := statSelectedCommand;
+WriteData := statDataToWrite;
+MemoryIndex := statSelectedMemoryIndex;
+ReadDataTag := statReadDataCompelete;]]></ST>
+    </Implementation>
+    <Method Name="ReadDataComplete" Id="{69151cef-dab6-4391-96d2-c2b48987ded4}">
+      <Declaration><![CDATA[METHOD PUBLIC ReadDataComplete : BOOL
+VAR_INPUT
+	StartReadData	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF StartReadData THEN
+	statReadingData := TRUE;
+	ReadDataComplete := TRUE;
+ELSE
+	ReadDataComplete := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadSerialNumber" Id="{1920a587-67f2-42e2-910d-a6236847131b}">
+      <Declaration><![CDATA[METHOD PUBLIC ReadSerialNumber : BOOL
+VAR_INPUT
+	Start_ReadingSerialNumebr	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Start_ReadingSerialNumebr AND NOT statErrorActive AND
+	SensorPartDetected
+THEN
+	statReadingSerialNumber := TRUE;
+	ReadSerialNumber := TRUE;
+ELSE
+	ReadSerialNumber := FALSE;			
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ResetData_On" Id="{800b3ef3-cecc-44ba-a7eb-89302c3f2329}">
+      <Declaration><![CDATA[METHOD PRIVATE ResetData_On : BOOL
+VAR
+	i :	INT;	//Laufvariable abloeschen gelesene Daten
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[statReadingSerialnumberFinished := FALSE;
+statReadingDataFinished := FALSE;
+statWritingDataFinished := FALSE;
+statExecuteCommand := FALSE;
+statReadSerialNumber := 0;
+statDataToWrite := 0;
+statSelectedMemoryIndex := 0;
+statSelectedCommand := NOCOMMAND;
+FOR i := 0 TO 127 DO
+	statReadDataCompelete[i] := 0;
+END_FOR
+
+ResetData_On := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WriteDataComplete" Id="{b7da192e-cabf-4f02-a7fe-f56d13b4c29a}">
+      <Declaration><![CDATA[METHOD WriteDataComplete : BOOL
+VAR_INPUT
+	StartWriteData	:	BOOL;
+	CompleteDataToWrite	:	ARRAY [0..127] OF WORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF StartWriteData THEN
+	statWritingData := TRUE;
+	statCompleteDataToWrite := CompleteDataToWrite;	
+	WriteDataComplete := TRUE;
+ELSE
+	WriteDataComplete := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

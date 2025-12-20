@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="RFIDReadSerialnumberStates" Id="{c5a46ae6-3082-4bf5-9dbf-4964ab4ec6eb}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE RFIDReadSerialnumberStates :
+(
+	WAITINGTRIGGER := 0,
+	SETTRIGGER,
+	WAITINGRESPONSE,
+	RESPONSE,
+	ERRORACTIVE
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

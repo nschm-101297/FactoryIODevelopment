@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_Aufzug" Id="{aacc9d31-4429-4f84-b695-0be7a89ff098}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_Aufzug
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[instFBElevator(
+	CurrentPosition:= AufzugIstwert, 
+	SensorOutfeed:= AufzugSensorAuslaufFoerderband, 
+	SensorInfeed:= AufzugSensorEinlaufFoerderband, 
+	SetPointPositionElevator=> AufzugSollwert, 
+	ConveyorForward=> AufzugFoerderbandVorwaerts, 
+	ConveyorBackward=> AufzugFoerderbandRueckwaerts, 
+	ElevatorInPosition=> AufzugInPosition, 
+	OperatingMode:= instOperatingMode.StateOperatingMode);
+	
+instFBElevator.MoveElevator(AufzugBewegen, SollPosition);
+instFBElevator.ConveyorForward_ON(AufzugFoerderbandVor);
+instFBElevator.ConveyorBackward_ON(AufzugFoerderbandRueck);
+instFBElevator.Conveyor_OFF(AufzugFoerderbandStop);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="Emitter" Id="{6f5ea492-507e-4f6b-b498-dba00c51bd54}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	instEmitter	:	FB_Emitter;	//Instanz Emitter 4m Rollenfoerderer
+	CreateNewPart	:	BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

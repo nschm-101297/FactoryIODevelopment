@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_Foerderband" Id="{ce6e1859-68b8-4786-b679-b328e40439d4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_Foerderband
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[instFoerderband6(
+	SensorInfeed:= Sensor_Band_Einlauf, 
+	SensorOutfeed:= Sensor_Band_Auslauf, 
+	MaximumTimeRuncontrol:= T#30S, 
+	MotorForward=> Foerderband_Vorwaerts, 
+	MotorBackward=> Foerderband_Rueckwaerts, 
+	RuncontrolForwardActive=> , 
+	RuncontrolBackwardActive=> , 
+	Error=> , 
+	OperatingMode:= instOperatingMode.StateOperatingMode);
+
+instFoerderband6.MotorForward_On(Sensor_Band_Einlauf OR StartButton);
+instFoerderband6.MotorBackward_On(Sensor_Band_Auslauf);
+instFoerderband6.Motor_Off((Foerderband_Vorwaerts AND Sensor_Band_Auslauf) OR
+							(Foerderband_Rueckwaerts AND Sensor_Band_Einlauf));]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

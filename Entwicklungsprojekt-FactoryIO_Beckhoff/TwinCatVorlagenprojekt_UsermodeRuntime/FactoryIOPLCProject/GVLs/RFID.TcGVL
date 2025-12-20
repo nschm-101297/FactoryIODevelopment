@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="RFID" Id="{af72479c-8487-4cab-9f64-73dcd56f51a1}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	RFIDCommandID	:	WORD;
+	RFIDReadData	:	WORD;
+	RFIDStatus	:	WORD;
+	RFIDExecuteCommand	:	BOOL;
+	RFIDCommand	:	WORD;
+	RFIDWriteData	:	WORD;
+	RFIDMemoryIndex	:	WORD;
+	(*======================== Simulation ========================*)
+	RFIDReadSerialNumberSimu	:	BOOL;
+	RFIDReadDataSimu	:	BOOL;
+	RFIDWriteDataSimu	:	BOOL;
+	RFIDCompleteDataToReadSimu	:	ARRAY[0..127] of WORD;
+	RFIDCompleteDataToWriteSimu	:	ARRAY[0..127] of WORD;
+	instFBRFID	:	FB_RFID;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

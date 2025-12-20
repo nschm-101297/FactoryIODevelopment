@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{efc828a3-15ab-4363-a86a-bea84d274138}</ProjectGuid>
+    <AssemblyName>Dg_Writing_RFID</AssemblyName>
+    <Name>Dg_Writing_RFID</Name>
+    <RootNamespace>Dg_Writing_RFID</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="YT Scope Project.tcscopex">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+</Project>

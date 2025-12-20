@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="OperatingModeHomeing" Id="{dd0e6127-1187-4e5a-bb52-77fa0617157b}">
+    <Declaration><![CDATA[TYPE OperatingModeHomeing :
+STRUCT
+	PreconditionsFullfilled	:	BOOL;
+	IsActive	:	BOOL;
+	IsReached	:	BOOL;
+	AllMachinesInHome	:	BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

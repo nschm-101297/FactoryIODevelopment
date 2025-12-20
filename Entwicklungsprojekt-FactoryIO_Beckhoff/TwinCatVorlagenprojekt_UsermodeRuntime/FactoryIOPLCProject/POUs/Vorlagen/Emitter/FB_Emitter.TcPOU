@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Emitter" Id="{5ab143ff-446a-40b1-829f-857198f2ba46}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Emitter
+VAR_INPUT
+	PartPresent	:	BOOL;
+END_VAR
+VAR_OUTPUT
+	CreatePart	:	BOOL;
+END_VAR
+VAR
+	internCreatePart	: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF PartPresent THEN
+	internCreatePart := FALSE;
+END_IF
+
+CreatePart := internCreatePart;]]></ST>
+    </Implementation>
+    <Method Name="Create" Id="{3f33d370-46a2-407f-803f-2e9550997144}">
+      <Declaration><![CDATA[METHOD PUBLIC Create : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT PartPresent THEN
+	internCreatePart := TRUE;
+	Create := TRUE;
+ELSE
+	internCreatePart := FALSE;
+	Create := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

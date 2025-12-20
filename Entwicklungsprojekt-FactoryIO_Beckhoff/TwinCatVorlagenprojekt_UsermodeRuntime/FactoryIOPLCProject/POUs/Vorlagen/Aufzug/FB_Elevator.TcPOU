@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Elevator" Id="{2a827300-0b60-4120-b719-8232ca3f6355}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Elevator
+VAR_INPUT
+	CurrentPosition	:	WORD;	//Current Position of Conveyor
+	SensorOutfeed	:	BOOL;	//Sensor Outfeed Conveyor
+	SensorInfeed	:	BOOL;	//Sensor Infeed Conveyor	
+END_VAR
+VAR_OUTPUT
+	SetPointPositionElevator	:	WORD;
+	ConveyorForward		:	BOOL;
+	ConveyorBackward	:	BOOL;
+	ElevatorInPosition	:	BOOL;
+END_VAR
+VAR_IN_OUT
+	OperatingMode	:	OperatingMode;	//Schnittstelle für Betriebsarten
+END_VAR
+VAR
+	statCurrentPosition	:	REAL;
+	statSetPointPosition	:	REAL;	
+	statSelectedPositionToElevator	:	REAL;
+	statPositionToElevator	:	WORD;
+	statConveyorForward		:	BOOL;
+	statConveyorBackward	:	BOOL;
+	statMoveElevator	:	BOOL;
+	statInPosition	:	BOOL;
+	statRTrigPartOutfeed	:	R_TRIG;
+	statRTrigPartInfeed	:	R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== CurrentPosition =====================*)
+FC_AnalogInputValueHandling(RowValue:= CurrentPosition, 
+							UpperLimit:= 7.0, 
+							LowerLimit:= 0.0, 
+							ConvertedValue=> statCurrentPosition);
+(*===================== Elevator in Position =====================*)
+IF (statCurrentPosition >= statSetPointPosition - 0.1) AND (statCurrentPosition <= statSetPointPosition + 0.1) THEN
+	statInPosition := TRUE;
+	statMoveElevator := FALSE;
+ELSE
+	statInPosition := FALSE;
+END_IF
+(*===================== Positioning Elevator =====================*)
+IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive 
+   AND statMoveElevator THEN
+	statSelectedPositionToElevator := statSetPointPosition;
+END_IF
+IF OperatingMode.EStop.IsActive OR OperatingMode.ManuelIsActive OR
+	OperatingMode.Fault.IsActive OR OperatingMode.AutomaticStop.IsActive THEN
+	statSelectedPositionToElevator := statCurrentPosition;
+	statMoveElevator := FALSE;
+END_IF
+(*===================== SetPointPosition =====================*)
+FC_AnalogOutputValueHandling(Setpoint:= statSelectedPositionToElevator, 
+						     UpperLimit:= 7.0, 
+							 LowerLimit:= 0.0, 
+							 ConvertedValue=> statPositionToElevator);
+(*===================== Conveyor Reset =====================*)
+IF OperatingMode.EStop.IsActive OR OperatingMode.ManuelIsActive OR
+	OperatingMode.Fault.IsActive OR OperatingMode.AutomaticStop.IsActive THEN
+	statConveyorForward := FALSE;
+	statConveyorBackward := FALSE;
+END_IF
+(*===================== Conveyor Forward =====================*)
+statRTrigPartOutfeed(CLK:= SensorOutfeed);
+IF statRTrigPartOutfeed.Q THEN
+	statConveyorForward := FALSE;
+END_IF
+(*===================== Conveyor Backward =====================*)
+statRTrigPartInfeed(CLK:= SensorInfeed);
+IF statRTrigPartInfeed.Q THEN
+	statConveyorBackward := FALSE;
+END_IF
+(*===================== Outputs writting =====================*)
+SetPointPositionElevator := statPositionToElevator;
+ConveyorForward := statConveyorForward;
+ConveyorBackward := statConveyorBackward;
+ElevatorInPosition := statInPosition;]]></ST>
+    </Implementation>
+    <Method Name="Conveyor_OFF" Id="{48119ff9-0305-4a70-9426-eb2ef6c3731f}">
+      <Declaration><![CDATA[METHOD PUBLIC Conveyor_OFF : BOOL
+VAR_INPUT
+	ConveyorStop	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF ConveyorStop THEN
+	statConveyorForward := FALSE;
+	statConveyorBackward := FALSE;
+	Conveyor_OFF := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConveyorBackward_ON" Id="{256a1358-daa7-4fea-b0f5-f2ac6faae314}">
+      <Declaration><![CDATA[METHOD PUBLIC ConveyorBackward_ON : BOOL
+VAR_INPUT
+	ConveyorBackwardStart	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND 
+	statInPosition AND ConveyorBackwardStart AND NOT statConveyorForward
+	THEN
+	statConveyorBackward := TRUE;
+	ConveyorBackward_ON := TRUE;
+ELSE
+	ConveyorBackward_ON := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ConveyorForward_ON" Id="{7be3d785-4333-48b7-9818-18a3c1092a32}">
+      <Declaration><![CDATA[METHOD PUBLIC ConveyorForward_ON : BOOL
+VAR_INPUT
+	ConveyorForwardStart	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND 
+	statInPosition AND ConveyorForwardStart AND NOT statConveyorBackward
+	THEN
+	statConveyorForward := TRUE;
+	ConveyorForward_ON := TRUE;
+ELSE
+	ConveyorForward_ON := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveElevator" Id="{a12eb686-e079-4b75-b91c-863039272e2a}">
+      <Declaration><![CDATA[METHOD PUBLIC MoveElevator
+VAR_INPUT
+	MoveStart	:	BOOL;
+	NewPosition	:	REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND MoveStart
+	THEN
+	statMoveElevator := TRUE;
+	SetPointPosition := NewPosition;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="SetPointPosition" Id="{0aaec5ab-1fea-4ec0-8300-12ab65669165}">
+      <Declaration><![CDATA[PROPERTY PUBLIC SetPointPosition : REAL]]></Declaration>
+      <Get Name="Get" Id="{220f88aa-4ea9-4049-bf02-fc462309f3ae}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SetPointPosition := statSetPointPosition;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{98d181d2-0d1d-40e4-93ec-a9369cf367e7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF SetPointPosition <= 7.0 AND SetPointPosition >= 0.0 THEN
+	statSetPointPosition := SetPointPosition;
+END_IF]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

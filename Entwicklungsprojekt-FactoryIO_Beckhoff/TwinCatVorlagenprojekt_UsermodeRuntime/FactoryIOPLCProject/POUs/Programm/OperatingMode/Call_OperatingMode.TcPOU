@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_OperatingMode" Id="{e0abeec7-2c06-4fbb-ba98-ebafc89ce1b0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_OperatingMode
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[instOperatingMode(PermissionHardware:= simPermissionHardware, 
+				  PermissionSoftware:= simPermissionSafety, 
+				  E_Stop:= E_Stop, 
+				  OperatingModeManual:= BetrMan, 
+				  OperatingModeAutomatic:= BetrAuto, 
+				  LEDStart=> StartLED, 
+				  LEDStop=> StopLED, 
+				  LEDHome=> HomeLED, 
+				  LEDReset=> ResetLED, 
+				  LEDQuit=> QuitLED);
+
+instOperatingMode.Start_On(StartButton);
+instOperatingMode.Stop_On(StopButton);
+instOperatingMode.Homeing_On(HomeButton);
+instOperatingMode.Reset_On(ResetButton);
+instOperatingMode.Quit_On(QuitButton);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

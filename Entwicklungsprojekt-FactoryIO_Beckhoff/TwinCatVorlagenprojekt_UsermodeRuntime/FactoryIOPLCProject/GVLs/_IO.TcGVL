@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="_IO" Id="{81e37156-9cde-434e-8739-06951237bf97}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	
+	(* ==================================== Digitale Eingaenge ====================================*)
+	
+	BauteilVorEmitter	:	BOOL;	//Sensor 4m Rollenband Emitter Bauteil vorhanden
+	(* ==================================== Digitale Ausgaenge ====================================*)
+	
+	Emitter_Rollenband4m	:	BOOL;	//Emitter Rollenband 4m hinten im Eck
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

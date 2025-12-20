@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_Warehouse" Id="{f88e7ae7-f95a-4d34-9fc0-142f9b7746fc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_Warehouse
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[instStackerCrane(ForkSensorMiddle := RBGEndlageMitte,
+                 ForkSensorLeft := RBGEndlageLinks,	
+                 ForkSensorRight := RBGEndlageRechts,	
+				 StackerCraneCurrentPositionXAxis := RBGIstwertX,
+                 StackerCraneCurrentPositionZAxis := RBGIstwertZ,
+				 OperatingMode := instOperatingMode.StateOperatingMode,
+				 SetPointToXAxis => RBGSollwertX, 
+                 SetPointToZAxis => RBGSollwertZ, 
+                 MoveForkLeft => RBGGabelLinks,	
+                 MoveForkRight => RBGGabelRechts);
+instStackerCrane.MoveAxesStackerCrane_ON(RBGStartMove, RBGSollwertXSimu, RBGSollwertZSimu);
+instStackerCrane.MoveForkToLeft_ON(RBGStartForkLeftMove);
+instStackerCrane.MoveForkToRight_ON(RBGStartForkRightMove);
+instStackerCrane.MoveForkToMiddle_ON(RBGStartForkMiddleMove);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
