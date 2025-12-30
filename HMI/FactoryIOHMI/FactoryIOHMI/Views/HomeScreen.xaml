@@ -7,7 +7,78 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="Beige">
+    <UserControl.Resources>
+        <DropShadowEffect x:Key="ShadowNormal" BlurRadius="12" ShadowDepth="14" Opacity="0.35" />
+        <DropShadowEffect x:Key="ShadowHover"  BlurRadius="16" ShadowDepth="16" Opacity="0.45" />
+        <DropShadowEffect x:Key="ShadowPressed" BlurRadius="8" ShadowDepth="20" Opacity="0.20" />
+
+        <Style x:Key="ShadowButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Beige"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Face"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="True"
+                                Effect="{StaticResource ShadowNormal}">
+
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Face" Property="Effect" Value="{StaticResource ShadowHover}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Face" Property="Effect" Value="{StaticResource ShadowPressed}"/>
+                                <Setter TargetName="Face" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Face" Property="Effect" Value="{x:Null}"/>
+                                <Setter TargetName="Face" Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="0"
+                Style="{StaticResource ShadowButtonStyle}">
+            <Image Source="/Images/Home.png" Stretch="Uniform" MinWidth="50"/>
+        </Button>
+        <Button Grid.Column="1"
+                Style="{StaticResource ShadowButtonStyle}">
+            <Image Source="/Images/Error.png" Stretch="Uniform" MinWidth="50"/>
+        </Button>
+        <Button Grid.Column="2"
+                Style="{StaticResource ShadowButtonStyle}">
+            <Image Source="/Images/Settings.png" Stretch="Uniform" MinWidth="50"/>
+        </Button>
     </Grid>
 </UserControl>

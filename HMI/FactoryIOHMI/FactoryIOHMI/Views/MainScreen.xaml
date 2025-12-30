@@ -5,20 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FactoryIOHMI.Views"
         mc:Ignorable="d"
-        Title="MainScreen" Height="450" Width="800">
+        Title="FactoryIO-HMI" Height="450" Width="800"
+        WindowState="Maximized" WindowStartupLocation="CenterScreen"
+        Background="Beige">
+    <Window.Resources>
+        <Style x:Key="BTNStyle" TargetType="Button">
+            <Setter Property="Cursor" Value="Arrow"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="15"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" MinWidth="150"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Header="Bedinung" Margin="5" MinWidth="100"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Column="0" Grid.Row="0" Source="/Images/Home.png" MaxHeight="100"
+               HorizontalAlignment="Center"/>
+        <GroupBox Grid.Column="1" Grid.Row="0" Margin="0"
+                  FontWeight="Bold" FontSize="20"
+                  Header="MachineState"
                   BorderBrush="Black" BorderThickness="2">
-            <StackPanel Orientation="Vertical">
-                <Button Margin="5" Content="Main Screen"/>
-                <Button Margin="5" Content="Connection"/>
-                <Button Margin="5" Content="Runtime"/>
-            </StackPanel>
+            <Grid>
+                <Image Source="/Images/Machine_Run.png" MaxHeight="200"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Stretch="Uniform"/>
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="20" FontWeight="Bold" Foreground="Red"
+                       Content="Produktion"/>
+            </Grid>
         </GroupBox>
-        <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <GroupBox Grid.Column="2" Grid.Row="0" Margin="0"
+                  FontWeight="Bold" FontSize="20"
+                  Header="Error"
+                  BorderBrush="Black" BorderThickness="2">
+                <Grid>
+                    <Button Margin="5" Style="{StaticResource BTNStyle}" Background="Transparent">
+                        <Image Source="/Images/Error.png" MaxHeight="100"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Stretch="Uniform"/>
+                    </Button>
+                </Grid>
+        </GroupBox>
+        <ContentControl Grid.ColumnSpan="3" Grid.Row="1"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>
