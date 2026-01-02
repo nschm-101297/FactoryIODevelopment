@@ -12,6 +12,7 @@ using TwinCAT;
 using TwinCAT.Ads;
 using TwinCAT.Ads.TypeSystem;
 using TwinCAT.TypeSystem;
+using System.Windows;
 
 namespace FactoryIOHMI.ViewModels
 {
@@ -82,6 +83,7 @@ namespace FactoryIOHMI.ViewModels
                 _runtimeADSClient = new AdsClient();
                 _runtimeADSClient.Connect(AmsNetId.Local, 851);
                 connectionSucessfull = _runtimeADSClient.IsConnected;
+                _runtimeADSClient.ConnectionStateChanged += RuntimeClient_ConnectionStateChanged;
             }
             catch (Exception ex)
             {
@@ -90,6 +92,13 @@ namespace FactoryIOHMI.ViewModels
             }
             return connectionSucessfull;
         }
+
+        private void RuntimeClient_ConnectionStateChanged(object? sender, ConnectionStateChangedEventArgs e)
+        {
+            ConnectionState connectionStateNew = e.NewState;
+            RuntimeConnected = connectionStateNew == ConnectionState.Connected;
+        }
+
         private ImageSource LoadImageCurrentMachineState()
         {
             Uri uriMachineState = new Uri(@"\Images\Machine_Stop.png", UriKind.Relative);
