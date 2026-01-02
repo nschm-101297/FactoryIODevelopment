@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FactoryIOHMI.ViewModels;
 
 namespace FactoryIOHMI.Views
 {
@@ -22,6 +23,7 @@ namespace FactoryIOHMI.Views
         public MainScreen()
         {
             InitializeComponent();
+            this.DataContext = new MainScreenViewModel();
         }
     }
 }

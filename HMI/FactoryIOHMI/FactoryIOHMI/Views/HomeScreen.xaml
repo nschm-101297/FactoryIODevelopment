@@ -70,15 +70,15 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0"
                 Style="{StaticResource ShadowButtonStyle}">
-            <Image Source="/Images/Home.png" Stretch="Uniform" MinWidth="50"/>
+            <Image Source="/Images/Home.png" Stretch="Uniform" MinWidth="50" MaxWidth="400"/>
         </Button>
         <Button Grid.Column="1"
                 Style="{StaticResource ShadowButtonStyle}">
-            <Image Source="/Images/Error.png" Stretch="Uniform" MinWidth="50"/>
+            <Image Source="/Images/Error.png" Stretch="Uniform" MinWidth="50" MaxWidth="400"/>
         </Button>
         <Button Grid.Column="2"
                 Style="{StaticResource ShadowButtonStyle}">
-            <Image Source="/Images/Settings.png" Stretch="Uniform" MinWidth="50"/>
+            <Image Source="/Images/Settings.png" Stretch="Uniform" MinWidth="50" MaxWidth="400"/>
         </Button>
     </Grid>
 </UserControl>

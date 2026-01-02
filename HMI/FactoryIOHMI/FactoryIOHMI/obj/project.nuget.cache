@@ -1,8 +1,23 @@
 {
   "version": 2,
-  "dgSpecHash": "PV2FJX/y4e8=",
+  "dgSpecHash": "RFL2fzDxDFA=",
   "success": true,
   "projectFilePath": "F:\\Sicherung-D_Desktop-PC\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO_Beckhoff\\HMI\\FactoryIOHMI\\FactoryIOHMI\\FactoryIOHMI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\schme\\.nuget\\packages\\beckhoff.twincat.ads\\7.0.132\\beckhoff.twincat.ads.7.0.132.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\beckhoff.twincat.ads.abstractions\\7.0.132\\beckhoff.twincat.ads.abstractions.7.0.132.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\beckhoff.twincat.ads.configurationproviders\\7.0.132\\beckhoff.twincat.ads.configurationproviders.7.0.132.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\beckhoff.twincat.ads.server\\7.0.132\\beckhoff.twincat.ads.server.7.0.132.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\microsoft.extensions.configuration.binder\\8.0.0\\microsoft.extensions.configuration.binder.8.0.0.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.3\\microsoft.extensions.logging.abstractions.8.0.3.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\system.componentmodel.composition\\8.0.0\\system.componentmodel.composition.8.0.0.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\system.diagnostics.eventlog\\8.0.1\\system.diagnostics.eventlog.8.0.1.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\system.reactive\\6.0.1\\system.reactive.6.0.1.nupkg.sha512",
+    "C:\\Users\\schme\\.nuget\\packages\\system.serviceprocess.servicecontroller\\8.0.1\\system.serviceprocess.servicecontroller.8.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

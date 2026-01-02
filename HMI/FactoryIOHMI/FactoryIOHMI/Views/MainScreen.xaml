@@ -53,7 +53,10 @@
                   Header="MachineState"
                   BorderBrush="Black" BorderThickness="2">
             <Grid>
-                <Image Source="/Images/Machine_Run.png" MaxHeight="200"
+                <Image Source="{Binding CurrentMachineState, 
+                                        Mode=TwoWay, 
+                                        UpdateSourceTrigger=PropertyChanged}" 
+                       MaxHeight="200"
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        Stretch="Uniform"/>
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -74,6 +77,9 @@
                 </Grid>
         </GroupBox>
         <ContentControl Grid.ColumnSpan="3" Grid.Row="1"
-                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Content="{Binding CurrentSubScreen,
+                                          Mode=TwoWay,
+                                          UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>
