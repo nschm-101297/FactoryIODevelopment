@@ -13,13 +13,14 @@ using TwinCAT.Ads;
 using TwinCAT.Ads.TypeSystem;
 using TwinCAT.TypeSystem;
 using System.Windows;
+using FactoryIOHMI.Services;
 
 namespace FactoryIOHMI.ViewModels
 {
     public class MainScreenViewModel : INotifyPropertyChanged
     {
         #region Properties
-        private AdsClient _runtimeADSClient;
+        private AdsClientService _runtimeADSClient;
         private bool _runtimeConnected;
 
         public bool RuntimeConnected
@@ -80,9 +81,9 @@ namespace FactoryIOHMI.ViewModels
             bool connectionSucessfull = false;
             try
             {
-                _runtimeADSClient = new AdsClient();
-                _runtimeADSClient.Connect(AmsNetId.Local, 851);
-                connectionSucessfull = _runtimeADSClient.IsConnected;
+                _runtimeADSClient = new AdsClientService();
+                _runtimeADSClient.ClientConnect("199.4.42.250.1.1", 851);
+                connectionSucessfull = _runtimeADSClient.IsConnected();
                 _runtimeADSClient.ConnectionStateChanged += RuntimeClient_ConnectionStateChanged;
             }
             catch (Exception ex)
