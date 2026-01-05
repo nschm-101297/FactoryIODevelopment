@@ -65,9 +65,9 @@ namespace FactoryIOHMI.ViewModels
         #region Constructors
         public MainScreenViewModel()
         {
-            CurrentSubScreen = new HomeScreen();
             CurrentMachineState = LoadImageCurrentMachineState();
             RuntimeConnected = ConnectRuntime();
+            CurrentSubScreen = new HomeScreen();
         }
         #endregion
 

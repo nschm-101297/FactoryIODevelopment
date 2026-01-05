@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FactoryIOHMI.Services;
+using FactoryIOHMI.ViewModels;
 
 namespace FactoryIOHMI.Views
 {
@@ -23,6 +25,11 @@ namespace FactoryIOHMI.Views
         public HomeScreen()
         {
             InitializeComponent();
+        }
+        public HomeScreen(AdsClientService adsClient)
+        {
+            InitializeComponent();
+
         }
     }
 }

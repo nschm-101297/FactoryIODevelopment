@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TwinCAT;
 using TwinCAT.Ads;
+using TwinCAT.Ads.TypeSystem;
+using TwinCAT.TypeSystem;
 
 namespace FactoryIOHMI.Services
 {
@@ -13,6 +17,8 @@ namespace FactoryIOHMI.Services
     {
         #region Properties
         private AdsClient _adsClient;
+        private ISymbolLoader _symbolLoader;
+        private ObservableCollection<Subscription> _subscriptions = new ObservableCollection<Subscription>();
         #endregion
 
         #region Events
@@ -35,7 +41,7 @@ namespace FactoryIOHMI.Services
         {
             AmsNetId netId = new AmsNetId(amsNetId);
             _adsClient.Connect(netId, portNumber);
-
+            _symbolLoader = SymbolLoaderFactory.Create(_adsClient, SymbolLoaderSettings.Default);
         }
         public bool IsConnected()
         {
@@ -54,6 +60,32 @@ namespace FactoryIOHMI.Services
         {
             ResultWrite writeResult = await _adsClient.WriteValueAsync(nameVariable, writeValue, token);
             return writeResult;
+        }
+        public IDisposable? SubscripeVariable(string symbolName, Action<object?> onChangedEventHandler, AdsTransMode transMode = AdsTransMode.OnChange, int updateTime = 500)
+        {
+            if(_symbolLoader == null)
+            {
+                MessageBox.Show("Erst Verbindung zum ADS-Client aufbauen!", 
+                                "ADS-Verbindung fehlt ...",
+                                MessageBoxButton.OK, 
+                                MessageBoxImage.Error);
+                return null;
+            }
+
+            Symbol symbol = (Symbol)_symbolLoader.Symbols[symbolName];
+            symbol.NotificationSettings = new NotificationSettings(transMode, updateTime, 0);
+
+            EventHandler<ValueChangedEventArgs> valueVariableChangedEventHandler = (_, e) =>
+            {
+                onChangedEventHandler(e.Value);
+            };
+
+            symbol.ValueChanged += valueVariableChangedEventHandler;
+
+            Subscription createdSubscription = new Subscription(symbolName, symbol, valueVariableChangedEventHandler);
+            _subscriptions.Add(createdSubscription);
+
+            return createdSubscription;
         }
         #endregion
 
