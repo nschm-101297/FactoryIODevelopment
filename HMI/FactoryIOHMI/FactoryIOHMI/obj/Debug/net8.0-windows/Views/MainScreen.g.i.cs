@@ -53,7 +53,7 @@ namespace FactoryIOHMI.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FactoryIOHMI;component/views/mainscreen.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FactoryIOHMI;V1.0.0.0;component/views/mainscreen.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\MainScreen.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
