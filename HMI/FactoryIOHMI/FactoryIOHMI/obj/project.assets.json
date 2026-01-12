@@ -732,11 +732,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Sicherung-D_Desktop-PC\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO_Beckhoff\\HMI\\FactoryIOHMI\\FactoryIOHMI\\FactoryIOHMI.csproj",
+      "projectUniqueName": "Z:\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO\\HMI\\FactoryIOHMI\\FactoryIOHMI\\FactoryIOHMI.csproj",
       "projectName": "FactoryIOHMI",
-      "projectPath": "D:\\Sicherung-D_Desktop-PC\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO_Beckhoff\\HMI\\FactoryIOHMI\\FactoryIOHMI\\FactoryIOHMI.csproj",
+      "projectPath": "Z:\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO\\HMI\\FactoryIOHMI\\FactoryIOHMI\\FactoryIOHMI.csproj",
       "packagesPath": "C:\\Users\\schme\\.nuget\\packages\\",
-      "outputPath": "D:\\Sicherung-D_Desktop-PC\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO_Beckhoff\\HMI\\FactoryIOHMI\\FactoryIOHMI\\obj\\",
+      "outputPath": "Z:\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO\\HMI\\FactoryIOHMI\\FactoryIOHMI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
