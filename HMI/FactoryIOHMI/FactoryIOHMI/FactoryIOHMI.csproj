@@ -13,7 +13,10 @@
     <None Remove="Images\Home.png" />
     <None Remove="Images\Machine_Run.png" />
     <None Remove="Images\Machine_Stop.png" />
+    <None Remove="Images\monitor.png" />
+    <None Remove="Images\RuntimeBeenden.png" />
     <None Remove="Images\Settings.png" />
+    <None Remove="Images\verbindung.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +40,16 @@
     <Resource Include="Images\Machine_Stop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Monitor.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\RuntimeBeenden.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Verbindung.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FactoryIOHMI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c55497d065800cf2aba9aaa9e2eaf81b607820bc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f32bc950481ce8c3c2d030c856f98e7b454a146")]
 [assembly: System.Reflection.AssemblyProductAttribute("FactoryIOHMI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FactoryIOHMI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

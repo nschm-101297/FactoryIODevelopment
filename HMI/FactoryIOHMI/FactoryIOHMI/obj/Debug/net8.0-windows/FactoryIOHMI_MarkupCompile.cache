@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\Sicherung-D_Desktop-PC\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO_Beckhoff\HMI\FactoryIOHMI\FactoryIOHMI\obj\Debug\net8.0-windows\
+Z:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\HMI\FactoryIOHMI\FactoryIOHMI\obj\Debug\net8.0-windows\
 FactoryIOHMI
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-F:\Sicherung-D_Desktop-PC\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO_Beckhoff\HMI\FactoryIOHMI\FactoryIOHMI\App.xaml
-2-1770728064
+Z:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\HMI\FactoryIOHMI\FactoryIOHMI\App.xaml
+3-1264320251
 
-9-2095671903
+10-111316530
 211-283268635
-Views\HomeScreen.xaml;Views\MainScreen.xaml;
+Views\HomeScreen.xaml;Views\MainScreen.xaml;Views\SettingsScreen.xaml;
 
 False
 
