@@ -69,15 +69,18 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0"
-                Style="{StaticResource ShadowButtonStyle}">
+                Style="{StaticResource ShadowButtonStyle}"
+                Command="{Binding HomeScreen}">
             <Image Source="/Images/Home.png" Stretch="Uniform" MinWidth="50" MaxWidth="400"/>
         </Button>
         <Button Grid.Column="1"
-                Style="{StaticResource ShadowButtonStyle}">
+                Style="{StaticResource ShadowButtonStyle}"
+                Command="{Binding WarningScreen}">
             <Image Source="/Images/Error.png" Stretch="Uniform" MinWidth="50" MaxWidth="400"/>
         </Button>
         <Button Grid.Column="2"
-                Style="{StaticResource ShadowButtonStyle}">
+                Style="{StaticResource ShadowButtonStyle}"
+                Command="{Binding SettingScreen}">
             <Image Source="/Images/Settings.png" Stretch="Uniform" MinWidth="50" MaxWidth="400"/>
         </Button>
     </Grid>

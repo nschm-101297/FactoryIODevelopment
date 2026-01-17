@@ -105,3 +105,4 @@ Z:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\HMI\FactoryIOHMI\FactoryIOHMI
 Z:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\HMI\FactoryIOHMI\FactoryIOHMI\obj\Debug\net8.0-windows\FactoryIOHMI.pdb
 Z:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\HMI\FactoryIOHMI\FactoryIOHMI\obj\Debug\net8.0-windows\FactoryIOHMI.genruntimeconfig.cache
 Z:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\HMI\FactoryIOHMI\FactoryIOHMI\obj\Debug\net8.0-windows\ref\FactoryIOHMI.dll
+Z:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\HMI\FactoryIOHMI\FactoryIOHMI\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs

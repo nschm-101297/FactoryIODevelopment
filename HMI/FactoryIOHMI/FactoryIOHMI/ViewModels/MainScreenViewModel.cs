@@ -67,7 +67,7 @@ namespace FactoryIOHMI.ViewModels
         {
             CurrentMachineState = LoadImageCurrentMachineState();
             RuntimeConnected = ConnectRuntime();
-            CurrentSubScreen = new HomeScreen();
+            CurrentSubScreen = new HomeScreenViewModel(this, _runtimeADSClient);
         }
         #endregion
 

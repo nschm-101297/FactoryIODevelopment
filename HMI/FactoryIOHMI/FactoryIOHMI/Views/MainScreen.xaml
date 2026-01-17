@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FactoryIOHMI.Views"
+        xmlns:vm="clr-namespace:FactoryIOHMI.ViewModels"
         mc:Ignorable="d"
         Title="FactoryIO-HMI" Height="450" Width="800"
         WindowState="Maximized" WindowStartupLocation="CenterScreen"
@@ -35,6 +36,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <DataTemplate DataType="{x:Type vm:HomeScreenViewModel}">
+            <local:HomeScreen/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
