@@ -39,6 +39,9 @@
         <DataTemplate DataType="{x:Type vm:HomeScreenViewModel}">
             <local:HomeScreen/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SettingScreenViewModel}">
+            <local:SettingsScreen/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

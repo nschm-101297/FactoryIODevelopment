@@ -45,25 +45,33 @@
                     <Label Grid.Column="1" Grid.Row="0"
                            BorderBrush="Black"
                            BorderThickness="2"
-                           Content="Verbindungsstatus: "/>
+                           Content="{Binding ConnectionState,
+                                     Mode=OneWay,
+                                     UpdateSourceTrigger=PropertyChanged}"/>
                     <Label Grid.Column="0" Grid.Row="1"
                            Content="AMS-NET-ID: "/>
                     <Label Grid.Column="1" Grid.Row="1"
                            BorderBrush="Black"
                            BorderThickness="2"
-                           Content="Verbindungsstatus: "/>
+                           Content="{Binding AMSNetId,
+                                     Mode=OneWay,
+                                     UpdateSourceTrigger=PropertyChanged}"/>
                     <Label Grid.Column="0" Grid.Row="2"
                            Content="Portnummer: "/>
                     <Label Grid.Column="1" Grid.Row="2"
                            BorderBrush="Black"
                            BorderThickness="2"
-                           Content="Verbindungsstatus: "/>
+                           Content="{Binding PortNumber,
+                                     Mode=OneWay,
+                                     UpdateSourceTrigger=PropertyChanged}"/>
                     <Label Grid.Column="0" Grid.Row="3"
                            Content="Timeout: "/>
                     <Label Grid.Column="1" Grid.Row="3"
                            BorderBrush="Black"
                            BorderThickness="2"
-                           Content="Verbindungsstatus: "/>
+                           Content="{Binding Timeout,
+                                     Mode=OneWay,
+                                     UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -72,7 +80,8 @@
                 </TabItem.Header>
                 <Button HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Background="Transparent">
+                        Background="Transparent"
+                        Command="{Binding CloseRuntime}">
                     <StackPanel>
                         <Image Source="/Images/RuntimeBeenden.png" 
                                Stretch="Uniform"

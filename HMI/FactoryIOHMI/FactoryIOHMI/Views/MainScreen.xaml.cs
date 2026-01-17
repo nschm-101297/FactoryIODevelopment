@@ -23,7 +23,7 @@ namespace FactoryIOHMI.Views
         public MainScreen()
         {
             InitializeComponent();
-            this.DataContext = new MainScreenViewModel();
+            this.DataContext = new MainScreenViewModel(this);
         }
     }
 }

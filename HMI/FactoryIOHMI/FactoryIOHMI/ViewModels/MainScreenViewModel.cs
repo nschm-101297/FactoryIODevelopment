@@ -14,6 +14,7 @@ using TwinCAT.Ads.TypeSystem;
 using TwinCAT.TypeSystem;
 using System.Windows;
 using FactoryIOHMI.Services;
+using FactoryIOHMI.Views;
 
 namespace FactoryIOHMI.ViewModels
 {
@@ -55,7 +56,7 @@ namespace FactoryIOHMI.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentMachineState)));
             }
         }
-
+        public MainScreen CurrentWindow { get; private set; }
         #endregion
 
         #region Events
@@ -68,6 +69,14 @@ namespace FactoryIOHMI.ViewModels
             CurrentMachineState = LoadImageCurrentMachineState();
             RuntimeConnected = ConnectRuntime();
             CurrentSubScreen = new HomeScreenViewModel(this, _runtimeADSClient);
+            CurrentWindow = null;
+        }
+        public MainScreenViewModel(MainScreen screen)
+        {
+            CurrentMachineState = LoadImageCurrentMachineState();
+            RuntimeConnected = ConnectRuntime();
+            CurrentSubScreen = new HomeScreenViewModel(this, _runtimeADSClient);
+            CurrentWindow = screen;
         }
         #endregion
 

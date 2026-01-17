@@ -16,6 +16,8 @@ namespace FactoryIOHMI.Services
     public sealed class AdsClientService
     {
         #region Properties
+        private string _amsNetId;
+        private string _portNumber;
         private AdsClient _adsClient;
         private ISymbolLoader _symbolLoader;
         private ObservableCollection<Subscription> _subscriptions = new ObservableCollection<Subscription>();
@@ -39,6 +41,8 @@ namespace FactoryIOHMI.Services
         #region Methods
         public void ClientConnect(string amsNetId, int portNumber)
         {
+            _amsNetId = amsNetId;
+            _portNumber = portNumber.ToString();
             AmsNetId netId = new AmsNetId(amsNetId);
             _adsClient.Connect(netId, portNumber);
             _symbolLoader = SymbolLoaderFactory.Create(_adsClient, SymbolLoaderSettings.Default);
@@ -50,6 +54,18 @@ namespace FactoryIOHMI.Services
         public StateInfo GetConnectionState()
         {
             return _adsClient.ReadState();
+        }
+        public string GetAMSNetId()
+        {
+            return _amsNetId;
+        }
+        public string GetPortNumber()
+        {
+            return _portNumber;
+        }
+        public string GetTimeout()
+        {
+            return _adsClient.Timeout.ToString();
         }
         public async Task<ResultValue<T>> ReadValuevOfVariable<T>(string nameVariable, CancellationToken token)
         {

@@ -70,7 +70,11 @@ namespace FactoryIOHMI.ViewModels
         }
         public void SettingScreenExecute(object parameter)
         {
-
+            if(ParentViewModel == null)
+            {
+                return;
+            }
+            ParentViewModel.CurrentSubScreen = new SettingScreenViewModel(ParentViewModel, ADSClient);
         }
         public bool SettingScreenCanExecute(object parameter)
         {
