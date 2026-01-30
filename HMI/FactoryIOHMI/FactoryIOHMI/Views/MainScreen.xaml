@@ -42,6 +42,9 @@
         <DataTemplate DataType="{x:Type vm:SettingScreenViewModel}">
             <local:SettingsScreen/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ErrorWarningScreenViewModel}">
+            <local:ErrorWarningScreen/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

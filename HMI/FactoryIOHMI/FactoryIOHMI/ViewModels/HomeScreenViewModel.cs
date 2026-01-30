@@ -62,6 +62,11 @@ namespace FactoryIOHMI.ViewModels
         }
         public void WarningScreenExecute(object parameter)
         {
+            if (ParentViewModel == null)
+            {
+                return;
+            }
+            ParentViewModel.CurrentSubScreen = new ErrorWarningScreenViewModel(ParentViewModel, ADSClient);
 
         }
         public bool WarningScreenCanExecute(object parameter)
