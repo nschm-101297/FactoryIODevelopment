@@ -29,7 +29,6 @@ namespace FactoryIOHMI.ViewModels
 
         public ObservableCollection<IErrorWarning> ErrorWarnings { get; set; }
         public AdsClientService ADSClient { get; private set; }
-        public MainScreenViewModel ParentScreenViewModel { get; private set; }
         public ICommand QuitAll { get; set; }
         public ICommand Quit { get; set; }
 
@@ -45,16 +44,14 @@ namespace FactoryIOHMI.ViewModels
             SelectedErrorWarning = -1;
             ErrorWarnings = new ObservableCollection<IErrorWarning>();
             ADSClient = null;
-            ParentScreenViewModel = null;
             QuitAll = new RelayCommand(QuitAllExecute, QuitAllCanExecute);
             Quit = new RelayCommand(QuitExecute, QuitCanExecute);
         }
-        public ErrorWarningScreenViewModel(MainScreenViewModel viewModel, AdsClientService adsClient)
+        public ErrorWarningScreenViewModel(AdsClientService adsClient)
         {
             SelectedErrorWarning = -1;
             ErrorWarnings = new ObservableCollection<IErrorWarning>();
             ADSClient = adsClient;
-            ParentScreenViewModel = viewModel;
             QuitAll = new RelayCommand(QuitAllExecute, QuitAllCanExecute);
             Quit = new RelayCommand(QuitExecute, QuitCanExecute);
             CommissingMethod();

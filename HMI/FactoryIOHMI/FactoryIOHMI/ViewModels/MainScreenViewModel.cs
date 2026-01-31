@@ -15,6 +15,8 @@ using TwinCAT.TypeSystem;
 using System.Windows;
 using FactoryIOHMI.Services;
 using FactoryIOHMI.Views;
+using FactoryIOHMI.Commands;
+using System.Windows.Input;
 
 namespace FactoryIOHMI.ViewModels
 {
@@ -56,6 +58,9 @@ namespace FactoryIOHMI.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentMachineState)));
             }
         }
+        public ICommand ShowHomeScreen { get; set; }
+        public ICommand ShowOperatingmodeScreen { get; set; }
+        public ICommand ShowErrorWarningsScreen { get; set; }
         public MainScreen CurrentWindow { get; private set; }
         #endregion
 
@@ -70,6 +75,9 @@ namespace FactoryIOHMI.ViewModels
             RuntimeConnected = ConnectRuntime();
             CurrentSubScreen = new HomeScreenViewModel(this, _runtimeADSClient);
             CurrentWindow = null;
+            ShowHomeScreen = new RelayCommand(ShowHomeScreenExecute, ShowHomeScreenCanExecute);
+            ShowOperatingmodeScreen = new RelayCommand(ShowOperatingmodeExecute, ShowOperatingmodeCanExecute);
+            ShowErrorWarningsScreen = new RelayCommand(ShowErrorWarningsExecute, ShowErrorWarningsCanExecute);
         }
         public MainScreenViewModel(MainScreen screen)
         {
@@ -77,11 +85,37 @@ namespace FactoryIOHMI.ViewModels
             RuntimeConnected = ConnectRuntime();
             CurrentSubScreen = new HomeScreenViewModel(this, _runtimeADSClient);
             CurrentWindow = screen;
+            ShowHomeScreen = new RelayCommand(ShowHomeScreenExecute, ShowHomeScreenCanExecute);
+            ShowOperatingmodeScreen = new RelayCommand(ShowOperatingmodeExecute, ShowOperatingmodeCanExecute);
+            ShowErrorWarningsScreen = new RelayCommand(ShowErrorWarningsExecute, ShowErrorWarningsCanExecute);
         }
         #endregion
 
         #region Command-Methods
-
+        public void ShowHomeScreenExecute(object par)
+        {
+            CurrentSubScreen = new HomeScreenViewModel(this, _runtimeADSClient);
+        }
+        public bool ShowHomeScreenCanExecute(object par)
+        {
+            return true;
+        }
+        public void ShowOperatingmodeExecute(object par)
+        {
+            CurrentSubScreen = new OperatingmodeScreenViewModel(_runtimeADSClient);
+        }
+        public bool ShowOperatingmodeCanExecute(object par)
+        {
+            return true;
+        }
+        public void ShowErrorWarningsExecute(object par)
+        {
+            CurrentSubScreen = new ErrorWarningScreenViewModel(_runtimeADSClient);
+        }
+        public bool ShowErrorWarningsCanExecute(object par)
+        {
+            return true;
+        }
         #endregion
 
         #region Methods

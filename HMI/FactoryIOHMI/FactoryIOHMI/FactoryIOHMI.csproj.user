@@ -11,6 +11,9 @@
     <Compile Update="Views\MainScreen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\OperatingmodeScreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\SettingsScreen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
