@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <FileVersion>1.0.0.0</FileVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{dffaf9b9-28ca-4cef-a85b-be89528310de}</ProjectGuid>
+    <SubObjectsSortedByName>true</SubObjectsSortedByName>
+    <DownloadApplicationInfo>true</DownloadApplicationInfo>
+    <WriteProductVersion>false</WriteProductVersion>
+    <GenerateTpy>false</GenerateTpy>
+    <Name>FactoryIOLibrary</Name>
+    <ProgramVersion>3.1.4026.20</ProgramVersion>
+    <Application>{24e5a045-6c4b-4f70-a454-3fcf67754812}</Application>
+    <TypeSystem>{270e808c-0bf4-488a-9a63-e8634b75116d}</TypeSystem>
+    <Implicit_Task_Info>{1e5940e0-9b89-4295-9a1c-20a96f3a6bd0}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{69f9e7a8-e8fb-41c2-bac2-71d5708c5a61}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{95e384be-9b79-4a68-a697-70ece89aabd6}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{f19c26a4-d2ac-4662-b642-527ae7a4b7f6}</LibraryReferences>
+    <Company>Privat</Company>
+    <Released>false</Released>
+    <Title>FactoryIO_Library</Title>
+    <ProjectVersion>0.0.2</ProjectVersion>
+    <GlobalVersionStructureIncluded>true</GlobalVersionStructureIncluded>
+    <DefaultNamespace>FactoryIO</DefaultNamespace>
+    <LibraryCategories>
+      <LibraryCategory xmlns="">
+        <Id>{adda4f03-4796-42cf-9fbe-bb885a4e3a8a}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>FactoryIO</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id xmlns="">{adda4f03-4796-42cf-9fbe-bb885a4e3a8a}</Id>
+    </SelectedLibraryCategories>
+    <Author>Entwickler</Author>
+    <Description>This library contains function blocks to control scenes in FactoryIO.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DUTs" />
+    <Folder Include="DUTs\OperatingMode" />
+    <Folder Include="DUTs\RFID" />
+    <Folder Include="DUTs\Warehouse" />
+    <Folder Include="POUs" />
+    <Folder Include="POUs\AnalogValueHandling" />
+    <Folder Include="POUs\Aufzug" />
+    <Folder Include="POUs\Emitter" />
+    <Folder Include="POUs\Foerderband" />
+    <Folder Include="POUs\OperatingMode" />
+    <Folder Include="POUs\RFID" />
+    <Folder Include="POUs\Warehouse" />
+    <Folder Include="Version" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DUTs\OperatingMode\ActionState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OperatingMode\FaultWarningState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OperatingMode\OperatingMode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OperatingMode\OperatingModeHomeing.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\RFID\RFIDReadSerialnumberStates.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\RFID\RFIDReadWriteDataStates.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Warehouse\StackerCranePosition.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\AnalogValueHandling\FC_AnalogInputValueHandling.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\AnalogValueHandling\FC_AnalogOutputValueHandling.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Aufzug\FB_Elevator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Emitter\FB_Emitter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Foerderband\FB_Foerderband.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\OperatingMode\FB_OperatingMode.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\RFID\FB_RFID.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Warehouse\FB_StackerCrane.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Version\Global_Version.TcGVL">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FactoryIOLibrary.tmc">
+      <SubType>Content</SubType>
+    </None>
+  </ItemGroup>
+  <ProjectExtensions>
+    <PlcProjectOptions>
+      <XmlArchive>
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
+            <v n="Name">"&lt;ProjectRoot&gt;"</v>
+            <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+              <v>{8F99A816-E488-41E4-9FA3-846536012284}</v>
+              <o>
+                <v n="Name">"{8F99A816-E488-41E4-9FA3-846536012284}"</v>
+                <d n="SubKeys" t="Hashtable" />
+                <d n="Values" t="Hashtable" ckt="String" cvt="String">
+                  <v>DisabledWarningIds</v>
+                  <v>410,5410</v>
+                </d>
+              </o>
+            </d>
+            <d n="Values" t="Hashtable" />
+          </o>
+        </Data>
+        <TypeList>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
+    </PlcProjectOptions>
+  </ProjectExtensions>
+</Project>

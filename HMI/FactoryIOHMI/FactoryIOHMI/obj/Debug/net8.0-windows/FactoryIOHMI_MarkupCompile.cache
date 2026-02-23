@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 Z:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\HMI\FactoryIOHMI\FactoryIOHMI\App.xaml
-51337770406
+6-1578972263
 
-211734525548
+25-1924971640
 2111841393381
-Views\ErrorWarningScreen.xaml;Views\HomeScreen.xaml;Views\MainScreen.xaml;Views\OperatingmodeScreen.xaml;Views\SettingsScreen.xaml;
+Views\ErrorWarningScreen.xaml;Views\HomeScreen.xaml;Views\MainScreen.xaml;Views\OperatingmodeScreen.xaml;Views\OverviewComponentsScreen.xaml;Views\SettingsScreen.xaml;
 
 False
 

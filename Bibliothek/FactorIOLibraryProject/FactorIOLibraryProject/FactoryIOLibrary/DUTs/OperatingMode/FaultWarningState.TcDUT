@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="FaultWarningState" Id="{ff6b7ca2-86e7-41b3-9ccc-196d939cd64e}">
+    <Declaration><![CDATA[TYPE FaultWarningState :
+STRUCT
+	IsActive :	BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

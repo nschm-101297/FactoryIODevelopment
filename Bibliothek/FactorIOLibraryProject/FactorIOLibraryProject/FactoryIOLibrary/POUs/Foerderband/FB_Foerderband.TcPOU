@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Foerderband" Id="{7a8acca4-2944-41ca-b882-1ebba2f1ef43}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Foerderband
+VAR_INPUT
+	SensorInfeed	:	BOOL;	//Sensor am Band Einlauf
+	SensorOutfeed	:	BOOL;	//Sensor am Band Auslauf
+	MaximumTimeRuncontrol	:	TIME;	//Maximale Zeit bis Fehler Laufkontrolle aktiviert wird
+END_VAR
+VAR_OUTPUT
+	MotorForward	:	BOOL;	//Motor vorwaerts drehen
+	MotorBackward	:	BOOL;	//Motor rueckwaerts drehen
+	RuncontrolForwardActive	:	BOOL;	//Laufkontrolle in Vorwaerts-Richtung aktiv
+	RuncontrolBackwardActive	:	BOOL;	//Laufkontrolle in Rueckwaerts-Richtung aktiv
+	Error	:	BOOL;	//Fehler aktiv
+END_VAR
+VAR_IN_OUT
+	OperatingMode	:	OperatingMode;	//Schnittstelle für Betriebsarten
+END_VAR
+VAR
+	statMotorForward	:	BOOL;
+	statMotorBackward	:	BOOL;
+	statRuncontrolForward	:	BOOL;
+	statRuncontrolBackward	:	BOOL;
+	statErrorRuncontrolForward	:	BOOL;
+	statErrorRuncontrolBackward	:	BOOL;
+	statTimeRuncontrolForward	:	TON;
+	statTimeRuncontrolBackward	:	TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== Motor Forward =====================*)
+statMotorForward := statMotorForward AND OperatingMode.AutomaticIsActive
+									 AND(OperatingMode.AutomaticStart.IsActive OR 
+										 OperatingMode.AutomaticHome.IsActive) AND NOT
+										 statMotorBackward AND NOT
+									 	 OperatingMode.AutomaticStop.IsActive AND NOT
+									 	 OperatingMode.EStop.IsActive AND NOT
+										 statErrorRuncontrolForward;
+(*===================== Motor Backward =====================*)
+statMotorBackward := statMotorBackward AND OperatingMode.AutomaticIsActive
+									   AND(OperatingMode.AutomaticStart.IsActive OR 
+										   OperatingMode.AutomaticHome.IsActive) AND NOT
+										   statMotorForward AND NOT
+									 	   OperatingMode.AutomaticStop.IsActive AND NOT
+									 	   OperatingMode.EStop.IsActive AND NOT
+										   statErrorRuncontrolBackward;
+(*===================== Runcontrol Forward =====================*)
+IF statMotorForward AND NOT statRuncontrolForward THEN
+	statRuncontrolForward := TRUE;
+ELSIF (statRuncontrolForward AND SensorOutfeed) OR
+	(OperatingMode.Reset.IsActive AND statErrorRuncontrolForward)
+THEN
+		statRuncontrolForward := FALSE;
+END_IF
+
+statTimeRuncontrolForward(IN:= statRuncontrolForward,
+						  PT:= MaximumTimeRuncontrol);
+IF OperatingMode.Quit.IsActive THEN
+	statErrorRuncontrolForward := FALSE;
+END_IF
+IF statTimeRuncontrolForward.Q THEN
+	statErrorRuncontrolForward := TRUE;
+END_IF
+(*===================== Runcontrol Backward =====================*)
+IF statMotorBackward AND NOT statRuncontrolBackward THEN
+	statRuncontrolBackward := TRUE;
+ELSIF statRuncontrolBackward AND SensorInfeed OR
+	(OperatingMode.Reset.IsActive AND statErrorRuncontrolBackward)
+THEN
+		statRuncontrolBackward := FALSE;
+END_IF
+
+statTimeRuncontrolBackward(IN:= statRuncontrolBackward,
+						   PT:= MaximumTimeRuncontrol);
+IF OperatingMode.Quit.IsActive THEN
+	statErrorRuncontrolBackward := FALSE;
+END_IF
+IF statTimeRuncontrolBackward.Q THEN
+	statErrorRuncontrolBackward := TRUE;
+END_IF
+(*===================== Outputs =====================*)
+MotorForward := statMotorForward;
+MotorBackward := statMotorBackward;
+RuncontrolForwardActive := statRuncontrolForward;
+RuncontrolBackwardActive := statRuncontrolBackward;
+Error := statErrorRuncontrolForward OR statErrorRuncontrolBackward;
+OperatingMode.Fault.IsActive :=  statErrorRuncontrolForward OR statErrorRuncontrolBackward;]]></ST>
+    </Implementation>
+    <Method Name="Motor_Off" Id="{e689e4b8-9f77-46f0-8c4b-cf63f0c52c8e}">
+      <Declaration><![CDATA[METHOD PUBLIC Motor_Off
+VAR_INPUT
+	Motor_Stop	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Motor_Stop THEN
+	statMotorForward := FALSE;
+	statMotorBackward := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MotorBackward_On" Id="{860a77f7-c692-4f7d-8fd7-8e3268edd29f}">
+      <Declaration><![CDATA[METHOD MotorBackward_On
+VAR_INPUT
+	MotorBackward_Start	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND
+(OperatingMode.AutomaticStart.IsActive OR 
+ OperatingMode.AutomaticHome.IsActive) AND NOT
+ statMotorForward AND NOT
+ OperatingMode.AutomaticStop.IsActive AND NOT
+ OperatingMode.EStop.IsActive AND NOT
+ statErrorRuncontrolBackward AND NOT
+ statMotorBackward AND
+ MotorBackward_Start
+ THEN
+ 	statMotorBackward := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MotorForward_On" Id="{ee553154-cddb-4c80-b067-3d1fb1593ebd}">
+      <Declaration><![CDATA[METHOD PUBLIC MotorForward_On
+VAR_INPUT
+	MotorForward_Start	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  OperatingMode.AutomaticIsActive AND
+(OperatingMode.AutomaticStart.IsActive OR 
+ OperatingMode.AutomaticHome.IsActive) AND NOT
+ statMotorBackward AND NOT
+ OperatingMode.AutomaticStop.IsActive AND NOT
+ OperatingMode.EStop.IsActive AND NOT
+ statErrorRuncontrolForward AND NOT
+ statMotorForward AND
+ MotorForward_Start
+ THEN
+	statMotorForward := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

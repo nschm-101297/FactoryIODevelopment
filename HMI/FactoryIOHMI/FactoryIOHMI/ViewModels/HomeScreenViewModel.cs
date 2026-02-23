@@ -54,7 +54,11 @@ namespace FactoryIOHMI.ViewModels
         #region Command-Methods
         public void HomeScreenExecute(object parameter)
         {
-
+            if (ParentViewModel == null)
+            {
+                return;
+            }
+            ParentViewModel.CurrentSubScreen = new OverviewComponentsScreenViewModel(ParentViewModel);
         }
         public bool HomeScreenCanExecute(object parameter)
         {

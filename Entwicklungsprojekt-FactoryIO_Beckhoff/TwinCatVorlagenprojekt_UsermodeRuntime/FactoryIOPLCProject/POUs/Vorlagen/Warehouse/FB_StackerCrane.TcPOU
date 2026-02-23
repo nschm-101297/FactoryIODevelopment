@@ -3,9 +3,6 @@
   <POU Name="FB_StackerCrane" Id="{b4e2a7dd-fd58-4b61-a413-e8e9cbb651c1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_StackerCrane
 VAR_INPUT
-	ForkSensorMiddle	:	BOOL;
-	ForkSensorLeft	:	BOOL;
-	ForkSensorRight	:	BOOL;
 	StackerCraneCurrentPositionXAxis	:	WORD;
 	StackerCraneCurrentPositionZAxis	:	WORD;
 END_VAR
@@ -45,19 +42,7 @@ FC_AnalogInputValueHandling(RowValue:= StackerCraneCurrentPositionZAxis,
 							LowerLimit:= 0.0, 
 							ConvertedValue=> statCurrentPositionZAxis);
 (*===================== Stacker crane in Position =====================*)
-IF statStackerCraneInPositionXAxis AND statStackerCraneInPositionZAxis THEN
-	statMoveStackerCrane := FALSE;
-END_IF
-IF (statCurrentPositionXAxis >= statSetPointXAxis - 0.1) AND (statCurrentPositionXAxis <= statSetPointXAxis + 0.1) THEN
-	statStackerCraneInPositionXAxis := TRUE;
-ELSE
-	statStackerCraneInPositionXAxis := FALSE;
-END_IF
-IF (statCurrentPositionZAxis >= statSetPointZAxis - 0.1) AND (statCurrentPositionZAxis <= statSetPointZAxis + 0.1) THEN
-	statStackerCraneInPositionZAxis := TRUE;
-ELSE
-	statStackerCraneInPositionZAxis := FALSE;
-END_IF
+EvaluatePosition();
 (*===================== Positioning Stacker crane =====================*)
 IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive 
    AND statMoveStackerCrane THEN
@@ -86,6 +71,24 @@ SetPointToZAxis := statSetPointToZaxis;
 MoveForkLeft := statMoveForkLeft;
 MoveForkRight := statMoveForkRight;]]></ST>
     </Implementation>
+    <Method Name="EvaluatePosition" Id="{009b1d40-db45-4d5b-9724-104d00ffa9de}">
+      <Declaration><![CDATA[METHOD PUBLIC EvaluatePosition]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF statStackerCraneInPositionXAxis AND statStackerCraneInPositionZAxis THEN
+	statMoveStackerCrane := FALSE;
+END_IF
+IF (statCurrentPositionXAxis >= statSetPointXAxis - 0.1) AND (statCurrentPositionXAxis <= statSetPointXAxis + 0.1) THEN
+	statStackerCraneInPositionXAxis := TRUE;
+ELSE
+	statStackerCraneInPositionXAxis := FALSE;
+END_IF
+IF (statCurrentPositionZAxis >= statSetPointZAxis - 0.1) AND (statCurrentPositionZAxis <= statSetPointZAxis + 0.1) THEN
+	statStackerCraneInPositionZAxis := TRUE;
+ELSE
+	statStackerCraneInPositionZAxis := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="InPositionXAxis" Id="{99b77603-dec4-46a3-af14-48acaf9c0f42}">
       <Declaration><![CDATA[PROPERTY PUBLIC InPositionXAxis : BOOL]]></Declaration>
       <Get Name="Get" Id="{b62af317-8d1c-4248-aa9c-84fbfdf53b86}">
@@ -120,6 +123,8 @@ END_VAR
 	SetPointXAxis := PositionXAxis;
 	SetPointZAxis := PositionZAxis;
 	statMoveStackerCrane := TRUE;
+// 	statStackerCraneInPositionXAxis := FALSE;
+// 	statStackerCraneInPositionZAxis := FALSE;
 END_IF ]]></ST>
       </Implementation>
     </Method>

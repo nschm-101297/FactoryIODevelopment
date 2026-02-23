@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FC_AnalogOutputValueHandling" Id="{210ee896-c68b-4c74-929c-bd0f2c787fe8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FC_AnalogOutputValueHandling
+VAR_INPUT
+	Setpoint	:	REAL;
+	UpperLimit	:	REAL;
+	LowerLimit	:	REAL;
+END_VAR
+VAR_OUTPUT
+	ConvertedValue	:	WORD;
+END_VAR
+VAR
+	tempCalculatedValue	:	REAL;
+	tempConvertedValue	:	WORD;
+	tempValueWithOffset	:	WORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[tempCalculatedValue := Setpoint * 10.0/(UpperLimit - LowerLimit);
+tempConvertedValue := TO_WORD(tempCalculatedValue * 10.0);
+tempValueWithOffset := tempConvertedValue * 10;
+
+ConvertedValue := tempValueWithOffset;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_OperatingMode" Id="{c3dad087-efd8-4126-a802-e979de0f57d4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_OperatingMode
+VAR_INPUT
+	PermissionHardware	:	BOOL;	//Permission hardware ready for operation
+	PermissionSoftware	:	BOOL;	//Permission from safety machine ready for start
+	E_Stop	:	BOOL;	//Button E-Stop
+	OperatingModeManual	:	BOOL;	//Operating Mode manual is selected
+	OperatingModeAutomatic	:	BOOL;	//Operating Mode automatic is selected
+END_VAR
+VAR_OUTPUT
+	LEDStart	:	BOOL;	//Indicator to show state automatic start
+	LEDStop	:	BOOL;	//Indicator to show state automatic stop
+	LEDHome	:	BOOL;	//Indicator to show state automatic home
+	LEDReset	:	BOOL;	//Indicator to show state reset
+	LEDQuit	:	BOOL;	//Indicator to show state quit
+END_VAR
+VAR
+	statRisingEdgeAutomaticActivated	:	BOOL;	//Rising edge, used when Automatic is activated
+	statOperatingMode	:	OperatingMode;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== Operating Manual =====================*)
+statOperatingMode.ManuelIsActive := OperatingModeManual;
+(*===================== Operating Automatic =====================*)
+statOperatingMode.AutomaticIsActive := OperatingModeAutomatic;
+(*===================== E-Stop is active =====================*)
+statOperatingMode.EStop.PreconditionsFullfilled := TRUE;
+statOperatingMode.EStop.IsActive := NOT E_Stop AND statOperatingMode.EStop.PreconditionsFullfilled;
+(*===================== Reset is active =====================*)
+statOperatingMode.Reset.PreconditionsFullfilled := TRUE;
+statOperatingMode.Reset.IsActive := statOperatingMode.Reset.IsActive AND statOperatingMode.Reset.PreconditionsFullfilled;
+(*===================== Quit is active =====================*)
+statOperatingMode.Quit.PreconditionsFullfilled := TRUE;
+statOperatingMode.Quit.IsActive := statOperatingMode.Quit.IsActive AND statOperatingMode.Quit.PreconditionsFullfilled;
+(*===================== Automatic Start is active =====================*)
+statOperatingMode.AutomaticStart.PreconditionsFullfilled := PermissionHardware AND PermissionSoftware AND
+												  			E_Stop AND NOT statOperatingMode.Reset.IsActive AND NOT
+												  			statOperatingMode.AutomaticHome.IsActive AND NOT
+															statOperatingMode.Fault.IsActive AND
+												  			statOperatingMode.AutomaticIsActive;
+statOperatingMode.AutomaticStart.IsActive := statOperatingMode.AutomaticStart.IsActive AND statOperatingMode.AutomaticStart.PreconditionsFullfilled;
+(*===================== Automatic Stop is active =====================*)
+statOperatingMode.AutomaticStop.PreconditionsFullfilled := NOT statOperatingMode.AutomaticHome.IsActive;
+statOperatingMode.AutomaticStop.IsActive := (statOperatingMode.AutomaticStop.IsActive AND statOperatingMode.AutomaticStop.PreconditionsFullfilled) OR
+											 statOperatingMode.ManuelIsActive OR statOperatingMode.Fault.IsActive OR 
+											 (statOperatingMode.AutomaticIsActive AND (NOT PermissionHardware OR NOT PermissionSoftware)) OR
+											  statOperatingMode.EStop.IsActive OR statOperatingMode.Reset.IsActive;
+IF statOperatingMode.AutomaticIsActive AND NOT statRisingEdgeAutomaticActivated THEN
+	statRisingEdgeAutomaticActivated := TRUE;
+	statOperatingMode.AutomaticStop.IsActive := TRUE;
+ELSIF statOperatingMode.ManuelIsActive AND statRisingEdgeAutomaticActivated THEN
+	statRisingEdgeAutomaticActivated := FALSE;
+END_IF
+(*===================== Automatic Home is active =====================*)
+statOperatingMode.AutomaticHome.IsReached := statOperatingMode.AutomaticHome.AllMachinesInHome;
+IF statOperatingMode.AutomaticHome.IsReached THEN
+	StateOperatingMode.AutomaticStop.IsActive := TRUE;
+END_IF
+statOperatingMode.AutomaticHome.PreconditionsFullfilled := PermissionHardware AND PermissionSoftware AND
+												  			E_Stop AND NOT statOperatingMode.Reset.IsActive AND
+												  			statOperatingMode.AutomaticIsActive AND NOT
+														   statOperatingMode.AutomaticHome.IsReached;
+statOperatingMode.AutomaticHome.IsActive := statOperatingMode.AutomaticHome.IsActive AND statOperatingMode.AutomaticHome.PreconditionsFullfilled;
+(*===================== Outputs =====================*)
+LEDStart := statOperatingMode.AutomaticStart.IsActive;
+LEDStop := statOperatingMode.AutomaticStop.IsActive;	
+LEDHome := statOperatingMode.AutomaticHome.IsActive;	
+LEDReset := statOperatingMode.Reset.IsActive;
+LEDQuit	:= statOperatingMode.Quit.IsActive;]]></ST>
+    </Implementation>
+    <Method Name="Homeing_On" Id="{7e62c1e5-310d-4727-8e63-27ba151a87a7}">
+      <Declaration><![CDATA[METHOD Homeing_On
+VAR_INPUT
+	ButtonHome	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF ButtonHome AND statOperatingMode.AutomaticStart.PreconditionsFullfilled AND NOT 
+statOperatingMode.AutomaticHome.IsReached
+THEN
+	statOperatingMode.AutomaticStart.IsActive := FALSE;
+	statOperatingMode.AutomaticStop.IsActive := FALSE;
+	statOperatingMode.AutomaticHome.IsActive := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Quit_On" Id="{7bf0d568-ee8b-41a5-90b0-b7945116ee25}">
+      <Declaration><![CDATA[METHOD PUBLIC Quit_On
+VAR_INPUT
+	ButtonQuit	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF ButtonQuit THEN
+	statOperatingMode.Quit.IsActive := TRUE;
+ELSE
+		statOperatingMode.Quit.IsActive := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset_on" Id="{d2d797fd-82b1-4966-a207-58b034b34877}">
+      <Declaration><![CDATA[METHOD PUBLIC Reset_on
+VAR_INPUT
+	ButtonReset	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF ButtonReset THEN
+	statOperatingMode.Reset.IsActive := TRUE;
+ELSE
+		statOperatingMode.Reset.IsActive := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Start_On" Id="{3354be3e-6726-4d80-9078-ae6449d88d6f}">
+      <Declaration><![CDATA[METHOD PUBLIC Start_On
+VAR_INPUT
+	ButtonStart	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF ButtonStart AND statOperatingMode.AutomaticStart.PreconditionsFullfilled THEN
+	statOperatingMode.AutomaticStart.IsActive := TRUE;
+	statOperatingMode.AutomaticStop.IsActive := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StateOperatingMode" Id="{1c9be228-6bb8-46d1-a5b1-916f8552ece2}">
+      <Declaration><![CDATA[PROPERTY PUBLIC StateOperatingMode : REFERENCE TO OperatingMode]]></Declaration>
+      <Get Name="Get" Id="{d0141e4b-206b-4b51-8a7a-654fc4ae35ce}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StateOperatingMode REF= statOperatingMode;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{c9478dc0-de45-4077-b675-ff8f777460cd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[statOperatingMode := StateOperatingMode;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Stop_On" Id="{916474fd-677f-4f1e-b324-eebd14fbfbbc}">
+      <Declaration><![CDATA[METHOD PUBLIC Stop_On
+VAR_INPUT
+	ButtonStop	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT ButtonStop AND statOperatingMode.AutomaticStart.PreconditionsFullfilled THEN
+	statOperatingMode.AutomaticStart.IsActive := FALSE;
+	statOperatingMode.AutomaticStop.IsActive := TRUE;
+	statOperatingMode.AutomaticHome.IsActive := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

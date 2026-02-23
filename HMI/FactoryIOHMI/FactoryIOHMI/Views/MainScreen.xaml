@@ -48,6 +48,9 @@
         <DataTemplate DataType="{x:Type vm:OperatingmodeScreenViewModel}">
             <local:OperatingmodeScreen/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:OverviewComponentsScreenViewModel}">
+            <local:OverviewComponentsScreen/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
