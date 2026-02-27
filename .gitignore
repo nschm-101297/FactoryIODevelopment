@@ -33,6 +33,7 @@ LineIDs.dbg.bak
 *.xtv.bk?
 *.xt?.bk?
 *.xt?.orig
+**/Packages/
 
 # Multiuser specific
 **/.TcGit/
