@@ -1,1 +1,0 @@
-import{EditorPrompt}from"./EditorPrompt.js";import{TupleEditorPane}from"../BaseEditors/EditorPanes/TupleEditorPane.js";export class TupleEditorPrompt extends EditorPrompt{constructor(editorInfo,factory){super(editorInfo,TupleEditorPane,factory)}}TcHmi.Controls.Helpers??={},TcHmi.Controls.Helpers.TupleEditorPrompt=TupleEditorPrompt;
