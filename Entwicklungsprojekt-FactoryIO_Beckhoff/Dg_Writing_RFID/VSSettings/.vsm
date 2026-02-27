@@ -5,7 +5,7 @@
   <Children>
     <Node>
       <Title>YT Scope Project</Title>
-      <Expanded>True</Expanded>
+      <Expanded>False</Expanded>
       <FileName>Z:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\Entwicklungsprojekt-FactoryIO_Beckhoff\Dg_Writing_RFID\YT Scope Project.tcscopex</FileName>
       <Children>
         <Node>
@@ -41,12 +41,12 @@
         </Node>
         <Node>
           <Title>X-Axis_Setpoint</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -61,12 +61,12 @@
         </Node>
         <Node>
           <Title>Z-Axis_Setpoint</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group (1)</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -81,12 +81,12 @@
         </Node>
         <Node>
           <Title>StackerCraneMoving</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group (2)</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -101,12 +101,12 @@
         </Node>
         <Node>
           <Title>ProcessStep</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group (3)</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>

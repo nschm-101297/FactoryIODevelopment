@@ -21,13 +21,6 @@
 	RBGSollwertZSimu	:	REAL;
 	instStackerCrane	:	FB_StackerCrane;
 	processSteps	: StackerCraneSteps;
-	positionsWarehouse : ARRAY[0..5] OF StackerCranePosition := [
-						(PrePosition := 10.23, Position := 9.89),
-						(PrePosition := 10.23, Position := 9.89),
-						(PrePosition := 10.23, Position := 9.89),
-						(PrePosition := 10.23, Position := 9.89),
-						(PrePosition := 10.23, Position := 9.89),
-						(PrePosition := 10.23, Position := 9.89)];
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
