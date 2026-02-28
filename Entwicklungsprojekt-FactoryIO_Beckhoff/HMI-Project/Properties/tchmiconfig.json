@@ -57,7 +57,11 @@
       "type": "Stylesheet"
     }
   ],
-  "userControls": [],
+  "userControls": [
+    {
+      "url": "UserControl/Header.usercontrol"
+    }
+  ],
   "controls": [],
   "content": [],
   "views": [

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="PLCToHMIOperatingMode" Id="{95cbae51-f4ba-43cf-905a-89be056966bd}">
+    <Declaration><![CDATA[TYPE PLCToHMIOperatingMode :
+STRUCT
+	CurrentOperatingMode	:	OperatingMode;	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIActionState" Id="{9b5c21e4-34e1-4b46-8ce8-07d48b699a2a}">
+    <Declaration><![CDATA[TYPE HMIActionState :
+STRUCT
+	PreconditionsFullfilled	:	BOOL;
+	IsSelected	:	BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

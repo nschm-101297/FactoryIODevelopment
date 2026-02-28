@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIHeader" Id="{5cbe1d18-faa2-4d71-b308-6b6c7bfb6464}">
+    <Declaration><![CDATA[TYPE HMIHeader :
+STRUCT
+	PathOperatingMode	:	STRING;
+	PathMachineState	:	STRING;
+	NameApplication	:	STRING;
+	ErrorIsActive	:	BOOL;
+	State	:	INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

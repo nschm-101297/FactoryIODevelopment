@@ -127,6 +127,25 @@
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <ItemGroup>
+    <Content Include="Images\Home-Symbol.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Machine_Error.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Machine_Run.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Machine_Stop.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControl\Header.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControl\Header.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControl\Header.usercontrol</DependentUpon>
+    </Content>
     <Folder Include="Fonts\" />
     <Folder Include="Images" />
     <Folder Include="Images\Manifest" />
@@ -135,6 +154,7 @@
     <Folder Include="Imports\Videos" />
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
+    <Folder Include="UserControl" />
     <Folder Include="Themes" />
     <Folder Include="Themes\Base-Dark\Images\" />
     <Folder Include="Themes\Base\" />

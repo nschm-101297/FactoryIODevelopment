@@ -18,16 +18,31 @@
     <LibraryReferences>{3125a2d2-4046-486a-8164-24d971afc251}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\HMI\HMIHeader.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\OperatingMode\ActionState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\OperatingMode\FaultWarningState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\OperatingMode\HMIActionState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OperatingMode\HMIInterfaceOperatingMode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OperatingMode\HMIToPLCOperatingMode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\OperatingMode\OperatingMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\OperatingMode\OperatingModeHomeing.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OperatingMode\PLCToHMIOperatingMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Program\Warehouse\StackerCraneSteps.TcDUT">
@@ -128,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\HMI" />
     <Folder Include="DUTs\Program" />
     <Folder Include="DUTs\Program\Warehouse" />
     <Folder Include="DUTs\RFID" />
