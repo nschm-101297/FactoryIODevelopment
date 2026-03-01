@@ -70,6 +70,10 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="GVLs\HMI.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="GVLs\RFID.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -96,6 +100,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Programm\Foerderband\Call_Foerderband.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Programm\HMI\Call_HMI.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Programm\MAIN.TcPOU">
@@ -131,6 +138,9 @@
     <Compile Include="POUs\Vorlagen\Foerderband\FB_Foerderband.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Vorlagen\HMI\FB_HMIHeader.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Vorlagen\OperatingMode\FB_OperatingMode.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -152,6 +162,7 @@
     <Folder Include="POUs\Programm\Emitter" />
     <Folder Include="POUs\Programm\Foerderband" />
     <Folder Include="POUs\Programm\Aufzug" />
+    <Folder Include="POUs\Programm\HMI" />
     <Folder Include="POUs\Programm\RFID" />
     <Folder Include="POUs\Programm\Warehouse" />
     <Folder Include="POUs\Programm\OperatingMode" />
@@ -161,6 +172,7 @@
     <Folder Include="POUs\Vorlagen\Foerderband" />
     <Folder Include="POUs\Vorlagen\AnalogValueHandling" />
     <Folder Include="POUs\Vorlagen\Aufzug" />
+    <Folder Include="POUs\Vorlagen\HMI" />
     <Folder Include="POUs\Vorlagen\RFID" />
     <Folder Include="POUs\Vorlagen\Warehouse" />
     <Folder Include="POUs\Vorlagen\OperatingMode" />

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_HMI" Id="{619c281c-ef5d-4639-891a-10e7108f6cf6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_HMI
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode := instOperatingMode.StateOperatingMode;
+hmiHeaderInstance(NameApplication := 'Hochregallager',
+				  OperatingModeHMIInterface := hmiOperatingmodeInterface,
+				  HeaderHMIInterface := hmiHeaderInterface);
+				  ]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

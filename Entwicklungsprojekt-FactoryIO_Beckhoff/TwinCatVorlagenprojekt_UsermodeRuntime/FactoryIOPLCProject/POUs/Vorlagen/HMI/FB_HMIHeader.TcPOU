@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_HMIHeader" Id="{e68f2c6e-49b9-4e63-b1cf-2cf9153e53aa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_HMIHeader
+VAR_INPUT
+	NameApplication	:	STRING;
+	OperatingModeHMIInterface	:	HMIInterfaceOperatingMode;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	HeaderHMIInterface	:	HMIHeader;
+END_VAR
+VAR
+	statHeaderHMIInterface	:	HMIHeader;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== Name Application =====================*)
+statHeaderHMIInterface.NameApplication := NameApplication;
+(*===================== Name Application =====================*)
+statHeaderHMIInterface.ErrorIsActive := OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.Fault.IsActive;
+(*===================== Operating Mode =====================*)
+IF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.ManuelIsActive THEN
+	statHeaderHMIInterface.PathOperatingMode := 'Images/Manual_Mode.png';
+	statHeaderHMIInterface.State := 1;
+ELSIF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticIsActive THEN
+	statHeaderHMIInterface.PathOperatingMode := 'Images/Automatic_Mode.png';
+	statHeaderHMIInterface.State := 2;
+END_IF
+(*===================== Operating State =====================*)
+IF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticStart.IsActive THEN
+	statHeaderHMIInterface.PathMachineState := 'Images/Machine_Run.png';
+	statHeaderHMIInterface.State := 3;
+ELSIF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticStop.IsActive THEN
+	statHeaderHMIInterface.PathMachineState := 'Images/Machine_Stop.png';
+	statHeaderHMIInterface.State := 2;	
+ELSIF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticHome.IsActive THEN
+	statHeaderHMIInterface.PathMachineState := 'Images/Home-Symbol.png';
+	statHeaderHMIInterface.State := 4;			
+END_IF
+(*===================== Outputs =====================*)
+HeaderHMIInterface := statHeaderHMIInterface;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

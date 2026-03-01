@@ -16,9 +16,13 @@ VAR_OUTPUT
 	LEDReset	:	BOOL;	//Indicator to show state reset
 	LEDQuit	:	BOOL;	//Indicator to show state quit
 END_VAR
+VAR_IN_OUT
+	HMIInterface	:	HMIInterfaceOperatingMode;
+END_VAR
 VAR
 	statRisingEdgeAutomaticActivated	:	BOOL;	//Rising edge, used when Automatic is activated
 	statOperatingMode	:	OperatingMode;
+	statHMIInterface	:	HMIInterfaceOperatingMode;
 END_VAR
 ]]></Declaration>
     <Implementation>

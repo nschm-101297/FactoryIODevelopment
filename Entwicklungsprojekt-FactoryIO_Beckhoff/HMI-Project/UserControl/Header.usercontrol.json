@@ -67,6 +67,23 @@
       "readOnly": false,
       "heritable": true,
       "propertyName": "State"
+    },
+    {
+      "allowSymbolExpressionsInObject": false,
+      "requiredOnCompile": false,
+      "bindable": true,
+      "propertySetterName": "setNameApplication",
+      "propertyGetterName": "getNameApplication",
+      "refTo": "",
+      "name": "data-tchmi-nameapplication",
+      "displayName": "NameApplication",
+      "visible": true,
+      "type": "tchmi:general#/definitions/String",
+      "category": "",
+      "description": "",
+      "readOnly": false,
+      "heritable": true,
+      "propertyName": "NameApplication"
     }
   ],
   "virtualRights": [],

@@ -127,6 +127,9 @@
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <ItemGroup>
+    <Content Include="Images\Automatic_Mode.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\Home-Symbol.png">
       <SubType>Content</SubType>
     </Content>
@@ -137,6 +140,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\Machine_Stop.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Manual_Mode.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="UserControl\Header.usercontrol">

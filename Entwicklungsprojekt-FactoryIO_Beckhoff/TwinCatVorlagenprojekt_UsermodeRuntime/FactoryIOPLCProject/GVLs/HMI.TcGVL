@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="HMI" Id="{42b8ab01-74f8-4d3b-9b14-9c080998c4d7}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	hmiHeaderInstance	:	FB_HMIHeader;
+	hmiHeaderInterface	:	HMIHeader;	
+	hmiOperatingmodeInterface	:	HMIInterfaceOperatingMode;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
