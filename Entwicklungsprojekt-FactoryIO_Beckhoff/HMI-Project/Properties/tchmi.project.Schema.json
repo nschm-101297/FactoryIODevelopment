@@ -8,6 +8,14 @@
       "frameworkUserControlConfig": "UserControl\\Header.usercontrol.json",
       "type": "object",
       "id": "tchmi:project#/definitions/Header"
+    },
+    "Button_Mainscreen": {
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff",
+      "frameworkControlType": "TcHmi.Controls.System.TcHmiUserControl",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkUserControlConfig": "UserControl\\Button_Mainscreen.usercontrol.json",
+      "type": "object",
+      "id": "tchmi:project#/definitions/Button_Mainscreen"
     }
   }
 }

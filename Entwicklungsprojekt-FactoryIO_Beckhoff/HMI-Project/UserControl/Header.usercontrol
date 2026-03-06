@@ -1,4 +1,4 @@
-<div id="Header" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControl" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="100" data-tchmi-height="40" data-tchmi-width-unit="%" data-tchmi-height-unit="%" data-tchmi-creator-viewport-width="1024" data-tchmi-creator-viewport-height="500">
+<div id="Header" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControl" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="100" data-tchmi-height="200" data-tchmi-width-unit="%" data-tchmi-height-unit="px" data-tchmi-creator-viewport-width="1024" data-tchmi-creator-viewport-height="500" data-tchmi-width-mode="Value" data-tchmi-height-mode="Value">
 
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
@@ -6,8 +6,39 @@
   "color": "rgba(235, 244, 4, 1)"
 }
 </script>
-<div id="HomeView" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="172" data-tchmi-width-unit="px" data-tchmi-src="Images/Home-Symbol.png">
+<div id="Container" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%">
 
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "overflow": false,
+    "width": 15.0,
+    "widthMode": "Value",
+    "widthUnit": "%"
+  },
+  {
+    "width": 15.0,
+    "widthMode": "Value",
+    "widthUnit": "%"
+  },
+  {
+    "width": 15.0,
+    "widthMode": "Value",
+    "widthUnit": "%"
+  },
+  {
+    "width": 15.0,
+    "widthMode": "Value",
+    "widthUnit": "%"
+  },
+  {
+    "width": 40.0,
+    "widthMode": "Value",
+    "widthUnit": "%"
+  }
+]
+</script>
+<div id="HomeView" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-src="Images/Home-Symbol.png">
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
@@ -31,19 +62,30 @@
   }
 ]
 </script>
-</div>
-<div id="TcHmiRectangle_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-left="172" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="516" data-tchmi-width-unit="px">
+
+<script data-tchmi-target-attribute="data-tchmi-border-color" type="application/json">
+{
+  "angle": 0.0,
+  "stopPoints": [
+    {
+      "color": "rgba(0, 0, 0, 1)",
+      "stop": "0%"
+    },
+    {
+      "color": "rgba(199, 232, 24, 0)",
+      "stop": "100%"
+    }
+  ]
+}
+</script>
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
-  "color": "rgba(90, 231, 11, 1)"
+  "color": "rgba(235, 244, 4, 1)"
 }
 </script>
 </div>
-<div id="MachineOperatingMode" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-left="172" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="172" data-tchmi-width-unit="px" data-tchmi-src="%pp%PathImageOperatingMode%/pp%">
-
-
-
+<div id="MachineOperatingMode" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-src="%pp%PathImageOperatingMode%/pp%" data-tchmi-grid-column-index="1">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
   "color": "rgba(235, 244, 4, 1)"
@@ -52,7 +94,14 @@
 
 
 </div>
-<div id="MachineError" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-left="516" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="172" data-tchmi-width-unit="px" data-tchmi-src="Images/Machine_Error.png">
+<div id="MachineState" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-src="%pp%PathImageMachineState%/pp%" data-tchmi-grid-column-index="2">
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "color": "rgba(235, 244, 4, 1)"
+}
+</script>
+</div>
+<div id="MachineError" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-src="Images/Machine_Error.png" data-tchmi-grid-column-index="3">
 
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
@@ -61,7 +110,7 @@
 }
 </script>
 </div>
-<div id="DateTimeDisplay" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiDateTimeDisplay" data-tchmi-height="59" data-tchmi-height-unit="px" data-tchmi-left="896" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="128" data-tchmi-width-unit="px" data-tchmi-text-font-size="20" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center">
+<div id="DateTimeDisplay" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiDateTimeDisplay" data-tchmi-height="59" data-tchmi-height-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-text-font-size="20" data-tchmi-text-horizontal-alignment="Right" data-tchmi-text-vertical-alignment="Center" data-tchmi-grid-column-index="4">
 
 <script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
 {
@@ -85,12 +134,29 @@
 }
 </script>
 </div>
-<div id="MachineState" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-left="344" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="172" data-tchmi-width-unit="px" data-tchmi-src="%pp%PathImageMachineState%/pp%">
-<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+<div data-tchmi-grid-row-index="0" id="ApplicationName" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-text="%pp%NameApplication%/pp%" data-tchmi-top="145" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-font-size="20" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center" data-tchmi-grid-column-index="4">
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
 {
-  "color": "rgba(235, 244, 4, 1)"
+  "left": 1,
+  "right": 0,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
 }
 </script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "None",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+</div>
 </div>
 
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
@@ -338,28 +404,4 @@
   }
 ]
 </script>
-<div id="ApplicationName" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-left="789" data-tchmi-left-unit="px" data-tchmi-text="%pp%NameApplication%/pp%" data-tchmi-top="160" data-tchmi-top-unit="px" data-tchmi-width="235" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-font-size="20" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center">
-
-<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
-{
-  "left": 1,
-  "right": 0,
-  "top": 1,
-  "bottom": 1,
-  "leftUnit": "px",
-  "rightUnit": "px",
-  "topUnit": "px",
-  "bottomUnit": "px"
-}
-</script>
-
-<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
-{
-  "left": "Solid",
-  "right": "None",
-  "top": "Solid",
-  "bottom": "Solid"
-}
-</script>
-</div>
 </div>

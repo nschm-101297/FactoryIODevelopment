@@ -142,8 +142,21 @@
     <Content Include="Images\Machine_Stop.png">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Images\MainScreen.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\Manual_Mode.png">
       <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Settings.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControl\Button_Mainscreen.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControl\Button_Mainscreen.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControl\Button_Mainscreen.usercontrol</DependentUpon>
     </Content>
     <Content Include="UserControl\Header.usercontrol">
       <SubType>Content</SubType>

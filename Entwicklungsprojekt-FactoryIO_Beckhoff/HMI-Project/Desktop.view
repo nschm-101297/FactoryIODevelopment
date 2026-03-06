@@ -1,28 +1,51 @@
-<div id="Desktop" data-tchmi-type="TcHmi.Controls.System.TcHmiView" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width-mode="Parent" data-tchmi-min-width="100" data-tchmi-min-width-unit="%" data-tchmi-height-mode="Parent" data-tchmi-min-height="100" data-tchmi-min-height-unit="%" data-tchmi-width-unit="%" data-tchmi-height-unit="px" data-tchmi-width="100" data-tchmi-height="100" data-tchmi-creator-viewport-width="1024">
-  <div id="Header_1" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="501" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-target-user-control="UserControl/Header.usercontrol" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="1024" data-tchmi-width-unit="px" data-tchmi-pathimageoperatingmode="%s%ADS.PLC1.HMI.hmiHeaderInterface.PathOperatingMode%/s%" data-tchmi-pathimagemachinestate="%s%ADS.PLC1.HMI.hmiHeaderInterface.PathMachineState%/s%" data-tchmi-errorisactive="%s%ADS.PLC1.HMI.hmiHeaderInterface.ErrorIsActive%/s%" data-tchmi-state="%s%ADS.PLC1.HMI.hmiHeaderInterface.State%/s%" data-tchmi-nameapplication="%s%ADS.PLC1.HMI.hmiHeaderInterface.NameApplication%/s%">
+<div id="Desktop" data-tchmi-type="TcHmi.Controls.System.TcHmiView" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width-mode="Parent" data-tchmi-min-width="100" data-tchmi-min-width-unit="%" data-tchmi-height-mode="Parent" data-tchmi-min-height="100" data-tchmi-min-height-unit="%" data-tchmi-width-unit="%" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-height="100" data-tchmi-creator-viewport-width="1024">
+  <div id="DesktopContainer" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%">
+
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 30.5,
+    "heightMode": "Value",
+    "heightUnit": "%",
+    "overflow": false
+  },
+  {
+    "height": 69.5,
+    "heightMode": "Value",
+    "heightUnit": "%"
+  }
+]
+</script>
+<div id="Header_1" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-target-user-control="UserControl/Header.usercontrol" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-pathimageoperatingmode="%s%ADS.PLC1.HMI.hmiHeaderInterface.PathOperatingMode%/s%" data-tchmi-pathimagemachinestate="%s%ADS.PLC1.HMI.hmiHeaderInterface.PathMachineState%/s%" data-tchmi-errorisactive="%s%ADS.PLC1.HMI.hmiHeaderInterface.ErrorIsActive%/s%" data-tchmi-state="%s%ADS.PLC1.HMI.hmiHeaderInterface.State%/s%" data-tchmi-nameapplication="%s%ADS.PLC1.HMI.hmiHeaderInterface.NameApplication%/s%" data-tchmi-height-mode="Value" data-tchmi-height="100" data-tchmi-creator-visibility="Visible">
 </div>
-<div id="TcHmiTextblock_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="59" data-tchmi-height-unit="px" data-tchmi-left="706" data-tchmi-left-unit="px" data-tchmi-text="Textblock" data-tchmi-top="142" data-tchmi-top-unit="px" data-tchmi-width="318" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-font-size="20" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center">
+<div id="DesktopContainerMenu" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%">
 
-<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
-{
-  "left": 1,
-  "right": 0,
-  "top": 1,
-  "bottom": 1,
-  "leftUnit": "px",
-  "rightUnit": "px",
-  "topUnit": "px",
-  "bottomUnit": "px"
-}
+<script data-tchmi-target-attribute="data-tchmi-column-options" type="application/json">
+[
+  {
+    "overflow": false,
+    "width": 33.3,
+    "widthMode": "Value",
+    "widthUnit": "%"
+  },
+  {
+    "width": 33.3,
+    "widthMode": "Value",
+    "widthUnit": "%"
+  },
+  {
+    "width": 33.3,
+    "widthMode": "Value",
+    "widthUnit": "%"
+  }
+]
 </script>
-
-<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
-{
-  "left": "Solid",
-  "right": "None",
-  "top": "Solid",
-  "bottom": "Solid"
-}
-</script>
+<div id="SectorButton" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-target-user-control="UserControl/Button_Mainscreen.usercontrol" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-pathimage="Images/MainScreen.svg" data-tchmi-title="Abschnitte">
+</div>
+<div id="ErrorButton" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-target-user-control="UserControl/Button_Mainscreen.usercontrol" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-pathimage="Images/Machine_Error.png" data-tchmi-title="Fehler/Warnungen">
+</div>
+<div id="SettingButton" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-grid-column-index="2" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-target-user-control="UserControl/Button_Mainscreen.usercontrol" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-pathimage="Images/Settings.svg" data-tchmi-title="Einstellungen">
+</div>
+</div>
 </div>
 </div>
