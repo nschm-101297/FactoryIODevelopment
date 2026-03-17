@@ -38,25 +38,22 @@
   }
 ]
 </script>
-<div id="HomeView" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-src="Images/Home-Symbol.png">
+<div id="HomeView" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-src="Images/Home-Symbol.svg">
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
-        "objectType": "JavaScript",
+        "objectType": "WriteToSymbol",
         "active": true,
-        "sourceLines": [
-          "var v1 = TcHmi.View.get();",
-          "console.log('Button pressed ' + v1.getId());",
-          "TcHmi.View.load('Desktop.view', function (data){",
-          "                \tvar v2 = TcHmi.View.get();",
-          "                \tconsole.log(v2.getId());",
-          "});"
-        ],
-        "asyncWait": true,
-        "waitMode": "Synchronous"
+        "symbolExpression": "%pp%RegionContent%/pp%",
+        "value": {
+          "objectType": "Symbol",
+          "valueType": "tchmi:framework#/definitions/ContentPath",
+          "symbolExpression": "%pp%ActivateScreen%/pp%"
+        },
+        "asyncWait": true
       }
     ]
   }
@@ -101,7 +98,7 @@
 }
 </script>
 </div>
-<div id="MachineError" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-src="Images/Machine_Error.png" data-tchmi-grid-column-index="3">
+<div id="MachineError" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-src="Images/Machine_Error.svg" data-tchmi-grid-column-index="3">
 
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">

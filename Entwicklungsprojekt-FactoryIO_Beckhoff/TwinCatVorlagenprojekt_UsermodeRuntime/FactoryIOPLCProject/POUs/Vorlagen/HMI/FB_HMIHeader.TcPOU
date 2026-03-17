@@ -22,21 +22,21 @@ statHeaderHMIInterface.NameApplication := NameApplication;
 statHeaderHMIInterface.ErrorIsActive := OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.Fault.IsActive;
 (*===================== Operating Mode =====================*)
 IF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.ManuelIsActive THEN
-	statHeaderHMIInterface.PathOperatingMode := 'Images/Manual_Mode.png';
+	statHeaderHMIInterface.PathOperatingMode := 'Images/Manual_Mode.svg';
 	statHeaderHMIInterface.State := 1;
 ELSIF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticIsActive THEN
-	statHeaderHMIInterface.PathOperatingMode := 'Images/Automatic_Mode.png';
+	statHeaderHMIInterface.PathOperatingMode := 'Images/Automatic_Mode.svg';
 	statHeaderHMIInterface.State := 2;
 END_IF
 (*===================== Operating State =====================*)
 IF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticStart.IsActive THEN
-	statHeaderHMIInterface.PathMachineState := 'Images/Machine_Run.png';
+	statHeaderHMIInterface.PathMachineState := 'Images/Machine_Run.svg';
 	statHeaderHMIInterface.State := 3;
 ELSIF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticStop.IsActive THEN
-	statHeaderHMIInterface.PathMachineState := 'Images/Machine_Stop.png';
+	statHeaderHMIInterface.PathMachineState := 'Images/Machine_Stop.svg';
 	statHeaderHMIInterface.State := 2;	
 ELSIF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticHome.IsActive THEN
-	statHeaderHMIInterface.PathMachineState := 'Images/Home-Symbol.png';
+	statHeaderHMIInterface.PathMachineState := 'Images/Home-Symbol.svg';
 	statHeaderHMIInterface.State := 4;			
 END_IF
 (*===================== Outputs =====================*)

@@ -30,7 +30,7 @@
     <HmiCommunicationServerAuthPort>13000</HmiCommunicationServerAuthPort>
     <HmiCommunicationServerPublicPort>3443</HmiCommunicationServerPublicPort>
     <HmiInitial>14.3.617.1</HmiInitial>
-    <HmiRecent>14.3.617.1</HmiRecent>
+    <HmiRecent>14.3.683.1</HmiRecent>
     <HmiServerNodeAdvancedView>False</HmiServerNodeAdvancedView>
   </PropertyGroup>
   <PropertyGroup>
@@ -127,43 +127,61 @@
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <ItemGroup>
-    <Content Include="Images\Automatic_Mode.png">
+    <Content Include="Contents\ADSSettings.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Images\Home-Symbol.png">
+    <Content Include="Contents\MainSelectionDesktop.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Images\Machine_Error.png">
+    <Content Include="Contents\OverviewSection.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Images\Machine_Run.png">
+    <Content Include="Images\Automatic_Mode.svg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Images\Machine_Stop.png">
+    <Content Include="Images\ConveyorBelt.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Home-Symbol.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Machine_Error.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Machine_Run.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Machine_Stop.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\MainScreen.svg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Images\Manual_Mode.png">
+    <Content Include="Images\Manual_Mode.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\RFID.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\Settings.svg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="UserControl\Button_Mainscreen.usercontrol">
+    <Content Include="Images\StackerCrane.svg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="UserControl\Button_Mainscreen.usercontrol.json">
-      <SubType>Content</SubType>
-      <DependentUpon>UserControl\Button_Mainscreen.usercontrol</DependentUpon>
-    </Content>
-    <Content Include="UserControl\Header.usercontrol">
+    <Content Include="UserControls\Button_Mainscreen.usercontrol">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="UserControl\Header.usercontrol.json">
+    <Content Include="UserControls\Button_Mainscreen.usercontrol.json">
       <SubType>Content</SubType>
-      <DependentUpon>UserControl\Header.usercontrol</DependentUpon>
+      <DependentUpon>UserControls\Button_Mainscreen.usercontrol</DependentUpon>
+    </Content>
+    <Content Include="UserControls\Header.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\Header.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\Header.usercontrol</DependentUpon>
     </Content>
     <Folder Include="Fonts\" />
     <Folder Include="Images" />
@@ -173,7 +191,8 @@
     <Folder Include="Imports\Videos" />
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
-    <Folder Include="UserControl" />
+    <Folder Include="Contents" />
+    <Folder Include="UserControls" />
     <Folder Include="Themes" />
     <Folder Include="Themes\Base-Dark\Images\" />
     <Folder Include="Themes\Base\" />
