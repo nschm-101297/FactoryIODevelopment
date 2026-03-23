@@ -62,6 +62,9 @@
       "url": "UserControls/Button_Mainscreen.usercontrol"
     },
     {
+      "url": "UserControls/FourButtonSection.usercontrol"
+    },
+    {
       "url": "UserControls/Header.usercontrol"
     }
   ],
@@ -76,6 +79,13 @@
     },
     {
       "url": "Contents/MainSelectionDesktop.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
+      "url": "Contents/OperatingMode.content",
       "preload": false,
       "keepAlive": false,
       "loadSync": false,

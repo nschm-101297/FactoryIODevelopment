@@ -3,7 +3,6 @@
   <DUT Name="HMIActionState" Id="{9b5c21e4-34e1-4b46-8ce8-07d48b699a2a}">
     <Declaration><![CDATA[TYPE HMIActionState :
 STRUCT
-	PreconditionsFullfilled	:	BOOL;
 	IsSelected	:	BOOL;
 END_STRUCT
 END_TYPE

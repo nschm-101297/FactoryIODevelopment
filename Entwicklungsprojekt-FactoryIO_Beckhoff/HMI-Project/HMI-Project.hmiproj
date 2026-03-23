@@ -12,7 +12,7 @@
     <HmiTitle>HMI_Project</HmiTitle>
     <HmiVerboseLevel>2</HmiVerboseLevel>
     <HmiVersion>1.0.0.0</HmiVersion>
-    <HmiCommunicationServerPort>3000</HmiCommunicationServerPort>
+    <HmiCommunicationServerPort>3001</HmiCommunicationServerPort>
     <HmiLogTcHmiServerMessages>false</HmiLogTcHmiServerMessages>
     <HmiLogDesignerModeComMessages>false</HmiLogDesignerModeComMessages>
     <HmiDefaultLanguage>client</HmiDefaultLanguage>
@@ -27,7 +27,7 @@
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
     <TcHmi_Beckhoff_TwinCAT_HMI_Server_Engineering_IncludeInArchive>False</TcHmi_Beckhoff_TwinCAT_HMI_Server_Engineering_IncludeInArchive>
     <Name>HMI-Project</Name>
-    <HmiCommunicationServerAuthPort>13000</HmiCommunicationServerAuthPort>
+    <HmiCommunicationServerAuthPort>13001</HmiCommunicationServerAuthPort>
     <HmiCommunicationServerPublicPort>3443</HmiCommunicationServerPublicPort>
     <HmiInitial>14.3.617.1</HmiInitial>
     <HmiRecent>14.3.683.1</HmiRecent>
@@ -133,6 +133,9 @@
     <Content Include="Contents\MainSelectionDesktop.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Contents\OperatingMode.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Contents\OverviewSection.content">
       <SubType>Content</SubType>
     </Content>
@@ -160,6 +163,9 @@
     <Content Include="Images\Manual_Mode.svg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Images\OverviewOperatingMode.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\RFID.svg">
       <SubType>Content</SubType>
     </Content>
@@ -175,6 +181,13 @@
     <Content Include="UserControls\Button_Mainscreen.usercontrol.json">
       <SubType>Content</SubType>
       <DependentUpon>UserControls\Button_Mainscreen.usercontrol</DependentUpon>
+    </Content>
+    <Content Include="UserControls\FourButtonSection.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\FourButtonSection.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\FourButtonSection.usercontrol</DependentUpon>
     </Content>
     <Content Include="UserControls\Header.usercontrol">
       <SubType>Content</SubType>

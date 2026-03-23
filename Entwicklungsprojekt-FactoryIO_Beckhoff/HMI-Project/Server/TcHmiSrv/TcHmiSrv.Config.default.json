@@ -35,8 +35,8 @@
     "DISABLED_CONFIGURATION_HINTS": [],
     "DISCOVERY": 1,
     "ENDPOINTS": [
-        "http://127.0.0.1:13000",
-        "http://127.0.0.1:3000"
+        "http://127.0.0.1:13001",
+        "http://127.0.0.1:3001"
     ],
     "ETAGENABLED": true,
     "EXTENSIONS": {
@@ -868,6 +868,448 @@
                     },
                     {
                         "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Automatic.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Automatic::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Automatic.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Automatic::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticHome.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::AutomaticHome::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticStart.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::AutomaticStart::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticStop.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::AutomaticStop::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Manuel.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Manuel::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Manuel.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Manuel::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Quit.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Quit::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Reset.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Reset::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.IsActive": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::Automatic::IsActive",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::Automatic::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.AutomaticHome.IsActive": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::AutomaticHome::IsActive",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.AutomaticHome.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::AutomaticHome::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.AutomaticStart.IsActive": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::AutomaticStart::IsActive",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.AutomaticStart.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::AutomaticStart::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automaticstop.IsActive": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::Automaticstop::IsActive",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automaticstop.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::Automaticstop::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.AutomaticHome.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::CurrentOperatingMode::AutomaticHome::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.AutomaticStart.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::CurrentOperatingMode::AutomaticStart::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.AutomaticStop.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::CurrentOperatingMode::AutomaticStop::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.Quit.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::CurrentOperatingMode::Quit::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.Reset.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::CurrentOperatingMode::Reset::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Manuel.IsActive": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::Manuel::IsActive",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Manuel.PreconditionsFullfilled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::Manuel::PreconditionsFullfilled",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Quit.IsActive": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::Quit::IsActive",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Reset.IsActive": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::PLCToHMI::Reset::IsActive",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 2
                     }
                 ]
             },
@@ -3886,6 +4328,32 @@
                 "ADS.PLC1.HMI.hmiHeaderInterface.PathMachineState": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.PathOperatingMode": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.State": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Automatic.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Automatic.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticHome.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticStart.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticStop.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Manuel.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Manuel.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Quit.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Reset.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.IsActive": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.AutomaticHome.IsActive": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.AutomaticHome.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.AutomaticStart.IsActive": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.AutomaticStart.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automaticstop.IsActive": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automaticstop.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.AutomaticHome.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.AutomaticStart.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.AutomaticStop.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.Quit.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode.Reset.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Manuel.IsActive": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Manuel.PreconditionsFullfilled": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Quit.IsActive": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Reset.IsActive": 3,
                 "ChangeUserSettings": 3,
                 "ConfirmAlarm": 3,
                 "CreateEvent": 3,

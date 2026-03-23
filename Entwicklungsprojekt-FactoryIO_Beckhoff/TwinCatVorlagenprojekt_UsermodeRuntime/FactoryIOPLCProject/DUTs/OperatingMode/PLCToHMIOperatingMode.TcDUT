@@ -3,7 +3,15 @@
   <DUT Name="PLCToHMIOperatingMode" Id="{95cbae51-f4ba-43cf-905a-89be056966bd}">
     <Declaration><![CDATA[TYPE PLCToHMIOperatingMode :
 STRUCT
-	CurrentOperatingMode	:	OperatingMode;	
+	Manuel	:	ActionState;
+	Automatic	:	ActionState;
+	AutomaticStart	:	ActionState;
+	Automaticstop	:	ActionState;
+	AutomaticHome	:	ActionState;
+	Reset	:	ActionState;
+	Quit	:	ActionState;
+	Fault	:	ActionState;
+	
 END_STRUCT
 END_TYPE
 ]]></Declaration>

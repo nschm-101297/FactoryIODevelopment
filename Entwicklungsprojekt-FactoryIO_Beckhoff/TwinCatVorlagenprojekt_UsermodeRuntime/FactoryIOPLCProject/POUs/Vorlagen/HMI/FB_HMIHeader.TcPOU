@@ -19,23 +19,23 @@ END_VAR
       <ST><![CDATA[(*===================== Name Application =====================*)
 statHeaderHMIInterface.NameApplication := NameApplication;
 (*===================== Name Application =====================*)
-statHeaderHMIInterface.ErrorIsActive := OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.Fault.IsActive;
+statHeaderHMIInterface.ErrorIsActive := OperatingModeHMIInterface.PLCToHMI.Fault.IsActive;
 (*===================== Operating Mode =====================*)
-IF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.ManuelIsActive THEN
+IF OperatingModeHMIInterface.PLCToHMI.Manuel.IsActive THEN
 	statHeaderHMIInterface.PathOperatingMode := 'Images/Manual_Mode.svg';
 	statHeaderHMIInterface.State := 1;
-ELSIF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticIsActive THEN
+ELSIF OperatingModeHMIInterface.PLCToHMI.Automatic.IsActive THEN
 	statHeaderHMIInterface.PathOperatingMode := 'Images/Automatic_Mode.svg';
 	statHeaderHMIInterface.State := 2;
 END_IF
 (*===================== Operating State =====================*)
-IF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticStart.IsActive THEN
+IF OperatingModeHMIInterface.PLCToHMI.AutomaticStart.IsActive THEN
 	statHeaderHMIInterface.PathMachineState := 'Images/Machine_Run.svg';
 	statHeaderHMIInterface.State := 3;
-ELSIF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticStop.IsActive THEN
+ELSIF OperatingModeHMIInterface.PLCToHMI.AutomaticStop.IsActive THEN
 	statHeaderHMIInterface.PathMachineState := 'Images/Machine_Stop.svg';
 	statHeaderHMIInterface.State := 2;	
-ELSIF OperatingModeHMIInterface.PLCToHMI.CurrentOperatingMode.AutomaticHome.IsActive THEN
+ELSIF OperatingModeHMIInterface.PLCToHMI.AutomaticHome.IsActive THEN
 	statHeaderHMIInterface.PathMachineState := 'Images/Home-Symbol.svg';
 	statHeaderHMIInterface.State := 4;			
 END_IF

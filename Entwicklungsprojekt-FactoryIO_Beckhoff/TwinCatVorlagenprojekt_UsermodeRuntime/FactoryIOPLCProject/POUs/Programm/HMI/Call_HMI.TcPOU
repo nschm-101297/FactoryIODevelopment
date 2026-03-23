@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION Call_HMI
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode := instOperatingMode.StateOperatingMode;
+      <ST><![CDATA[//hmiOperatingmodeInterface.PLCToHMI.CurrentOperatingMode := instOperatingMode.StateOperatingMode;
 hmiHeaderInstance(NameApplication := 'Hochregallager',
 				  OperatingModeHMIInterface := hmiOperatingmodeInterface,
 				  HeaderHMIInterface := hmiHeaderInterface);
