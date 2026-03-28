@@ -24,6 +24,9 @@ VAR
 	statErrorReadAdsState	:	BOOL;
 	statErrorNumberAdsState	:	UDINT;
 	statReadAdsState	:	UDINT;
+	
+	statConvertingAdsState	:	BOOL;
+	statConvertedAdsState	:	STRING;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -43,7 +46,7 @@ IF NOT statBusyReadLocalAMSNetId AND NOT statErrorReadLocalAMSNetId AND
 	statExecuteReadingAdsState := TRUE;
 END_IF
 
-(*===================== Reading local AMSNetId =====================*)
+(*===================== Getting IP-Address =====================*)
 IF statGettingIpAddress THEN
 	statLocalIpAddress := GetDeviceIpAddress(statReadLocalAMSNetIdSeprated);
 	statGettingIpAddress := FALSE;
@@ -62,8 +65,84 @@ instReadADSState(NETID := statReadLocalAMSNetId,
 IF NOT statBusyReadAdsState AND NOT statErrorReadAdsState AND
 	statExecuteReadingAdsState THEN
 	statExecuteReadingAdsState := FALSE;
+	statConvertingAdsState := TRUE;
+END_IF
+
+(*===================== Converting Ads state =====================*)
+IF statConvertingAdsState THEN
+	statConvertedAdsState := ConvertRuntimestatusInString(statReadAdsState);
+	statConvertingAdsState := FALSE;
 END_IF]]></ST>
     </Implementation>
+    <Property Name="AdsState" Id="{6eea6bc8-e6ea-44d5-bd0c-846554110dc1}">
+      <Declaration><![CDATA[PROPERTY PUBLIC AdsState : String]]></Declaration>
+      <Get Name="Get" Id="{c2761746-ba33-4cfe-8a11-d4f8556c770c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AdsState := statConvertedAdsState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ConvertRuntimestatusInString" Id="{adee1e1a-fac9-4303-8fe0-be4d2ba8a723}">
+      <Declaration><![CDATA[METHOD PRIVATE ConvertRuntimestatusInString : String
+VAR_INPUT
+	CurrentDeviceStatus 	: 	UDINT;
+END_VAR
+VAR
+	tempConvertedDeviceStatus	:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE CurrentDeviceStatus OF
+	0:
+		tempConvertedDeviceStatus := 'Invalid';
+	1:
+		tempConvertedDeviceStatus := 'Idle';
+	2:
+		tempConvertedDeviceStatus := 'Reset';
+	3:
+		tempConvertedDeviceStatus := 'Init';
+	4:
+		tempConvertedDeviceStatus := 'Start';
+	5:
+		tempConvertedDeviceStatus := 'Run';
+	6:
+		tempConvertedDeviceStatus := 'Stop';
+	7:
+		tempConvertedDeviceStatus := 'Save cfg';
+	8:
+		tempConvertedDeviceStatus := 'Load cfg';
+	9:
+		tempConvertedDeviceStatus := 'Power failure';
+	10:
+		tempConvertedDeviceStatus := 'Power good';
+	11:
+		tempConvertedDeviceStatus := 'Error';
+	12:
+		tempConvertedDeviceStatus := 'Shutdown';
+	13:
+		tempConvertedDeviceStatus := 'Suspend';
+	14:
+		tempConvertedDeviceStatus := 'Resume';
+	15:
+		tempConvertedDeviceStatus := 'Config';
+	16:
+		tempConvertedDeviceStatus := 'Reconfig';
+	17:
+		tempConvertedDeviceStatus := 'Stopping';
+	18:
+		tempConvertedDeviceStatus := 'Incompatible';
+	19:
+		tempConvertedDeviceStatus := 'Execption';
+	ELSE
+		tempConvertedDeviceStatus := 'Not defined in system';			
+END_CASE
+
+ConvertRuntimestatusInString := tempConvertedDeviceStatus;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="GetDeviceIpAddress" Id="{6b460412-9514-4e9a-b6c9-8eebbe2fbb84}">
       <Declaration><![CDATA[METHOD PRIVATE GetDeviceIpAddress : String
 VAR_INPUT
