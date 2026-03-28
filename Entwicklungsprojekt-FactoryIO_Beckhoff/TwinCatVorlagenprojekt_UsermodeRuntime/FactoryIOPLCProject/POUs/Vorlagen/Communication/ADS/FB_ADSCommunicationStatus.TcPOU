@@ -3,7 +3,8 @@
   <POU Name="FB_ADSCommunicationStatus" Id="{fc26bda7-2b0c-49ee-914f-e68b93c48878}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ADSCommunicationStatus
 VAR_INPUT
-	Timeout	:	TIME;
+	Timeout	:	TIME := T#1S;
+	LocalAdsPort	:	T_AmsPort;
 END_VAR
 VAR
 	instReadLocalAMSNetId	:	FB_GetLocalAmsNetId;
@@ -12,6 +13,10 @@ VAR
 	statErrorReadLocalAMSNetId	:	BOOL;
 	statErrorNumberReadLocalAMSNetId	:	UDINT;
 	statReadLocalAMSNetId	:	T_AmsNetID;
+	statReadLocalAMSNetIdSeprated	:	T_AmsNetIdArr;
+	
+	statGettingIpAddress	:	BOOL;
+	statLocalIpAddress	:	STRING;
 	
 	instReadADSState	:	ADSRDSTATE;
 	statExecuteReadingAdsState	:	BOOL;
@@ -28,17 +33,25 @@ instReadLocalAMSNetId(bExecute := statExecuteReadingLocalAMSNetId,
 					  bBusy => statBusyReadLocalAMSNetId,
 					  bError => statErrorReadLocalAMSNetId,
 					  nErrId => statErrorNumberReadLocalAMSNetId,
-					  AddrString => statReadLocalAMSNetId);
+					  AddrString => statReadLocalAMSNetId,
+					  AddrBytes => statReadLocalAMSNetIdSeprated);
 					  
 IF NOT statBusyReadLocalAMSNetId AND NOT statErrorReadLocalAMSNetId AND
 	statExecuteReadingLocalAMSNetId THEN
 	statExecuteReadingLocalAMSNetId := FALSE;
+	statGettingIpAddress := TRUE;
 	statExecuteReadingAdsState := TRUE;
+END_IF
+
+(*===================== Reading local AMSNetId =====================*)
+IF statGettingIpAddress THEN
+	statLocalIpAddress := GetDeviceIpAddress(statReadLocalAMSNetIdSeprated);
+	statGettingIpAddress := FALSE;
 END_IF
 
 (*===================== Reading Ads state =====================*)
 instReadADSState(NETID := statReadLocalAMSNetId,
-				 PORT := 851,
+				 PORT := LocalAdsPort,
 				 RDSTATE := statExecuteReadingAdsState,
 			     TMOUT := Timeout,
 				 BUSY => statBusyReadAdsState,
@@ -51,6 +64,27 @@ IF NOT statBusyReadAdsState AND NOT statErrorReadAdsState AND
 	statExecuteReadingAdsState := FALSE;
 END_IF]]></ST>
     </Implementation>
+    <Method Name="GetDeviceIpAddress" Id="{6b460412-9514-4e9a-b6c9-8eebbe2fbb84}">
+      <Declaration><![CDATA[METHOD PRIVATE GetDeviceIpAddress : String
+VAR_INPUT
+	CurrentAMSNetId	:	T_AmsNetIdArr;
+END_VAR
+VAR
+	tempRunCounter	:	INT;
+	tempIpAddressConverted	:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR tempRunCounter := 0 TO 3 DO
+	tempIpAddressConverted := CONCAT(tempIpAddressConverted, BYTE_TO_STRING(CurrentAMSNetId[tempRunCounter]));
+	IF tempRunCounter < 3 THEN
+		tempIpAddressConverted := CONCAT(tempIpAddressConverted, '.');
+	END_IF
+END_FOR
+
+GetDeviceIpAddress := tempIpAddressConverted;]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="LocalAMSNetId" Id="{7b71f754-a9bd-4d11-a914-4354786a1931}">
       <Declaration><![CDATA[PROPERTY PUBLIC LocalAMSNetId : String]]></Declaration>
       <Get Name="Get" Id="{219b9a17-cb1d-486e-8706-680f14c1b592}">
@@ -59,6 +93,17 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[LocalAMSNetId := statReadLocalAMSNetId;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LocalIpAddress" Id="{6000413c-bfbf-43ca-8c0b-09816ce2d821}">
+      <Declaration><![CDATA[PROPERTY PUBLIC LocalIpAddress : String]]></Declaration>
+      <Get Name="Get" Id="{020ecc30-ae91-4c39-9568-5747342c3c80}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LocalIpAddress := statLocalIpAddress;]]></ST>
         </Implementation>
       </Get>
     </Property>
