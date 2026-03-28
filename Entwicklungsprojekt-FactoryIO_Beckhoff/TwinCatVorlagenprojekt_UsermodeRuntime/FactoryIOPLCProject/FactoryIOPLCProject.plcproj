@@ -135,6 +135,9 @@
     <Compile Include="POUs\Vorlagen\Aufzug\FB_Elevator.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Vorlagen\Communication\ADS\FB_ADSCommunicationStatus.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Vorlagen\Emitter\FB_Emitter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -173,11 +176,13 @@
     <Folder Include="POUs\Programm\OperatingMode" />
     <Folder Include="POUs\Vorlagen" />
     <Folder Include="POUs\Programm" />
+    <Folder Include="POUs\Vorlagen\Communication\ADS" />
     <Folder Include="POUs\Vorlagen\Emitter" />
     <Folder Include="POUs\Vorlagen\Foerderband" />
     <Folder Include="POUs\Vorlagen\AnalogValueHandling" />
     <Folder Include="POUs\Vorlagen\Aufzug" />
     <Folder Include="POUs\Vorlagen\HMI" />
+    <Folder Include="POUs\Vorlagen\Communication" />
     <Folder Include="POUs\Vorlagen\RFID" />
     <Folder Include="POUs\Vorlagen\Warehouse" />
     <Folder Include="POUs\Vorlagen\OperatingMode" />
@@ -215,8 +220,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -286,14 +291,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

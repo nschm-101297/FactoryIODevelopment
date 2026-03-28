@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ADSCommunicationStatus" Id="{fc26bda7-2b0c-49ee-914f-e68b93c48878}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ADSCommunicationStatus
+VAR_INPUT
+	Timeout	:	TIME;
+END_VAR
+VAR
+	instReadLocalAMSNetId	:	FB_GetLocalAmsNetId;
+	statExecuteReadingLocalAMSNetId	:	BOOL := TRUE;
+	statBusyReadLocalAMSNetId	:	BOOL;
+	statErrorReadLocalAMSNetId	:	BOOL;
+	statErrorNumberReadLocalAMSNetId	:	UDINT;
+	statReadLocalAMSNetId	:	T_AmsNetID;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== Reading local AMSNetId =====================*)
+instReadLocalAMSNetId(bExecute := statExecuteReadingLocalAMSNetId,
+					  tTimeOut := Timeout,
+					  bBusy => statBusyReadLocalAMSNetId,
+					  bError => statErrorReadLocalAMSNetId,
+					  nErrId => statErrorNumberReadLocalAMSNetId,
+					  AddrString => statReadLocalAMSNetId);
+					  
+IF NOT statBusyReadLocalAMSNetId AND NOT statErrorReadLocalAMSNetId AND
+	statExecuteReadingLocalAMSNetId THEN
+	statExecuteReadingLocalAMSNetId := FALSE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
