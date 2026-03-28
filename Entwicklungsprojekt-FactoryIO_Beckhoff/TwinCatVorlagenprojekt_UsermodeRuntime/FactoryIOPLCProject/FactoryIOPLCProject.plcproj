@@ -18,6 +18,9 @@
     <LibraryReferences>{3125a2d2-4046-486a-8164-24d971afc251}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\Communication\ADS\ADSCommunicationInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\HMI\HMIHeader.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -153,7 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\Communication\ADS" />
     <Folder Include="DUTs\HMI" />
+    <Folder Include="DUTs\Communication" />
     <Folder Include="DUTs\Program" />
     <Folder Include="DUTs\Program\Warehouse" />
     <Folder Include="DUTs\RFID" />
