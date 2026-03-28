@@ -12,6 +12,13 @@ VAR
 	statErrorReadLocalAMSNetId	:	BOOL;
 	statErrorNumberReadLocalAMSNetId	:	UDINT;
 	statReadLocalAMSNetId	:	T_AmsNetID;
+	
+	instReadADSState	:	ADSRDSTATE;
+	statExecuteReadingAdsState	:	BOOL;
+	statBusyReadAdsState	:	BOOL;
+	statErrorReadAdsState	:	BOOL;
+	statErrorNumberAdsState	:	UDINT;
+	statReadAdsState	:	UDINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -26,7 +33,34 @@ instReadLocalAMSNetId(bExecute := statExecuteReadingLocalAMSNetId,
 IF NOT statBusyReadLocalAMSNetId AND NOT statErrorReadLocalAMSNetId AND
 	statExecuteReadingLocalAMSNetId THEN
 	statExecuteReadingLocalAMSNetId := FALSE;
+	statExecuteReadingAdsState := TRUE;
+END_IF
+
+(*===================== Reading Ads state =====================*)
+instReadADSState(NETID := statReadLocalAMSNetId,
+				 PORT := 851,
+				 RDSTATE := statExecuteReadingAdsState,
+			     TMOUT := Timeout,
+				 BUSY => statBusyReadAdsState,
+				 ERR => statErrorReadAdsState,
+				 ERRID => statErrorNumberAdsState,
+				 ADSSTATE => statReadAdsState);
+					  
+IF NOT statBusyReadAdsState AND NOT statErrorReadAdsState AND
+	statExecuteReadingAdsState THEN
+	statExecuteReadingAdsState := FALSE;
 END_IF]]></ST>
     </Implementation>
+    <Property Name="LocalAMSNetId" Id="{7b71f754-a9bd-4d11-a914-4354786a1931}">
+      <Declaration><![CDATA[PROPERTY PUBLIC LocalAMSNetId : String]]></Declaration>
+      <Get Name="Get" Id="{219b9a17-cb1d-486e-8706-680f14c1b592}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LocalAMSNetId := statReadLocalAMSNetId;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>
