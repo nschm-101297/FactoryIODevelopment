@@ -788,6 +788,57 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.HMI.hmiAdsCommunicationInterface.DeviceIpAddress": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiAdsCommunicationInterface::DeviceIpAddress",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiAdsCommunicationInterface.LocalAMSNetId": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiAdsCommunicationInterface::LocalAMSNetId",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiAdsCommunicationInterface.RuntimeStatus": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiAdsCommunicationInterface::RuntimeStatus",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.HMI.hmiHeaderInterface.ErrorIsActive": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -4323,6 +4374,9 @@
                 "ADS.AdsSyncReadStateReq": 3,
                 "ADS.CheckLicense": 3,
                 "ADS.Diagnostics": 3,
+                "ADS.PLC1.HMI.hmiAdsCommunicationInterface.DeviceIpAddress": 3,
+                "ADS.PLC1.HMI.hmiAdsCommunicationInterface.LocalAMSNetId": 3,
+                "ADS.PLC1.HMI.hmiAdsCommunicationInterface.RuntimeStatus": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.ErrorIsActive": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.NameApplication": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.PathMachineState": 3,
