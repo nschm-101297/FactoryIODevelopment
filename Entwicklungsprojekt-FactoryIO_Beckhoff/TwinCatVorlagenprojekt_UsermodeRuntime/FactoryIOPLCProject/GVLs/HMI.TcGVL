@@ -5,6 +5,9 @@
 	hmiHeaderInstance	:	FB_HMIHeader;
 	hmiHeaderInterface	:	HMIHeader;	
 	hmiOperatingmodeInterface	:	HMIInterfaceOperatingMode;
+	
+	hmiAdsCommunicationInterfaceInstance	:	FB_ADSCommunicationStatus;
+	hmiAdsCommunicationInterface	:	ADSCommunicationInterface;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -8,7 +8,17 @@
 hmiHeaderInstance(NameApplication := 'Hochregallager',
 				  OperatingModeHMIInterface := hmiOperatingmodeInterface,
 				  HeaderHMIInterface := hmiHeaderInterface);
-				  ]]></ST>
+				  
+hmiAdsCommunicationInterfaceInstance(Timeout := T#1S,
+									 TimeoutHMI := T#1S,
+									 LocalAdsPort := 851,
+									 HeartbeatHMI := hmiAdsCommunicationInterface.HeartbeatHMI);
+									 
+
+hmiAdsCommunicationInterface.DeviceIpAddress := hmiAdsCommunicationInterfaceInstance.LocalIpAddress;
+hmiAdsCommunicationInterface.LocalAMSNetId := hmiAdsCommunicationInterfaceInstance.LocalAMSNetId;
+hmiAdsCommunicationInterface.HeartbeatPLC := hmiAdsCommunicationInterfaceInstance.PLCHeartbeatHMICommunication;
+hmiAdsCommunicationInterface.RuntimeStatus := hmiAdsCommunicationInterfaceInstance.AdsState;				  ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
