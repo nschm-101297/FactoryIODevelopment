@@ -109,7 +109,14 @@
   ],
   "userFunctions": [],
   "symbols": {
-    "internal": {},
+    "internal": {
+      "bConnectionStatusPLCHMI": {
+        "value": false,
+        "type": "tchmi:general#/definitions/BOOL",
+        "persist": false,
+        "readonly": false
+      }
+    },
     "themedResources": {},
     "timer": {},
     "package": {}

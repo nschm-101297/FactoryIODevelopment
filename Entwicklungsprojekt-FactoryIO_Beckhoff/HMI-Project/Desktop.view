@@ -60,4 +60,93 @@
 </script>
 </div>
 </div>
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onInitialized",
+    "actions": [
+      {
+        "objectType": "JavaScript",
+        "active": true,
+        "sourceLines": [
+          "console.log('Desktop onInitialized gestartet');",
+          "",
+          "// 👉 globales Objekt anlegen (falls noch nicht vorhanden)",
+          "window.hmiHeartbeat = window.hmiHeartbeat || {};",
+          "",
+          "// 👉 nur einmal starten (kein return erlaubt → deshalb if-Block)",
+          "if (!window.hmiHeartbeat.started) {",
+          "",
+          "    window.hmiHeartbeat.started = true;",
+          "",
+          "    console.log('Heartbeat wird gestartet');",
+          "",
+          "    // 👉 Initialwerte",
+          "    window.hmiHeartbeat.heartbeatValue = false;",
+          "    window.hmiHeartbeat.timer = null;",
+          "    window.hmiHeartbeat.timeout = null;",
+          "    window.hmiHeartbeat.destroyWatch = null;",
+          "",
+          "    // 👉 Symbolpfade",
+          "    var plcHeartbeatExpression = '%s%ADS.PLC1.HMI.hmiAdsCommunicationInterface.HeartbeatPLC%/s%';",
+          "    var hmiConnectionStateExpression = '%i%bConnectionStatusPLCHMI%/i%';",
+          "",
+          "    // 👉 Verbindungsstatus setzen",
+          "    function setConnectionState(isConnected) {",
+          "        TcHmi.Symbol.writeEx(hmiConnectionStateExpression, isConnected, function (data) {",
+          "            if (data.error !== TcHmi.Errors.NONE) {",
+          "                console.log('Fehler beim Schreiben Verbindungsstatus:', data.error);",
+          "            }",
+          "        });",
+          "    }",
+          "",
+          "    // 👉 Timeout neu starten",
+          "    function restartHeartbeatTimeout() {",
+          "        if (window.hmiHeartbeat.timeout !== null) {",
+          "            clearTimeout(window.hmiHeartbeat.timeout);",
+          "        }",
+          "",
+          "        window.hmiHeartbeat.timeout = setTimeout(function () {",
+          "            console.log('Timeout -> Verbindung verloren');",
+          "            setConnectionState(false);",
+          "        }, 2000);",
+          "    }",
+          "",
+          "    // 👉 Timer (HMI → PLC)",
+          "    window.hmiHeartbeat.timer = setInterval(function () {",
+          "        window.hmiHeartbeat.heartbeatValue = !window.hmiHeartbeat.heartbeatValue;",
+          "",
+          "        TcHmi.Symbol.writeEx(",
+          "            '%s%ADS.PLC1.HMI.hmiAdsCommunicationInterface.HeartbeatHMI%/s%',",
+          "            window.hmiHeartbeat.heartbeatValue,",
+          "            function (data) {",
+          "                if (data.error !== TcHmi.Errors.NONE) {",
+          "                    console.log('Heartbeat schreiben fehlgeschlagen');",
+          "                }",
+          "            }",
+          "        );",
+          "    }, 500);",
+          "",
+          "    // 👉 Watch (PLC → HMI)",
+          "    var heartbeatSymbol = new TcHmi.Symbol(plcHeartbeatExpression);",
+          "",
+          "    window.hmiHeartbeat.destroyWatch = heartbeatSymbol.watch(function (data) {",
+          "        if (data.error === TcHmi.Errors.NONE) {",
+          "            setConnectionState(true);",
+          "            restartHeartbeatTimeout();",
+          "        } else {",
+          "            setConnectionState(false);",
+          "        }",
+          "    });",
+          "",
+          "}"
+        ],
+        "asyncWait": true,
+        "waitMode": "Synchronous"
+      }
+    ]
+  }
+]
+</script>
 </div>

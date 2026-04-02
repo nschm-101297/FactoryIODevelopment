@@ -1,6 +1,6 @@
 <div id="ADSSettings" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="100" data-tchmi-height="100" data-tchmi-width-unit="%" data-tchmi-height-unit="%">
 
-<div id="TcHmiGrid_2" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%">
+<div id="ADSSettingsContainer" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
 [
@@ -55,7 +55,7 @@
 </div>
 <div id="txtIpAdress_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-font-size="20" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text="%s%ADS.PLC1.HMI.hmiAdsCommunicationInterface.DeviceIpAddress%/s%">
 </div>
-<div id="txtConnectionState_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-font-size="20" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center">
+<div id="txtConnectionState_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-font-size="20" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text="%i%bConnectionStatusPLCHMI%/i%">
 </div>
 <div id="txtRuntimeMode_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="3" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-font-size="20" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text="%s%ADS.PLC1.HMI.hmiAdsCommunicationInterface.RuntimeStatus%/s%">
 
