@@ -10,7 +10,7 @@ hmiHeaderInstance(NameApplication := 'Hochregallager',
 				  HeaderHMIInterface := hmiHeaderInterface);
 				  
 hmiAdsCommunicationInterfaceInstance(Timeout := T#1S,
-									 TimeoutHMI := T#1S,
+									 TimeoutHMI := T#500ms,
 									 LocalAdsPort := 851,
 									 HeartbeatHMI := hmiAdsCommunicationInterface.HeartbeatHMI);
 									 

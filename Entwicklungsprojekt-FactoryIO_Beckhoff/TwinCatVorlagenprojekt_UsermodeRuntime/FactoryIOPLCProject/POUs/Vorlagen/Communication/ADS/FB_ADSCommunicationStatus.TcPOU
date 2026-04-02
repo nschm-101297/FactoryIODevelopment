@@ -37,9 +37,7 @@ VAR
 	statHearbeatHMIIsKeepAlive	:	BOOL;
 	
 	instHearbeatPLCTrue	:	TON;
-	instHearbeatPLCFalse	:	TON;
 	statHeartbeatPLCTrue	:	BOOL;
-	statHeartbeatPLCFalse	:	BOOL;
 	statHearbeatPLC	:	BOOL;
 END_VAR
 ]]></Declaration>
@@ -100,15 +98,13 @@ instHearbeatEvaluationHMIFalse(IN := NOT HeartbeatHMI,
 statHearbeatHMIIsKeepAlive := NOT statErrorHeartbeatHMIToLongTrue AND NOT statErrorHeartbeatHMIToLongFalse;
 
 (*===================== Creating Heartbeat PLC =====================*)
-instHearbeatPLCTrue(IN := NOT statHeartbeatPLCFalse,
+instHearbeatPLCTrue(IN := NOT statHeartbeatPLCTrue,
 					PT := TimeoutHMI,
 					Q => statHeartbeatPLCTrue);
-instHearbeatPLCFalse(IN := NOT statHeartbeatPLCTrue,
-					 PT := TimeoutHMI,
-					 Q => statHeartbeatPLCFalse);
 							  
-
-statHearbeatPLC := statHeartbeatPLCTrue;]]></ST>
+IF statHeartbeatPLCTrue THEN
+	statHearbeatPLC := NOT statHearbeatPLC;
+END_IF]]></ST>
     </Implementation>
     <Property Name="AdsState" Id="{6eea6bc8-e6ea-44d5-bd0c-846554110dc1}">
       <Declaration><![CDATA[PROPERTY PUBLIC AdsState : String]]></Declaration>
