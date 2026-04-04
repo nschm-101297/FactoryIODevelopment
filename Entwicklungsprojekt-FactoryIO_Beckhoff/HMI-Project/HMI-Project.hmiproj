@@ -182,6 +182,13 @@
       <SubType>Content</SubType>
       <DependentUpon>UserControls\Button_Mainscreen.usercontrol</DependentUpon>
     </Content>
+    <Content Include="UserControls\Footer.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\Footer.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\Footer.usercontrol</DependentUpon>
+    </Content>
     <Content Include="UserControls\FourButtonSection.usercontrol">
       <SubType>Content</SubType>
     </Content>

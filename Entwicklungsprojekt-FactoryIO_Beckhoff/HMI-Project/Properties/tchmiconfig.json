@@ -62,6 +62,9 @@
       "url": "UserControls/Button_Mainscreen.usercontrol"
     },
     {
+      "url": "UserControls/Footer.usercontrol"
+    },
+    {
       "url": "UserControls/FourButtonSection.usercontrol"
     },
     {
@@ -113,6 +116,12 @@
       "bConnectionStatusPLCHMI": {
         "value": false,
         "type": "tchmi:general#/definitions/BOOL",
+        "persist": false,
+        "readonly": false
+      },
+      "lastPageSafed": {
+        "value": "Contents/MainSelectionDesktop.content",
+        "type": "tchmi:framework#/definitions/ContentPath",
         "persist": false,
         "readonly": false
       }
