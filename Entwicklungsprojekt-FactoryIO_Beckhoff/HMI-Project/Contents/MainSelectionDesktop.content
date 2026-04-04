@@ -83,7 +83,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/Visibility",
-          "value": "Visible"
+          "value": "Collapsed"
         },
         "asyncWait": true
       }
@@ -99,7 +99,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/Visibility",
-          "value": "Collapsed"
+          "value": "Visible"
         },
         "asyncWait": true
       },
