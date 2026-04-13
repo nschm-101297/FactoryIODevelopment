@@ -139,10 +139,19 @@
     <Content Include="Contents\OverviewSection.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Contents\MachineSection.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\Automatic_Mode.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\ConveyorBelt.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Elevator.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\Emitter.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\Home-Symbol.svg">
