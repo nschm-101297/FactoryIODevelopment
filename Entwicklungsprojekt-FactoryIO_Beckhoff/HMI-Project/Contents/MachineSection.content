@@ -721,6 +721,22 @@
         "waitMode": "Synchronous"
       }
     ]
+  },
+  {
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onDestroyed",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%i%cpLastPageSaved%/i%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:framework#/definitions/ContentPath",
+          "value": "Contents/MachineSection.content"
+        },
+        "asyncWait": true
+      }
+    ]
   }
 ]
 </script>
