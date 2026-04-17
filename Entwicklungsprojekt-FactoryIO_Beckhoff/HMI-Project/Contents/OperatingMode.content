@@ -92,7 +92,7 @@
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%i%lastPageSafed%/i%",
+        "symbolExpression": "%i%cpLastPageSaved%/i%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
