@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIRuncontrolInterface" Id="{f61c084c-86f1-484e-b6e5-3051a3870f77}">
+    <Declaration><![CDATA[TYPE HMIRuncontrolInterface :
+STRUCT
+	RuncontrolButtons	:	ARRAY [1..10] of HMIButtonMachineSection;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIWorkpieceInterface" Id="{73d13c24-ca17-41e6-818b-9b7d2b7d0190}">
+    <Declaration><![CDATA[TYPE HMIWorkpieceInterface :
+STRUCT
+	PartPresent	:	BOOL;
+	CreatePart	:	BOOL;	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
