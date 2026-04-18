@@ -8,6 +8,8 @@
 	
 	hmiAdsCommunicationInterfaceInstance	:	FB_ADSCommunicationStatus;
 	hmiAdsCommunicationInterface	:	ADSCommunicationInterface;
+	
+	hmiMachineSectionInterface	:	HMISettingLineInterface;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

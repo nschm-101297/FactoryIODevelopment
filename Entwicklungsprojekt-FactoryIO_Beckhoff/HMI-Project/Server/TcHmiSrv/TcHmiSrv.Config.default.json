@@ -29,7 +29,145 @@
     "DEFAULTLOCALE": "client",
     "DEFAULTTIMEFORMATLOCALE": "client",
     "DEFAULTTIMEZONE": "client",
-    "DEFINITIONS": {},
+    "DEFINITIONS": {
+        "ADS": {
+            "ADS-PLC1.ARRAY_1..3_OF-HMIButtonSettingLineInterface": {
+                "items": {
+                    "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIButtonSettingLineInterface"
+                },
+                "maxItems": 3,
+                "minItems": 3,
+                "startOffset": 1,
+                "type": "array"
+            },
+            "ADS-PLC1.HMIButtonSettingLineInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "AxisPosition": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/REAL"
+                            },
+                            {
+                                "propertyOrder": 6
+                            }
+                        ]
+                    },
+                    "CaptionButton": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 7
+                            }
+                        ]
+                    },
+                    "InPosition": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    },
+                    "IsEnabled": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "IsPressed": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    },
+                    "IsVisibleAxisPosition": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 4
+                            }
+                        ]
+                    },
+                    "IsVisibleButton": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 5
+                            }
+                        ]
+                    },
+                    "PathImageButton": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 8
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "IsEnabled",
+                    "IsPressed",
+                    "InPosition",
+                    "IsVisibleAxisPosition",
+                    "IsVisibleButton",
+                    "AxisPosition",
+                    "CaptionButton",
+                    "PathImageButton"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.HMISettingLineInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "CaptionSettingLine": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "SettingLineButtons": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..3_OF-HMIButtonSettingLineInterface"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "CaptionSettingLine",
+                    "SettingLineButtons"
+                ],
+                "type": "object"
+            }
+        }
+    },
     "DEFLATECOMPRESSIONLEVEL": 5,
     "DIAGNOSTICS_DOMAINS": [],
     "DISABLED_CONFIGURATION_HINTS": [],
@@ -955,6 +1093,16 @@
                         "propertyOrder": 5
                     }
                 ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.HMISettingLineInterface"
             },
             "USEMAPPING": true
         },
@@ -4197,6 +4345,7 @@
                 "ADS.PLC1.HMI.hmiHeaderInterface.PathMachineState": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.PathOperatingMode": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.State": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticHome.IsSelected": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.IsActive": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.PreconditionsFullfilled": 3,
