@@ -3,7 +3,7 @@
   <DUT Name="HMIMovementForkInterface" Id="{78f23466-a8b8-4bc5-9f92-db87a0e2d99a}">
     <Declaration><![CDATA[TYPE HMIMovementForkInterface :
 STRUCT
-	ForkMovementButtons	:	ARRAY [1..8] of HMIButtonMachineSection;
+	ForkMovementSettingLines	:	ARRAY [1..3] of HMISettingLineInterface;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

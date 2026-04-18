@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <DUT Name="HMIButtonMachineSection" Id="{2ce3b5e1-29dd-491c-a6ff-4c55b64a6f27}">
-    <Declaration><![CDATA[TYPE HMIButtonMachineSection :
+  <DUT Name="HMIButtonSettingLineInterface" Id="{2ce3b5e1-29dd-491c-a6ff-4c55b64a6f27}">
+    <Declaration><![CDATA[TYPE HMIButtonSettingLineInterface :
 STRUCT
 	IsEnabled	:	BOOL;
 	IsPressed	:	BOOL;

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMISettingLineInterface" Id="{a4fd7520-d467-4c44-a00c-1450f8a2c779}">
+    <Declaration><![CDATA[TYPE HMISettingLineInterface :
+STRUCT
+	CaptionSettingLine	:	STRING;
+	SettingLineButtons	:	ARRAY[1..3] OF HMIButtonSettingLineInterface;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
