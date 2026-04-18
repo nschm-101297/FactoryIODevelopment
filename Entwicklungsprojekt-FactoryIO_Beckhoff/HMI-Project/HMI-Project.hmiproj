@@ -212,6 +212,13 @@
       <SubType>Content</SubType>
       <DependentUpon>UserControls\Header.usercontrol</DependentUpon>
     </Content>
+    <Content Include="UserControls\SettingLine.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\SettingLine.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\SettingLine.usercontrol</DependentUpon>
+    </Content>
     <Folder Include="Fonts\" />
     <Folder Include="Images" />
     <Folder Include="Images\Manifest" />
