@@ -198,6 +198,13 @@
       <SubType>Content</SubType>
       <DependentUpon>UserControls\Footer.usercontrol</DependentUpon>
     </Content>
+    <Content Include="UserControls\Fork.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\Fork.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\Fork.usercontrol</DependentUpon>
+    </Content>
     <Content Include="UserControls\FourButtonSection.usercontrol">
       <SubType>Content</SubType>
     </Content>

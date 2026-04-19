@@ -240,7 +240,13 @@
   {
     "displayName": "Fork",
     "hidden": "%i%bForkTabInvisible%/i%",
-    "name": "tab2"
+    "name": "tab2",
+    "targetFile": {
+      "path": "UserControls/Fork.usercontrol",
+      "attributes": {
+        "data-tchmi-hmiforkinterface": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.Forks%/s%"
+      }
+    }
   },
   {
     "displayName": "Runcontrol",
