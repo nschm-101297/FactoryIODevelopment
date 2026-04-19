@@ -6,7 +6,8 @@
 {attribute 'to_string'}
 TYPE MachineSection :
 (
-	Conveyor := 0,
+	None := 0,
+	Conveyor,
 	Emitter,
 	Elevator,
 	StackerCrane,

@@ -40,6 +40,15 @@
                 "startOffset": 1,
                 "type": "array"
             },
+            "ADS-PLC1.ARRAY_1..3_OF-HMISettingLineInterface": {
+                "items": {
+                    "$ref": "tchmi:server#/definitions/ADS-PLC1.HMISettingLineInterface"
+                },
+                "maxItems": 3,
+                "minItems": 3,
+                "startOffset": 1,
+                "type": "array"
+            },
             "ADS-PLC1.HMIButtonSettingLineInterface": {
                 "additionalProperties": false,
                 "properties": {
@@ -136,6 +145,63 @@
                 ],
                 "type": "object"
             },
+            "ADS-PLC1.HMIMovementForkInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "ForkMovementSettingLines": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..3_OF-HMISettingLineInterface"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "ForkMovementSettingLines"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.HMIMovementInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "MovementSettingLines": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..3_OF-HMISettingLineInterface"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "MovementSettingLines"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.HMIRuncontrolInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "RuncontrolSettingLines": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..3_OF-HMISettingLineInterface"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "RuncontrolSettingLines"
+                ],
+                "type": "object"
+            },
             "ADS-PLC1.HMISettingLineInterface": {
                 "additionalProperties": false,
                 "properties": {
@@ -165,6 +231,79 @@
                     "SettingLineButtons"
                 ],
                 "type": "object"
+            },
+            "ADS-PLC1.HMIWorkpieceInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "CreatePart": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    },
+                    "PartPresent": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "PartPresent",
+                    "CreatePart"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.MachineSection": {
+                "attributes": {
+                    "generate_implicit_init_function": "",
+                    "qualified_only": "",
+                    "strict": "",
+                    "to_string": ""
+                },
+                "enum": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "options": [
+                    {
+                        "label": "None",
+                        "value": 0
+                    },
+                    {
+                        "label": "Conveyor",
+                        "value": 1
+                    },
+                    {
+                        "label": "Emitter",
+                        "value": 2
+                    },
+                    {
+                        "label": "Elevator",
+                        "value": 3
+                    },
+                    {
+                        "label": "StackerCrane",
+                        "value": 4
+                    },
+                    {
+                        "label": "RFID",
+                        "value": 5
+                    }
+                ],
+                "type": "integer"
             }
         }
     },
@@ -1096,13 +1235,105 @@
             },
             "USEMAPPING": true
         },
-        "ADS.PLC1.HMI.hmiMachineSectionInterface": {
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
             "DYNAMIC": true,
-            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface",
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::ActiveMachineSection",
             "SCHEMA": {
-                "$ref": "tchmi:server#/definitions/ADS-PLC1.HMISettingLineInterface"
+                "allOf": [
+                    {
+                        "$ref": "tchmi:server#/definitions/ADS-PLC1.MachineSection"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.Forks": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::Forks",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIMovementForkInterface"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.Movements": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::Movements",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIMovementInterface"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.Runcontrols": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::Runcontrols",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIRuncontrolInterface"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.SelectedActor": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::SelectedActor",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/INT"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.Workpiece": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::Workpiece",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIWorkpieceInterface"
+                    },
+                    {
+                        "propertyOrder": 7
+                    }
+                ]
             },
             "USEMAPPING": true
         },
@@ -4345,7 +4576,12 @@
                 "ADS.PLC1.HMI.hmiHeaderInterface.PathMachineState": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.PathOperatingMode": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.State": 3,
-                "ADS.PLC1.HMI.hmiMachineSectionInterface": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.Forks": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.Movements": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.Runcontrols": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.SelectedActor": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.Workpiece": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticHome.IsSelected": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.IsActive": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.PreconditionsFullfilled": 3,

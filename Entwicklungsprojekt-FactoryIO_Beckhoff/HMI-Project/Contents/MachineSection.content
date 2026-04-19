@@ -162,7 +162,7 @@
 }
 </script>
 </div>
-<div id="cbSelectedActorInstance" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiCombobox" data-tchmi-auto-focus-out="True" data-tchmi-combobox-text="Select" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-font-size="40">
+<div id="cbSelectedActorInstance" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiCombobox" data-tchmi-auto-focus-out="True" data-tchmi-combobox-text="Select" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-font-size="40" data-tchmi-selected-index="%s%ADS.PLC1.HMI.hmiMachineSectionInterface.SelectedActor%/s%">
 <script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
 {
   "top": 3,
@@ -357,11 +357,11 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%i%pActorgroupImage%/i%",
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection%/s%",
                 "value": {
                   "objectType": "StaticValue",
-                  "valueType": "tchmi:framework#/definitions/Path",
-                  "value": "Images/Elevator.svg"
+                  "valueType": "tchmi:server#/definitions/ADS-PLC1.MachineSection",
+                  "value": 3
                 },
                 "asyncWait": true
               }
@@ -439,6 +439,17 @@
                   "value": "Images/ConveyorBelt.svg"
                 },
                 "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:server#/definitions/ADS-PLC1.MachineSection",
+                  "value": 1
+                },
+                "asyncWait": true
               }
             ]
           },
@@ -512,6 +523,17 @@
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Path",
                   "value": "Images/RFID.svg"
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:server#/definitions/ADS-PLC1.MachineSection",
+                  "value": 5
                 },
                 "asyncWait": true
               }
@@ -589,6 +611,17 @@
                   "value": "Images/StackerCrane.svg"
                 },
                 "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:server#/definitions/ADS-PLC1.MachineSection",
+                  "value": 4
+                },
+                "asyncWait": true
               }
             ]
           },
@@ -664,6 +697,17 @@
                   "value": "Images/Emitter.svg"
                 },
                 "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:server#/definitions/ADS-PLC1.MachineSection",
+                  "value": 2
+                },
+                "asyncWait": true
               }
             ]
           }
@@ -733,6 +777,17 @@
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
           "value": "Contents/MachineSection.content"
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:server#/definitions/ADS-PLC1.MachineSection",
+          "value": 0
         },
         "asyncWait": true
       }
