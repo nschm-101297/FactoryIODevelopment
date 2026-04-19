@@ -71,6 +71,9 @@
       "url": "UserControls/Header.usercontrol"
     },
     {
+      "url": "UserControls/Movement.usercontrol"
+    },
+    {
       "url": "UserControls/SettingLine.usercontrol"
     }
   ],

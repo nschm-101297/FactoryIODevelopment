@@ -229,7 +229,13 @@
   {
     "displayName": "Movements",
     "hidden": "%i%bMovementTabInvisible%/i%",
-    "name": "tab1"
+    "name": "tab1",
+    "targetFile": {
+      "path": "UserControls/Movement.usercontrol",
+      "attributes": {
+        "data-tchmi-hmimovementinterface": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.Movements%/s%"
+      }
+    }
   },
   {
     "displayName": "Fork",

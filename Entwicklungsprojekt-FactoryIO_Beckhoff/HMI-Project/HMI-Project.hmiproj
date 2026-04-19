@@ -212,6 +212,13 @@
       <SubType>Content</SubType>
       <DependentUpon>UserControls\Header.usercontrol</DependentUpon>
     </Content>
+    <Content Include="UserControls\Movement.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\Movement.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\Movement.usercontrol</DependentUpon>
+    </Content>
     <Content Include="UserControls\SettingLine.usercontrol">
       <SubType>Content</SubType>
     </Content>
