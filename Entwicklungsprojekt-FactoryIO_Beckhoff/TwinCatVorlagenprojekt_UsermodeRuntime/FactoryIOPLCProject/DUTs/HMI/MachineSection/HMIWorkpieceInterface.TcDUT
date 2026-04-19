@@ -3,8 +3,7 @@
   <DUT Name="HMIWorkpieceInterface" Id="{73d13c24-ca17-41e6-818b-9b7d2b7d0190}">
     <Declaration><![CDATA[TYPE HMIWorkpieceInterface :
 STRUCT
-	PartPresent	:	BOOL;
-	CreatePart	:	BOOL;	
+	WorkpieceSettingLines	:	ARRAY[1..3] of HMISettingLineInterface;	
 END_STRUCT
 END_TYPE
 ]]></Declaration>

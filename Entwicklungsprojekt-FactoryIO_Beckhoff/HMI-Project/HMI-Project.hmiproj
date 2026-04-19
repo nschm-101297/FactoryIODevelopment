@@ -240,6 +240,13 @@
       <SubType>Content</SubType>
       <DependentUpon>UserControls\SettingLine.usercontrol</DependentUpon>
     </Content>
+    <Content Include="UserControls\Workpiece.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\Workpiece.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\Workpiece.usercontrol</DependentUpon>
+    </Content>
     <Folder Include="Fonts\" />
     <Folder Include="Images" />
     <Folder Include="Images\Manifest" />

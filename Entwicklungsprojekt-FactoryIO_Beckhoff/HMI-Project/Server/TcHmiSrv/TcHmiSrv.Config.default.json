@@ -235,20 +235,10 @@
             "ADS-PLC1.HMIWorkpieceInterface": {
                 "additionalProperties": false,
                 "properties": {
-                    "CreatePart": {
+                    "WorkpieceSettingLines": {
                         "allOf": [
                             {
-                                "$ref": "tchmi:general#/definitions/BOOL"
-                            },
-                            {
-                                "propertyOrder": 2
-                            }
-                        ]
-                    },
-                    "PartPresent": {
-                        "allOf": [
-                            {
-                                "$ref": "tchmi:general#/definitions/BOOL"
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..3_OF-HMISettingLineInterface"
                             },
                             {
                                 "propertyOrder": 1
@@ -257,8 +247,7 @@
                     }
                 },
                 "required": [
-                    "PartPresent",
-                    "CreatePart"
+                    "WorkpieceSettingLines"
                 ],
                 "type": "object"
             },

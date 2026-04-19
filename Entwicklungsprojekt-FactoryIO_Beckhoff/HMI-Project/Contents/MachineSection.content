@@ -267,7 +267,13 @@
   {
     "displayName": "Workpiece",
     "hidden": "%i%bWorkpieceTabInvisible%/i%",
-    "name": "tab5"
+    "name": "tab5",
+    "targetFile": {
+      "path": "UserControls/Workpiece.usercontrol",
+      "attributes": {
+        "data-tchmi-hmiworkpieceinterface": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.Workpiece%/s%"
+      }
+    }
   }
 ]
 </script>

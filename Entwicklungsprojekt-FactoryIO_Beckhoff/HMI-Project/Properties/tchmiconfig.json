@@ -81,6 +81,9 @@
     },
     {
       "url": "UserControls/SettingLine.usercontrol"
+    },
+    {
+      "url": "UserControls/Workpiece.usercontrol"
     }
   ],
   "controls": [],
