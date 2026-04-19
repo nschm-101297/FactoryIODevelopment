@@ -219,6 +219,13 @@
       <SubType>Content</SubType>
       <DependentUpon>UserControls\Movement.usercontrol</DependentUpon>
     </Content>
+    <Content Include="UserControls\Runcontrol.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\Runcontrol.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\Runcontrol.usercontrol</DependentUpon>
+    </Content>
     <Content Include="UserControls\SettingLine.usercontrol">
       <SubType>Content</SubType>
     </Content>

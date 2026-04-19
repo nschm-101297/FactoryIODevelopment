@@ -245,7 +245,13 @@
   {
     "displayName": "Runcontrol",
     "hidden": "%i%bRuncontrolTabInvisible%/i%",
-    "name": "tab3"
+    "name": "tab3",
+    "targetFile": {
+      "path": "UserControls/Runcontrol.usercontrol",
+      "attributes": {
+        "data-tchmi-hmiruncontrolinterface": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.Runcontrols%/s%"
+      }
+    }
   },
   {
     "displayName": "RFID",
