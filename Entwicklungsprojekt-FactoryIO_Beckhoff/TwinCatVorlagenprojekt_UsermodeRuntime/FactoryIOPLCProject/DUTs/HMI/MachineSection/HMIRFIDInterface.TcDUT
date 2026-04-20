@@ -3,20 +3,9 @@
   <DUT Name="HMIRFIDInterface" Id="{1b526505-33bd-42a4-a645-94e60f72605b}">
     <Declaration><![CDATA[TYPE HMIRFIDInterface :
 STRUCT
-	PermissionHardware	:	BOOL;
-	PartPresent	:	BOOL;
-	ExecuteCommand	:	BOOL;
-	FMReading	:	BOOL;
-	FMWritting	:	BOOL;
-	ErrorActive	:	BOOL;
-	SelectedCommand	:	WORD;
-	ReadValue	:	WORD;
-	WriteValue	:	WORD;
-	SelectedMemoryIndex	:	WORD;
-	StatusReader	:	WORD;
-	CommandID	:	WORD;
-	AllReadData	:	ARRAY[0..127] OF WORD;
-	AllWriteData	:	ARRAY[0..127] OF WORD;
+	RFIDStatus	:	HMIRFIDStatusInterface;
+	RFIDControl	:	HMIRFIDControlInterface;
+	RFIDData	:	HMIRFIDDataInterface;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

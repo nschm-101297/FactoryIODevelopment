@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIRFIDStatusInterface" Id="{507d6932-9e4b-42eb-9a2d-e47e72ddcb94}">
+    <Declaration><![CDATA[TYPE HMIRFIDStatusInterface :
+STRUCT
+	PermissionHardware	:	BOOL;
+	PartPresent	:	BOOL;
+	ErrorActive	:	BOOL;
+	FMReading	:	BOOL;
+	FMWritting	:	BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

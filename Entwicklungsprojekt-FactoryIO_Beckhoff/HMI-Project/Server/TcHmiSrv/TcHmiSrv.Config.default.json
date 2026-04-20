@@ -31,6 +31,14 @@
     "DEFAULTTIMEZONE": "client",
     "DEFINITIONS": {
         "ADS": {
+            "ADS-PLC1.ARRAY_0..127_OF-WORD": {
+                "items": {
+                    "$ref": "tchmi:general#/definitions/WORD"
+                },
+                "maxItems": 128,
+                "minItems": 128,
+                "type": "array"
+            },
             "ADS-PLC1.ARRAY_1..3_OF-HMIButtonSettingLineInterface": {
                 "items": {
                     "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIButtonSettingLineInterface"
@@ -180,6 +188,162 @@
                 },
                 "required": [
                     "MovementSettingLines"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.HMIRFIDControlInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "ExecuteCommand": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "SelectedCommand": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/WORD"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    },
+                    "SelectedMemoryIndex": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/WORD"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "ExecuteCommand",
+                    "SelectedCommand",
+                    "SelectedMemoryIndex"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.HMIRFIDDataInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "AllReadData": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..127_OF-WORD"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    },
+                    "AllWriteData": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..127_OF-WORD"
+                            },
+                            {
+                                "propertyOrder": 4
+                            }
+                        ]
+                    },
+                    "SingleReadValue": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/WORD"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "SingleWriteValue": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/WORD"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "SingleReadValue",
+                    "SingleWriteValue",
+                    "AllReadData",
+                    "AllWriteData"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.HMIRFIDStatusInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "ErrorActive": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    },
+                    "FMReading": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 4
+                            }
+                        ]
+                    },
+                    "FMWritting": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 5
+                            }
+                        ]
+                    },
+                    "PartPresent": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    },
+                    "PermissionHardware": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "PermissionHardware",
+                    "PartPresent",
+                    "ErrorActive",
+                    "FMReading",
+                    "FMWritting"
                 ],
                 "type": "object"
             },
@@ -1270,6 +1434,57 @@
                     },
                     {
                         "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDControl": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::RFID::RFIDControl",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIRFIDControlInterface"
+                    },
+                    {
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDData": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::RFID::RFIDData",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIRFIDDataInterface"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDStatus": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::RFID::RFIDStatus",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIRFIDStatusInterface"
+                    },
+                    {
+                        "propertyOrder": 1
                     }
                 ]
             },
@@ -4568,6 +4783,9 @@
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.Forks": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.Movements": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDControl": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDData": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDStatus": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.Runcontrols": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.SelectedActor": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.Workpiece": 3,
