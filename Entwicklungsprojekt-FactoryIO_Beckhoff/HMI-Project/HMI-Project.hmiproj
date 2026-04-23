@@ -226,6 +226,13 @@
       <SubType>Content</SubType>
       <DependentUpon>UserControls\Movement.usercontrol</DependentUpon>
     </Content>
+    <Content Include="UserControls\RFIDBasicControl.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\RFIDBasicControl.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\RFIDBasicControl.usercontrol</DependentUpon>
+    </Content>
     <Content Include="UserControls\Runcontrol.usercontrol">
       <SubType>Content</SubType>
     </Content>
