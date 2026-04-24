@@ -197,6 +197,42 @@
         "type": "tchmi:framework#/definitions/Path",
         "persist": false,
         "readonly": false
+      },
+      "sRFIDAction": {
+        "value": "",
+        "type": "tchmi:general#/definitions/String",
+        "persist": false,
+        "readonly": false
+      },
+      "wSelectedIndex": {
+        "value": 0,
+        "type": "tchmi:general#/definitions/WORD",
+        "persist": false,
+        "readonly": false
+      },
+      "wSelectedValue": {
+        "value": 0,
+        "type": "tchmi:general#/definitions/WORD",
+        "persist": false,
+        "readonly": false
+      },
+      "tstOptionOne": {
+        "value": "Normal",
+        "type": "tchmi:framework#/definitions/ToggleState",
+        "persist": false,
+        "readonly": false
+      },
+      "tstOptionTwo": {
+        "value": "Active",
+        "type": "tchmi:framework#/definitions/ToggleState",
+        "persist": false,
+        "readonly": false
+      },
+      "tstOptionThree": {
+        "value": "Normal",
+        "type": "tchmi:framework#/definitions/ToggleState",
+        "persist": false,
+        "readonly": false
       }
     },
     "themedResources": {},
