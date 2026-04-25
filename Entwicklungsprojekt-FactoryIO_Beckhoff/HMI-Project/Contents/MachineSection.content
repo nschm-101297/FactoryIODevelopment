@@ -229,7 +229,7 @@
   {
     "displayName": "Movements",
     "hidden": "%i%bMovementTabInvisible%/i%",
-    "name": "tab1",
+    "name": "tbMovement",
     "targetFile": {
       "path": "UserControls/Movement.usercontrol",
       "attributes": {
@@ -240,7 +240,7 @@
   {
     "displayName": "Fork",
     "hidden": "%i%bForkTabInvisible%/i%",
-    "name": "tab2",
+    "name": "tbFork",
     "targetFile": {
       "path": "UserControls/Fork.usercontrol",
       "attributes": {
@@ -251,7 +251,7 @@
   {
     "displayName": "Runcontrol",
     "hidden": "%i%bRuncontrolTabInvisible%/i%",
-    "name": "tab3",
+    "name": "tbRuncontrol",
     "targetFile": {
       "path": "UserControls/Runcontrol.usercontrol",
       "attributes": {
@@ -262,7 +262,7 @@
   {
     "displayName": "RFID",
     "hidden": "%i%bRFIDTabInvisible%/i%",
-    "name": "tab4",
+    "name": "tbRFID",
     "targetFile": {
       "path": "UserControls/RFID.usercontrol"
     }
@@ -270,7 +270,7 @@
   {
     "displayName": "Workpiece",
     "hidden": "%i%bWorkpieceTabInvisible%/i%",
-    "name": "tab5",
+    "name": "tbWorkpiece",
     "targetFile": {
       "path": "UserControls/Workpiece.usercontrol",
       "attributes": {
@@ -373,6 +373,17 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
+                "symbolExpression": "%ctrl%tbFunctionGroups::InitialTabName%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "tbMovement"
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
                 "symbolExpression": "%i%pActorgroupImage%/i%",
                 "value": {
                   "objectType": "StaticValue",
@@ -453,6 +464,17 @@
                   "objectType": "StaticValue",
                   "valueType": "tchmi:general#/definitions/BOOL",
                   "value": true
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%tbFunctionGroups::InitialTabName%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "tbMovement"
                 },
                 "asyncWait": true
               },
@@ -545,6 +567,17 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
+                "symbolExpression": "%ctrl%tbFunctionGroups::InitialTabName%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "tbRFID"
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
                 "symbolExpression": "%i%pActorgroupImage%/i%",
                 "value": {
                   "objectType": "StaticValue",
@@ -625,6 +658,17 @@
                   "objectType": "StaticValue",
                   "valueType": "tchmi:general#/definitions/BOOL",
                   "value": true
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%tbFunctionGroups::InitialTabName%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "tbMovement"
                 },
                 "asyncWait": true
               },
@@ -717,6 +761,17 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
+                "symbolExpression": "%ctrl%tbFunctionGroups::InitialTabName%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "tbWorkpiece"
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
                 "symbolExpression": "%i%pActorgroupImage%/i%",
                 "value": {
                   "objectType": "StaticValue",
@@ -751,7 +806,7 @@
           "",
           "        var actorGroupName = data.value;",
           "",
-          "        var instancePath = `%s%ADS.PLC1.HMI.${actorGroupName}instances%/s%`;",
+          "        var instancePath = `%s%ADS.PLC1.HMI.hmi${actorGroupName}instances%/s%`;",
           "",
           "        TcHmi.Symbol.readEx2(instancePath, function (data) {",
           "",
