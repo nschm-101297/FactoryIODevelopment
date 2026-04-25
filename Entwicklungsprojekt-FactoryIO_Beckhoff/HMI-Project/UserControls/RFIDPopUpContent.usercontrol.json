@@ -44,7 +44,7 @@
       "name": "data-tchmi-datainterface",
       "displayName": "DataInterface",
       "visible": true,
-      "type": "tchmi:general#/definitions/String",
+      "type": "tchmi:server#/definitions/ADS-PLC1.HMIRFIDDataInterface",
       "category": "",
       "description": "",
       "readOnly": false,

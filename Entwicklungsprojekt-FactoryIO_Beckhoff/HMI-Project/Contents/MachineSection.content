@@ -262,7 +262,10 @@
   {
     "displayName": "RFID",
     "hidden": "%i%bRFIDTabInvisible%/i%",
-    "name": "tab4"
+    "name": "tab4",
+    "targetFile": {
+      "path": "UserControls/RFID.usercontrol"
+    }
   },
   {
     "displayName": "Workpiece",

@@ -50,9 +50,27 @@
   }
 ]
 </script>
-<div id="RFIDBasicFunctionButtons" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-target-user-control="UserControls/RFIDBasicControl.usercontrol" data-tchmi-width="500" data-tchmi-width-unit="px" data-tchmi-textlabel1="Permission Hardware" data-tchmi-textlabel2="Part Present">
+<div id="RFIDBasicFunctionButtons" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-target-user-control="UserControls/RFIDBasicControl.usercontrol" data-tchmi-width="500" data-tchmi-width-unit="px" data-tchmi-textlabel1="Permission Hardware" data-tchmi-textlabel2="Part Present" data-tchmi-popupid="%ctrl%RFIDPopUp::id%/ctrl%" data-tchmi-statusrfid="%s%ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDStatus%/s%">
 </div>
-<div id="TcHmiPopup_1" data-tchmi-type="TcHmi.Controls.System.TcHmiPopup" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-scrolling="Auto">
+<div id="RFIDPopUp" data-tchmi-type="TcHmi.Controls.System.TcHmiPopup" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-scrolling="Auto" data-tchmi-header-text="RFID control">
+
+<script data-tchmi-target-attribute="data-tchmi-target-file" type="application/json">
+{
+  "path": "UserControls/RFIDPopUpContent.usercontrol",
+  "attributes": {
+    "data-tchmi-controlinterface": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDControl%/s%",
+    "data-tchmi-statusinterface": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDStatus%/s%",
+    "data-tchmi-datainterface": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDData%/s%",
+    "data-tchmi-popupid": "%ctrl%RFIDPopUp::id%/ctrl%"
+  }
+}
+</script>
 </div>
 </div>
+
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "color": "rgba(229, 229, 4, 1)"
+}
+</script>
 </div>

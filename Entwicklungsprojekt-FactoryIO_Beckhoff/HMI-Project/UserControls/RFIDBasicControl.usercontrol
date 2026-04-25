@@ -196,6 +196,17 @@
         ],
         "asyncWait": true,
         "waitMode": "Synchronous"
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%i%sRFIDAction%/i%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/String",
+          "value": "Read"
+        },
+        "asyncWait": true
       }
     ]
   }
@@ -271,6 +282,17 @@
         ],
         "asyncWait": true,
         "waitMode": "Synchronous"
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%i%sRFIDAction%/i%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/String",
+          "value": "Write"
+        },
+        "asyncWait": true
       }
     ]
   }
