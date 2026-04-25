@@ -31,6 +31,14 @@
     "DEFAULTTIMEZONE": "client",
     "DEFINITIONS": {
         "ADS": {
+            "ADS-PLC1.ARRAY_0..10_OF-STRING-80": {
+                "items": {
+                    "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                },
+                "maxItems": 11,
+                "minItems": 11,
+                "type": "array"
+            },
             "ADS-PLC1.ARRAY_0..127_OF-WORD": {
                 "items": {
                     "$ref": "tchmi:general#/definitions/WORD"
@@ -1300,6 +1308,16 @@
                         "propertyOrder": 3
                     }
                 ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiEmitterInstances": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiEmitterInstances",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..10_OF-STRING-80"
             },
             "USEMAPPING": true
         },
@@ -4775,6 +4793,7 @@
                 "ADS.PLC1.HMI.hmiAdsCommunicationInterface.HeartbeatPLC": 3,
                 "ADS.PLC1.HMI.hmiAdsCommunicationInterface.LocalAMSNetId": 3,
                 "ADS.PLC1.HMI.hmiAdsCommunicationInterface.RuntimeStatus": 3,
+                "ADS.PLC1.HMI.hmiEmitterInstances": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.ErrorIsActive": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.NameApplication": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.PathMachineState": 3,

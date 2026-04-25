@@ -10,6 +10,11 @@
 	hmiAdsCommunicationInterface	:	ADSCommunicationInterface;
 	
 	hmiMachineSectionInterface	:	MachineSectionHMIInterface;
+	
+	hmiEmitterInstances	:	ARRAY[0..1] OF STRING := [
+														'Zufuehrband',
+														'SubParts'
+														];
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

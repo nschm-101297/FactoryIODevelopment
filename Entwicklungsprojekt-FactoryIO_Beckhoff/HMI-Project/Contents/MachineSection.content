@@ -162,7 +162,7 @@
 }
 </script>
 </div>
-<div id="cbSelectedActorInstance" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiCombobox" data-tchmi-auto-focus-out="True" data-tchmi-combobox-text="Select" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-font-size="40" data-tchmi-selected-index="%s%ADS.PLC1.HMI.hmiMachineSectionInterface.SelectedActor%/s%" data-tchmi-drop-down-horizontal-alignment="Center" data-tchmi-data-height="60" data-tchmi-drop-down-font-size="40">
+<div id="cbSelectedActorInstance" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiCombobox" data-tchmi-auto-focus-out="True" data-tchmi-combobox-text="Select" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-font-size="40" data-tchmi-selected-index="%s%ADS.PLC1.HMI.hmiMachineSectionInterface.SelectedActor|BindingMode=TwoWay%/s%" data-tchmi-drop-down-horizontal-alignment="Center" data-tchmi-data-height="60" data-tchmi-drop-down-font-size="40">
 <script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
 {
   "top": 3,
@@ -806,7 +806,7 @@
           "",
           "        var actorGroupName = data.value;",
           "",
-          "        var instancePath = `%s%ADS.PLC1.HMI.hmi${actorGroupName}instances%/s%`;",
+          "        var instancePath = `%s%ADS.PLC1.HMI.hmi${actorGroupName}Instances%/s%`;",
           "",
           "        TcHmi.Symbol.readEx2(instancePath, function (data) {",
           "",
