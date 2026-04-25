@@ -145,6 +145,9 @@
     <Content Include="Images\Automatic_Mode.svg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Images\BackwardConveyor.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\ConveyorBelt.svg">
       <SubType>Content</SubType>
     </Content>
@@ -155,6 +158,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\Emitter.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\ForwardConveyor.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\Home-Symbol.svg">
@@ -185,6 +191,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\StackerCrane.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\StopConveyor.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="UserControls\Button_Mainscreen.usercontrol">

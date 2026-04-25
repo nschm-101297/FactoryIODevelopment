@@ -15,6 +15,10 @@
 														'Zufuehrband',
 														'SubParts'
 													];
+	hmiConveyorsInstances	:	ARRAY[0..1] OF STRING := [
+															'Foerderband 6',
+															'Zufuehrung'
+														 ];
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
