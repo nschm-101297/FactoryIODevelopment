@@ -8,7 +8,10 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[instEmitter(PartPresent:= BauteilVorEmitter, 
+      <ST><![CDATA[instEmitter(PartPresent:= BauteilVorEmitter,
+			ActorInstanceIndex := 0,
+			ActorInstanceName := 'Zufuehrband',
+			HMIInterface := HMI.hmiMachineSectionInterface, 
 			CreatePart=> Emitter_Rollenband4m);
 			
 IF CreateNewPart THEN

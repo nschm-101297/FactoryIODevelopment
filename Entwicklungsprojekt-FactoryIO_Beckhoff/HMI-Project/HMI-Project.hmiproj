@@ -148,6 +148,9 @@
     <Content Include="Images\ConveyorBelt.svg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Images\CreatePartEmitter.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\Elevator.svg">
       <SubType>Content</SubType>
     </Content>
