@@ -5,7 +5,9 @@
 VAR_INPUT
 	CurrentPosition	:	WORD;	//Current Position of Conveyor
 	SensorOutfeed	:	BOOL;	//Sensor Outfeed Conveyor
-	SensorInfeed	:	BOOL;	//Sensor Infeed Conveyor	
+	SensorInfeed	:	BOOL;	//Sensor Infeed Conveyor
+	ActorInstanceIndex	:	INT;	//Index in DropDown HMI
+	ActorInstanceName	:	STRING;		//Name of the instance
 END_VAR
 VAR_OUTPUT
 	SetPointPositionElevator	:	WORD;
@@ -15,6 +17,7 @@ VAR_OUTPUT
 END_VAR
 VAR_IN_OUT
 	OperatingMode	:	OperatingMode;	//Schnittstelle für Betriebsarten
+	HMIInterface	:	MachineSectionHMIInterface;	//HMI-Interface
 END_VAR
 VAR
 	statCurrentPosition	:	REAL;
@@ -27,6 +30,18 @@ VAR
 	statInPosition	:	BOOL;
 	statRTrigPartOutfeed	:	R_TRIG;
 	statRTrigPartInfeed	:	R_TRIG;
+	
+	internHMIInterface	:	MachineSectionHMIInterface;
+	internRisingEdgePressButtonUpElevator	:	R_TRIG;
+	internRisingEdgePressButtonDownElevator	:	R_TRIG;
+	internRisingEdgePressButtonStopElevator	:	R_TRIG;
+	internRisingEdgePressButtonForwardConveyor	:	R_TRIG;
+	internRisingEdgePressButtonBackwardConveyor	:	R_TRIG;
+	internRisingEdgePressButtonStopConveyor	:	R_TRIG;
+	internStopElevator	:	BOOL;
+	internStopConveyor	:	BOOL;
+	internUpMovingElevator	:	BOOL;
+	internDownMovingElevator	:	BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -35,22 +50,141 @@ FC_AnalogInputValueHandling(RowValue:= CurrentPosition,
 							UpperLimit:= 7.0, 
 							LowerLimit:= 0.0, 
 							ConvertedValue=> statCurrentPosition);
+							
+(*===================== HMI INTERFACE =====================*)
+internHMIInterface := HMIInterface;
+
+IF internHMIInterface.ActiveMachineSection = MachineSection.Elevator AND
+	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Button Handling Movement =====================*)
+	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('Elevator Axis Control', ActorInstanceName);
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveElevator AND
+																							statSetPointPosition < 7;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].InPosition := internUpMovingElevator;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].CaptionButton := 'Up';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\UpElevator.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsVisibleAxisPosition := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsEnabled := OperatingMode.ManuelIsActive;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].InPosition := NOT statMoveElevator;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].AxisPosition := statCurrentPosition;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].CaptionButton := 'Stop';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].PathImageButton := 'Images\StopConveyor.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveElevator AND
+																							statSetPointPosition > 0;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].InPosition := internDownMovingElevator;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].CaptionButton := 'Down';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\DownElevator.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[2].CaptionSettingLine := CONCAT('Elevator Conveyor Control', ActorInstanceName);
+	
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveElevator AND NOT
+																							statConveyorBackward AND
+																							statInPosition;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].InPosition := statMoveElevator;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].CaptionButton := 'Forward';
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].PathImageButton := 'Images\ForwardConveyor.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsEnabled := OperatingMode.ManuelIsActive;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].InPosition := NOT statMoveElevator;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].CaptionButton := 'Stop';
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].PathImageButton := 'Images\StopConveyor.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveElevator AND NOT
+																							statConveyorBackward AND
+																							statInPosition;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].InPosition := statMoveElevator;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].CaptionButton := 'Backward';
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].PathImageButton := 'Images\BackwardConveyor.svg';
+	
+	(*===================== Elevator Up =====================*)
+	internRisingEdgePressButtonUpElevator(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsPressed);
+	IF internRisingEdgePressButtonUpElevator.Q THEN
+		statSetPointPosition := statSetPointPosition + 0.2;
+		statMoveElevator := TRUE;
+		internUpMovingElevator := TRUE;
+	END_IF
+	(*===================== Elevator Down =====================*)
+	internRisingEdgePressButtonDownElevator(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsPressed);
+	IF internRisingEdgePressButtonDownElevator.Q THEN
+		statSetPointPosition := statSetPointPosition - 0.2;
+		statMoveElevator := TRUE;
+		internDownMovingElevator := TRUE;
+	END_IF
+	(*===================== Elevator Stop =====================*)
+	internRisingEdgePressButtonStopElevator(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsPressed);
+	IF internRisingEdgePressButtonStopElevator.Q THEN
+		internStopElevator := TRUE;
+	END_IF
+	(*===================== Conveyor Forward =====================*)
+	internRisingEdgePressButtonForwardConveyor(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsPressed);
+	IF internRisingEdgePressButtonForwardConveyor.Q THEN
+		statConveyorForward := TRUE;
+	END_IF
+	(*===================== Conveyor Backward =====================*)
+	internRisingEdgePressButtonBackwardConveyor(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsPressed);
+	IF internRisingEdgePressButtonBackwardConveyor.Q THEN
+		statConveyorBackward := TRUE;
+	END_IF
+	(*===================== Conveyor Stop =====================*)
+	internRisingEdgePressButtonStopConveyor(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsPressed);
+	IF internRisingEdgePressButtonStopConveyor.Q THEN
+		internStopConveyor := TRUE;
+	END_IF
+	
+	(*===================== Write Interface =====================*)
+	HMIInterface := internHMIInterface;
+END_IF
+
 (*===================== Elevator in Position =====================*)
 IF (statCurrentPosition >= statSetPointPosition - 0.1) AND (statCurrentPosition <= statSetPointPosition + 0.1) THEN
 	statInPosition := TRUE;
 	statMoveElevator := FALSE;
+	internUpMovingElevator := FALSE;
+	internDownMovingElevator := FALSE;
 ELSE
 	statInPosition := FALSE;
 END_IF
 (*===================== Positioning Elevator =====================*)
-IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive 
-   AND statMoveElevator THEN
+IF (OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive) OR
+	OperatingMode.ManuelIsActive AND statMoveElevator 
+THEN
 	statSelectedPositionToElevator := statSetPointPosition;
 END_IF
-IF OperatingMode.EStop.IsActive OR OperatingMode.ManuelIsActive OR
-	OperatingMode.Fault.IsActive OR OperatingMode.AutomaticStop.IsActive THEN
+IF OperatingMode.EStop.IsActive OR OperatingMode.Fault.IsActive OR 
+   (OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStop.IsActive) OR
+   (OperatingMode.ManuelIsActive AND internStopElevator)
+THEN
 	statSelectedPositionToElevator := statCurrentPosition;
 	statMoveElevator := FALSE;
+	internStopElevator := FALSE;
+	internUpMovingElevator := FALSE;
+	internDownMovingElevator := FALSE;
 END_IF
 (*===================== SetPointPosition =====================*)
 FC_AnalogOutputValueHandling(Setpoint:= statSelectedPositionToElevator, 
@@ -58,10 +192,13 @@ FC_AnalogOutputValueHandling(Setpoint:= statSelectedPositionToElevator,
 							 LowerLimit:= 0.0, 
 							 ConvertedValue=> statPositionToElevator);
 (*===================== Conveyor Reset =====================*)
-IF OperatingMode.EStop.IsActive OR OperatingMode.ManuelIsActive OR
-	OperatingMode.Fault.IsActive OR OperatingMode.AutomaticStop.IsActive THEN
+IF OperatingMode.EStop.IsActive OR OperatingMode.Fault.IsActive OR 
+(OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStop.IsActive) OR
+(OperatingMode.ManuelIsActive AND internStopConveyor) 
+THEN
 	statConveyorForward := FALSE;
 	statConveyorBackward := FALSE;
+	internStopConveyor := FALSE;
 END_IF
 (*===================== Conveyor Forward =====================*)
 statRTrigPartOutfeed(CLK:= SensorOutfeed);

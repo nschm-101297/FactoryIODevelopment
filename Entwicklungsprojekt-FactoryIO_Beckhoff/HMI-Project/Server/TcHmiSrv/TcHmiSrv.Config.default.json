@@ -1329,6 +1329,16 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.HMI.hmiElevatorInstances": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiElevatorInstances",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..1_OF-STRING-80"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.HMI.hmiEmitterInstances": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -4812,6 +4822,7 @@
                 "ADS.PLC1.HMI.hmiAdsCommunicationInterface.LocalAMSNetId": 3,
                 "ADS.PLC1.HMI.hmiAdsCommunicationInterface.RuntimeStatus": 3,
                 "ADS.PLC1.HMI.hmiConveyorInstances": 3,
+                "ADS.PLC1.HMI.hmiElevatorInstances": 3,
                 "ADS.PLC1.HMI.hmiEmitterInstances": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.ErrorIsActive": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.NameApplication": 3,

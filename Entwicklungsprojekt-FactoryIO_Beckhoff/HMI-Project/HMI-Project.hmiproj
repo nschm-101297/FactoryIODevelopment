@@ -157,6 +157,9 @@
     <Content Include="Images\CreatePartEmitter.svg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Images\DownElevator.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\Elevator.svg">
       <SubType>Content</SubType>
     </Content>
@@ -200,6 +203,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\StopConveyor.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\UpElevator.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="UserControls\Button_Mainscreen.usercontrol">
