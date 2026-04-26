@@ -142,6 +142,9 @@
     <Content Include="Contents\MachineSection.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Images\ActiveRuncontrol.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\Automatic_Mode.svg">
       <SubType>Content</SubType>
     </Content>
@@ -182,6 +185,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\OverviewOperatingMode.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\ResetRuncontrol.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\RFID.svg">

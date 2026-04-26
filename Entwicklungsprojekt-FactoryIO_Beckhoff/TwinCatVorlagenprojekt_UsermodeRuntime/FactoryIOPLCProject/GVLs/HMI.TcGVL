@@ -15,7 +15,7 @@
 														'Zufuehrband',
 														'SubParts'
 													];
-	hmiConveyorsInstances	:	ARRAY[0..1] OF STRING := [
+	hmiConveyorInstances	:	ARRAY[0..1] OF STRING := [
 															'Foerderband 6',
 															'Zufuehrung'
 														 ];

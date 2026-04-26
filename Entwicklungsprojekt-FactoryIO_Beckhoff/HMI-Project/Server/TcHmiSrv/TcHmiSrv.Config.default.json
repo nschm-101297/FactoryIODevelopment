@@ -47,6 +47,14 @@
                 "minItems": 128,
                 "type": "array"
             },
+            "ADS-PLC1.ARRAY_0..1_OF-STRING-80": {
+                "items": {
+                    "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+            },
             "ADS-PLC1.ARRAY_1..3_OF-HMIButtonSettingLineInterface": {
                 "items": {
                     "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIButtonSettingLineInterface"
@@ -1308,6 +1316,16 @@
                         "propertyOrder": 3
                     }
                 ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiConveyorInstances": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiConveyorInstances",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..1_OF-STRING-80"
             },
             "USEMAPPING": true
         },
@@ -4793,6 +4811,7 @@
                 "ADS.PLC1.HMI.hmiAdsCommunicationInterface.HeartbeatPLC": 3,
                 "ADS.PLC1.HMI.hmiAdsCommunicationInterface.LocalAMSNetId": 3,
                 "ADS.PLC1.HMI.hmiAdsCommunicationInterface.RuntimeStatus": 3,
+                "ADS.PLC1.HMI.hmiConveyorInstances": 3,
                 "ADS.PLC1.HMI.hmiEmitterInstances": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.ErrorIsActive": 3,
                 "ADS.PLC1.HMI.hmiHeaderInterface.NameApplication": 3,
