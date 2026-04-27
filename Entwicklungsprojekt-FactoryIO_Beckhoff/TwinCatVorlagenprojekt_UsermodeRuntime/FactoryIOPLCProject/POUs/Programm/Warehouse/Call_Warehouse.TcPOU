@@ -7,6 +7,9 @@
     <Implementation>
       <ST><![CDATA[instStackerCrane(StackerCraneCurrentPositionXAxis := RBGIstwertX,
                  StackerCraneCurrentPositionZAxis := RBGIstwertZ,
+				 ActorInstanceIndex := 0,
+				 ActorInstanceName := 'Einlagerung',
+				 HMIInterface := HMI.hmiMachineSectionInterface,
 				 OperatingMode := instOperatingMode.StateOperatingMode,
 				 SetPointToXAxis => RBGSollwertX, 
                  SetPointToZAxis => RBGSollwertZ, 

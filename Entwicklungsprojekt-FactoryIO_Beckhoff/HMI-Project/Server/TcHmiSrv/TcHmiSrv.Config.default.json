@@ -1808,6 +1808,16 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.HMI.hmiStackerCraneInstances": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiStackerCraneInstances",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..1_OF-STRING-80"
+            },
+            "USEMAPPING": true
+        },
         "ADS.RuntimePorts": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -4851,6 +4861,7 @@
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Manuel.PreconditionsFullfilled": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Quit.IsActive": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Reset.IsActive": 3,
+                "ADS.PLC1.HMI.hmiStackerCraneInstances": 3,
                 "ChangeUserSettings": 3,
                 "ConfirmAlarm": 3,
                 "CreateEvent": 3,

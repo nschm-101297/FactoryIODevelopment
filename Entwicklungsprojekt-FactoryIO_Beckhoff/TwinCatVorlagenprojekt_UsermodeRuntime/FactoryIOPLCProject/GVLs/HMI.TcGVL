@@ -22,7 +22,12 @@
 	hmiElevatorInstances	:	ARRAY[0..1] OF STRING := [
 															'Einlauf',
 															'Hochregallager'
-														 ];
+														];
+	hmiStackerCraneInstances	:	ARRAY[0..1] OF STRING := [
+															'Einlagerung',
+															'Auslagerung'
+														 ];													 
+	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
