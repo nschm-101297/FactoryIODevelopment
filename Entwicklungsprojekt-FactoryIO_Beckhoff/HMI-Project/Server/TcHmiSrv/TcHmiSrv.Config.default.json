@@ -55,6 +55,14 @@
                 "minItems": 2,
                 "type": "array"
             },
+            "ADS-PLC1.ARRAY_0..2_OF-STRING-80": {
+                "items": {
+                    "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                },
+                "maxItems": 3,
+                "minItems": 3,
+                "type": "array"
+            },
             "ADS-PLC1.ARRAY_1..3_OF-HMIButtonSettingLineInterface": {
                 "items": {
                     "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIButtonSettingLineInterface"
@@ -1805,6 +1813,16 @@
                         "propertyOrder": 2
                     }
                 ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiRFIDInstances": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiRFIDInstances",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..2_OF-STRING-80"
             },
             "USEMAPPING": true
         },
@@ -4861,6 +4879,7 @@
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Manuel.PreconditionsFullfilled": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Quit.IsActive": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Reset.IsActive": 3,
+                "ADS.PLC1.HMI.hmiRFIDInstances": 3,
                 "ADS.PLC1.HMI.hmiStackerCraneInstances": 3,
                 "ChangeUserSettings": 3,
                 "ConfirmAlarm": 3,

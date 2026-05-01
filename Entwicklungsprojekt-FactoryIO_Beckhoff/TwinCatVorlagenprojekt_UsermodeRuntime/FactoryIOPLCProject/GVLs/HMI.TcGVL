@@ -26,7 +26,12 @@
 	hmiStackerCraneInstances	:	ARRAY[0..1] OF STRING := [
 															'Einlagerung',
 															'Auslagerung'
-														 ];													 
+														 ];		
+	hmiRFIDInstances	:	ARRAY[0..2] OF STRING := [
+															'Einlagerung',
+															'Zufuehrung',
+															'Warehouse-Infeed'
+														 ];											 
 	
 END_VAR]]></Declaration>
   </GVL>

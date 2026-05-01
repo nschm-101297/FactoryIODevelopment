@@ -176,6 +176,17 @@
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%i%sRFIDAction%/i%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/String",
+          "value": "Read"
+        },
+        "asyncWait": true
+      },
+      {
         "objectType": "JavaScript",
         "active": true,
         "sourceLines": [
@@ -196,17 +207,6 @@
         ],
         "asyncWait": true,
         "waitMode": "Synchronous"
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%i%sRFIDAction%/i%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/String",
-          "value": "Read"
-        },
-        "asyncWait": true
       }
     ]
   }
@@ -262,6 +262,17 @@
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%i%sRFIDAction%/i%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/String",
+          "value": "Write"
+        },
+        "asyncWait": true
+      },
+      {
         "objectType": "JavaScript",
         "active": true,
         "sourceLines": [
@@ -269,7 +280,7 @@
           "   if(data.error === TcHmi.Errors.NONE){",
           "\tvar popUpId = data.value;",
           "\tvar popUp = TcHmi.Controls.get(popUpId);",
-          "\tif(popUp & &typeof popUp.open === 'function'){",
+          "\tif(popUp && typeof popUp.open === 'function'){",
           "\t\tpopUp.open();",
           "\t\t}else{",
           "\t\t\tconsole.log('Not able to open popup write!');",
@@ -282,17 +293,6 @@
         ],
         "asyncWait": true,
         "waitMode": "Synchronous"
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%i%sRFIDAction%/i%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/String",
-          "value": "Write"
-        },
-        "asyncWait": true
       }
     ]
   }
