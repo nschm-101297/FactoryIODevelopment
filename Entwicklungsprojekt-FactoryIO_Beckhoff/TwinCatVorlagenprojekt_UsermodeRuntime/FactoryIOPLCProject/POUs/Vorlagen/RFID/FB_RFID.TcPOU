@@ -103,6 +103,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.RFID AND
 	(*===================== Write Interface =====================*)
 	HMIInterface := internHMIInterface;
 END_IF
+
 (*===================== Error Handling =====================*)
 IF QuitError AND statErrorActive THEN
 	statErrorActive := FALSE;
