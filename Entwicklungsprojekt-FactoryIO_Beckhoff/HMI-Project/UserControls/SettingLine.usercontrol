@@ -523,8 +523,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%Interface%/pp%",
     "actions": [
@@ -615,8 +614,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="btnSettingLineTwo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="2" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::SettingLineButtons[1]::CaptionButton%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-background-image-vertical-alignment="Top" data-tchmi-background-image-width="30" data-tchmi-background-image-height="30" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Bottom" data-tchmi-text-font-size="20" data-tchmi-is-enabled="%pp%Interface::SettingLineButtons[1]::IsEnabled%/pp%" data-tchmi-background-image="%pp%Interface::SettingLineButtons[1]::PathImageButton%/pp%">
 
@@ -633,8 +631,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%Interface%/pp%",
     "actions": [
@@ -725,8 +722,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="btnSettingLineButtonThree" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="4" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::SettingLineButtons[2]::CaptionButton%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-background-image-vertical-alignment="Top" data-tchmi-background-image-width="30" data-tchmi-background-image-height="30" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Bottom" data-tchmi-text-font-size="20" data-tchmi-is-enabled="%pp%Interface::SettingLineButtons[2]::IsEnabled%/pp%" data-tchmi-background-image="%pp%Interface::SettingLineButtons[2]::PathImageButton%/pp%">
 
@@ -743,8 +739,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%Interface%/pp%",
     "actions": [
@@ -835,13 +830,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="txtSettingLineAxisPosOne" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::SettingLineButtons[0]::AxisPosition%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="20" data-tchmi-min-height="30">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%Interface%/pp%",
     "actions": [
@@ -900,13 +893,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="txtSettingLineAxisPosTwo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="2" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::SettingLineButtons[1]::AxisPosition%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="20" data-tchmi-min-height="30">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%Interface%/pp%",
     "actions": [
@@ -965,15 +956,13 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="txtSettingLineAxisPosThree" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="4" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::SettingLineButtons[2]::AxisPosition%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="20" data-tchmi-min-height="30">
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%Interface%/pp%",
     "actions": [
@@ -1032,13 +1021,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="rcSettingLineInPosOne" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%Interface%/pp%",
     "actions": [
@@ -1099,13 +1086,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="rcSettingLineInPosTwo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-grid-column-index="3" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%Interface%/pp%",
     "actions": [
@@ -1166,13 +1151,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="rcSettingLineInPosThree" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-grid-column-index="5" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%Interface%/pp%",
     "actions": [
@@ -1233,8 +1216,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 </div>
 </div>

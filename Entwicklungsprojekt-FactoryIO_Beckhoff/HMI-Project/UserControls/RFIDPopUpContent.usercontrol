@@ -383,8 +383,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onRadioStateChanged",
     "actions": [
@@ -571,8 +570,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="ReadWriteAllOption" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRadioButton" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%f%%i%sRFIDAction%/i% + ' All'%/f%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-radio-group="1" data-tchmi-text-font-size="30" data-tchmi-radio-state="%i%tstOptionThree%/i%">
 
@@ -617,8 +615,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onRadioStateChanged",
     "actions": [
@@ -761,8 +758,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="rtReadWriteFM" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
 
@@ -794,8 +790,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%StatusInterface%/pp%",
     "actions": [
@@ -975,8 +970,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="rtErrorActive" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
 
@@ -1008,8 +1002,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDStatus%/s%",
     "actions": [
@@ -1070,8 +1063,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="lbReadWriteFM" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="2" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%f%%i%sRFIDAction%/i% + ' FM'%/f%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="30">
 </div>
@@ -1457,8 +1449,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%pp%DataInterface%/pp%",
     "actions": [
@@ -1505,8 +1496,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 </div>
 <div id="RFIDPopUpClosingContainer" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="3" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%">
@@ -1659,8 +1649,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onMouseDown",
     "actions": [
@@ -2053,8 +2042,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="btnClosingPopUp" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="2" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="Close" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="30">
 
@@ -2099,8 +2087,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
@@ -2163,8 +2150,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 </div>
 <div id="RFIDPopUpDataAllWrite" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiDatagrid" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-src-data="%pp%DataInterface::AllWriteData|BindingMode=TwoWay|BindingEvent=onDataChanged%/pp%" data-tchmi-row-height="50" data-tchmi-grid-font-size="30" data-tchmi-header-height="50" data-tchmi-header-font-size="30" data-tchmi-row-numbers-font-size="30" data-tchmi-row-numbers-width="50">
@@ -2280,8 +2266,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onInitialized",
     "actions": [
@@ -2481,6 +2466,5 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>

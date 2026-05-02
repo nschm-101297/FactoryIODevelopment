@@ -167,8 +167,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onMouseDown",
     "actions": [
@@ -261,8 +260,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="SecondButton" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="3" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="20" data-tchmi-visibility="%pp%VisibilitySecondButton%/pp%" data-tchmi-text="%pp%CaptionSecondButton%/pp%" data-tchmi-is-enabled="%pp%IsEnabledSecondButton%/pp%">
 <script data-tchmi-target-attribute="data-tchmi-border-radius" type="application/json">
@@ -278,8 +276,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onMouseDown",
     "actions": [
@@ -372,8 +369,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="ThirdButton" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="5" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="20" data-tchmi-text="%pp%CaptionThirdButton%/pp%" data-tchmi-visibility="%pp%VisibilityThirdButton%/pp%" data-tchmi-is-enabled="%pp%IsEnabledThirdButton%/pp%">
 <script data-tchmi-target-attribute="data-tchmi-border-radius" type="application/json">
@@ -389,8 +385,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onMouseDown",
     "actions": [
@@ -483,8 +478,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="FourthButton" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="7" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="20" data-tchmi-visibility="%pp%VisibilityFourthButton%/pp%" data-tchmi-text="%pp%CaptionFourthButton%/pp%" data-tchmi-is-enabled="%pp%IsEnabledFourthButton%/pp%">
 <script data-tchmi-target-attribute="data-tchmi-border-radius" type="application/json">
@@ -500,8 +494,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onMouseDown",
     "actions": [
@@ -594,8 +587,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 </div>
 

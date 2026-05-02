@@ -959,7 +959,7 @@
             "USEMAPPING": true
         },
         "ADS.Config": {
-            "ACCESS": 0,
+            "ACCESS": 3,
             "DOMAIN": "ADS",
             "DYNAMIC": false,
             "HIDDEN": true,
@@ -1353,7 +1353,7 @@
             "DYNAMIC": true,
             "MAPPING": "PLC1::HMI::hmiEmitterInstances",
             "SCHEMA": {
-                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..10_OF-STRING-80"
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..1_OF-STRING-80"
             },
             "USEMAPPING": true
         },
@@ -1595,11 +1595,113 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Automatic.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Automatic::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticHome.IsSelected": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
             "DYNAMIC": true,
             "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::AutomaticHome::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticStart.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::AutomaticStart::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticStop.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::AutomaticStop::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Manuel.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Manuel::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Quit.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Quit::IsSelected",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Reset.IsSelected": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiOperatingmodeInterface::HMIToPLC::Reset::IsSelected",
             "SCHEMA": {
                 "allOf": [
                     {
@@ -4866,7 +4968,13 @@
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.Runcontrols": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.SelectedActor": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.Workpiece": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Automatic.IsSelected": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticHome.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticStart.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.AutomaticStop.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Manuel.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Quit.IsSelected": 3,
+                "ADS.PLC1.HMI.hmiOperatingmodeInterface.HMIToPLC.Reset.IsSelected": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.IsActive": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Automatic.PreconditionsFullfilled": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.AutomaticHome.IsActive": 3,

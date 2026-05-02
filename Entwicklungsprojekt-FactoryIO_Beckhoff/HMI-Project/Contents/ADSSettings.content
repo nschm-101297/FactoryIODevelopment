@@ -87,8 +87,7 @@
 </div>
 </div>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%i%bConnectionStatusPLCHMI%/i%",
     "actions": [
@@ -174,6 +173,5 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>

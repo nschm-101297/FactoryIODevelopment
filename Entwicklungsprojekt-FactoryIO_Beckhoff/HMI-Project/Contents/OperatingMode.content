@@ -84,8 +84,7 @@
 </div>
 </div>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onDestroyed",
     "actions": [
@@ -102,6 +101,5 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
