@@ -31,8 +31,9 @@ VAR
 	statErrorRuncontrolBackward	:	BOOL;
 	statTimeRuncontrolForward	:	TON;
 	statTimeRuncontrolBackward	:	TON;
-	internHMIInterface	:	MachineSectionHMIInterface;
 	
+	internHMIInterface	:	MachineSectionHMIInterface;
+	internInstanceActivatedFirstTime	:	BOOL;
 	internRisingEdgePressButtonForward	:	R_TRIG;
 	internRisingEdgePressButtonBackward	:	R_TRIG;
 	internRisingEdgePressButtonStop	:	R_TRIG;
@@ -48,8 +49,13 @@ internHMIInterface := HMIInterface;
 
 IF internHMIInterface.ActiveMachineSection = MachineSection.Conveyor AND
 	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Initializing HMI-Interface =====================*)
+ 	IF NOT internInstanceActivatedFirstTime THEN
+		FC_InitializingSettingLines(HMIInterface := internHMIInterface);
+		internInstanceActivatedFirstTime := TRUE;
+	END_IF
 	(*===================== Button Handling Movement =====================*)
-	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('Conveyor Control', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('Conveyor Control ', ActorInstanceName);
 	
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
@@ -139,6 +145,8 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Conveyor AND
 	END_IF
 	(*===================== Write Interface =====================*)
 	HMIInterface := internHMIInterface;
+ELSE
+		internInstanceActivatedFirstTime := FALSE;
 END_IF
 (*===================== Motor Forward =====================*)
 statMotorForward := statMotorForward AND ((OperatingMode.AutomaticIsActive

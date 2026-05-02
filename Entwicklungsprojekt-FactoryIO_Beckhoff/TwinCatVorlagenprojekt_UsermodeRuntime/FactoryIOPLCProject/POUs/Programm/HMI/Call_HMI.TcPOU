@@ -18,7 +18,9 @@ hmiAdsCommunicationInterfaceInstance(Timeout := T#1S,
 hmiAdsCommunicationInterface.DeviceIpAddress := hmiAdsCommunicationInterfaceInstance.LocalIpAddress;
 hmiAdsCommunicationInterface.LocalAMSNetId := hmiAdsCommunicationInterfaceInstance.LocalAMSNetId;
 hmiAdsCommunicationInterface.HeartbeatPLC := hmiAdsCommunicationInterfaceInstance.PLCHeartbeatHMICommunication;
-hmiAdsCommunicationInterface.RuntimeStatus := hmiAdsCommunicationInterfaceInstance.AdsState;				  ]]></ST>
+hmiAdsCommunicationInterface.RuntimeStatus := hmiAdsCommunicationInterfaceInstance.AdsState;
+
+// FC_InitializingSettingLines(HMIInterface := HMI.hmiMachineSectionInterface);				  ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

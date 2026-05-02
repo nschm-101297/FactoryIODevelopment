@@ -183,6 +183,9 @@
     <Compile Include="POUs\Vorlagen\HMI\FB_HMIHeader.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Vorlagen\HMI\FC_InitializingSettingLines.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Vorlagen\OperatingMode\FB_OperatingMode.TcPOU">
       <SubType>Code</SubType>
     </Compile>

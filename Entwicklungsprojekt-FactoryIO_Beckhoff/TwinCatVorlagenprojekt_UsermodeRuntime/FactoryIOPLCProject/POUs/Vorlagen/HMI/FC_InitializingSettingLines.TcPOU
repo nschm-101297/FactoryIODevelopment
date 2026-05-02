@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FC_InitializingSettingLines" Id="{67d42198-5b46-40c6-ab95-402caa5690f2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FC_InitializingSettingLines
+VAR_IN_OUT
+	HMIInterface	:	MachineSectionHMIInterface;
+END_VAR
+VAR
+	internHMIInterface	:	MachineSectionHMIInterface;
+	emptyHMIMovementInterface	:	HMIMovementInterface;
+	emptyHMIMovementForkInterface	:	HMIMovementForkInterface;
+	emptyHMIRuncontrolInterface	:	HMIRuncontrolInterface;
+	emptyHMIRFIDInterface	:	HMIRFIDInterface;
+	emptyHMIWorkpieceInterface	:	HMIWorkpieceInterface;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== Load Interface =====================*)
+internHMIInterface := HMIInterface;
+
+(*===================== Initializing Interface =====================*)
+internHMIInterface.Movements := emptyHMIMovementInterface;
+internHMIInterface.Forks := emptyHMIMovementForkInterface;
+internHMIInterface.Runcontrols := emptyHMIRuncontrolInterface;
+internHMIInterface.RFID := emptyHMIRFIDInterface;
+internHMIInterface.Workpiece := emptyHMIWorkpieceInterface;
+(*===================== Write Interface =====================*)
+HMIInterface := internHMIInterface;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

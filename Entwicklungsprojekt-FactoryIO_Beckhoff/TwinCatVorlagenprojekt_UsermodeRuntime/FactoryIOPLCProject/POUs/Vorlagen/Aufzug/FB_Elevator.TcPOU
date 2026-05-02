@@ -32,6 +32,7 @@ VAR
 	statRTrigPartInfeed	:	R_TRIG;
 	
 	internHMIInterface	:	MachineSectionHMIInterface;
+	internInstanceActivatedFirstTime	:	BOOL;
 	internRisingEdgePressButtonUpElevator	:	R_TRIG;
 	internRisingEdgePressButtonDownElevator	:	R_TRIG;
 	internRisingEdgePressButtonStopElevator	:	R_TRIG;
@@ -56,8 +57,13 @@ internHMIInterface := HMIInterface;
 
 IF internHMIInterface.ActiveMachineSection = MachineSection.Elevator AND
 	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Initializing HMI-Interface =====================*)
+	IF NOT internInstanceActivatedFirstTime THEN
+		FC_InitializingSettingLines(HMIInterface := internHMIInterface);
+		internInstanceActivatedFirstTime := TRUE;
+	END_IF
 	(*===================== Button Handling Movement =====================*)
-	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('Elevator Axis Control', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('Elevator Axis Control ', ActorInstanceName);
 	
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
@@ -89,7 +95,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Elevator AND
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].CaptionButton := 'Down';
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\DownElevator.svg';
 	
-	internHMIInterface.Movements.MovementSettingLines[2].CaptionSettingLine := CONCAT('Elevator Conveyor Control', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[2].CaptionSettingLine := CONCAT('Elevator Conveyor Control ', ActorInstanceName);
 	
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
@@ -159,6 +165,8 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Elevator AND
 	
 	(*===================== Write Interface =====================*)
 	HMIInterface := internHMIInterface;
+ELSE
+		internInstanceActivatedFirstTime := FALSE;
 END_IF
 
 (*===================== Elevator in Position =====================*)

@@ -15,7 +15,9 @@ VAR_OUTPUT
 END_VAR
 VAR
 	internCreatePart	: BOOL;
+	
 	internHMIInterface	:	MachineSectionHMIInterface;
+	internInstanceActivatedFirstTime	:	BOOL;
 	internRisingEdgePressButton	:	R_TRIG;
 END_VAR
 ]]></Declaration>
@@ -25,6 +27,11 @@ internHMIInterface := HMIInterface;
 
 IF internHMIInterface.ActiveMachineSection = MachineSection.Emitter AND
 	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Initializing HMI-Interface =====================*)
+	IF NOT internInstanceActivatedFirstTime THEN
+		FC_InitializingSettingLines(HMIInterface := internHMIInterface);
+		internInstanceActivatedFirstTime := TRUE;
+	END_IF
 	(*===================== Button Handling =====================*)
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].CaptionSettingLine := CONCAT('Creation Part ', ActorInstanceName);
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
@@ -40,6 +47,8 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Emitter AND
 	END_IF
 	(*===================== Write Interface =====================*)
 	HMIInterface := internHMIInterface;
+ELSE
+		internInstanceActivatedFirstTime := FALSE;
 END_IF
 (*===================== Create Parts =====================*)
 IF PartPresent THEN
