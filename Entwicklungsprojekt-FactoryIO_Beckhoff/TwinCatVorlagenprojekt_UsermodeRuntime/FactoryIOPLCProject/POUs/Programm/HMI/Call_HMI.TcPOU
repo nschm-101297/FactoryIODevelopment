@@ -8,7 +8,7 @@
 hmiHeaderInstance(NameApplication := 'Hochregallager',
 				  OperatingModeHMIInterface := hmiOperatingmodeInterface,
 				  HeaderHMIInterface := hmiHeaderInterface);
-				  
+			  
 hmiAdsCommunicationInterfaceInstance(Timeout := T#1S,
 									 TimeoutHMI := T#500ms,
 									 LocalAdsPort := 851,
