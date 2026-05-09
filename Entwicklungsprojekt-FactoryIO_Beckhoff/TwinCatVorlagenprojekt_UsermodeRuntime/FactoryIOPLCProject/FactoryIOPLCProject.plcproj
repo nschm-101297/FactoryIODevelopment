@@ -93,6 +93,9 @@
     <Compile Include="DUTs\RFID\RFIDReadWriteDataStates.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\VisionSensor\VisionSensorParttype.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GVLs\Elevator.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -114,6 +117,10 @@
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="GVLs\RFID.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\VisionSensor.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -159,6 +166,9 @@
     <Compile Include="POUs\Programm\SignalmappingOutput.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Programm\VisionSensor\Call_VisionSensor.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Programm\Warehouse\Call_Warehouse.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -192,6 +202,9 @@
     <Compile Include="POUs\Vorlagen\RFID\FB_RFID.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Vorlagen\VisionSensor\FB_VisionSensor.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Vorlagen\Warehouse\FB_StackerCrane.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -204,6 +217,7 @@
     <Folder Include="DUTs\HMI\MachineSection" />
     <Folder Include="DUTs\HMI\Header" />
     <Folder Include="DUTs\HMI\SettingLine" />
+    <Folder Include="DUTs\VisionSensor" />
     <Folder Include="DUTs\Program" />
     <Folder Include="DUTs\Program\Warehouse" />
     <Folder Include="DUTs\RFID" />
@@ -213,6 +227,7 @@
     <Folder Include="POUs\Programm\Foerderband" />
     <Folder Include="POUs\Programm\Aufzug" />
     <Folder Include="POUs\Programm\HMI" />
+    <Folder Include="POUs\Programm\VisionSensor" />
     <Folder Include="POUs\Programm\RFID" />
     <Folder Include="POUs\Programm\Warehouse" />
     <Folder Include="POUs\Programm\OperatingMode" />
@@ -225,6 +240,7 @@
     <Folder Include="POUs\Vorlagen\Aufzug" />
     <Folder Include="POUs\Vorlagen\HMI" />
     <Folder Include="POUs\Vorlagen\Communication" />
+    <Folder Include="POUs\Vorlagen\VisionSensor" />
     <Folder Include="POUs\Vorlagen\RFID" />
     <Folder Include="POUs\Vorlagen\Warehouse" />
     <Folder Include="POUs\Vorlagen\OperatingMode" />

@@ -15,6 +15,7 @@ Call_Foerderband();
 Call_Aufzug();
 Call_Warehouse();
 Call_RFID();
+Call_VisionSensor();
 SignalmappingOutput();]]></ST>
     </Implementation>
   </POU>

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_VisionSensor" Id="{2c8b0188-7971-4839-99cf-597a5f216e62}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_VisionSensor
+VAR_INPUT
+	PartPresent	:	BOOL;	//Part is on VisionSensor
+	ValueCode	:	WORD;	//Material Code, which is detected
+END_VAR
+VAR_OUTPUT
+	Finished	:	BOOL;	//Evaluation finished
+	Error	:	BOOL;	//Error by evaluation of material
+END_VAR
+VAR
+	statDetectedPart	:	VisionSensorParttype;
+	statREPartDetected	:	R_TRIG;	
+	statPartPresentDelay	:	TON:=(PT := T#100ms);
+	statResultEvaluation	:	BOOL;
+	statEvaluationFinished	:	BOOL;
+	statErrorDetection	:	BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[statPartPresentDelay(IN := PartPresent);
+statREPartDetected(CLK := statPartPresentDelay.Q);
+IF statREPartDetected.Q THEN
+	statEvaluationFinished := FALSE;
+	statResultEvaluation := GetParttype(ValueCode);
+	IF statResultEvaluation THEN
+		statEvaluationFinished := TRUE;
+		statErrorDetection := FALSE;	
+	ELSE
+		statEvaluationFinished := TRUE;
+		statErrorDetection := TRUE;				
+	END_IF
+ELSIF NOT PartPresent AND statDetectedPart <> VisionSensorParttype.None THEN
+	statDetectedPart := VisionSensorParttype.None;
+	statEvaluationFinished := FALSE;
+	statResultEvaluation := FALSE;
+	statErrorDetection := FALSE;
+END_IF
+
+Finished := statEvaluationFinished;
+Error := statErrorDetection;]]></ST>
+    </Implementation>
+    <Method Name="GetParttype" Id="{f5d41d8e-7db2-4a39-ad62-adfe809d1794}">
+      <Declaration><![CDATA[METHOD PRIVATE GetParttype : BOOL
+VAR_INPUT
+	valueCode	:	WORD;
+END_VAR
+VAR
+	tempEvaluationSuccessfully	:	BOOL := FALSE;
+	tempEvaluatedCode	:	VisionSensorParttype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE valueCode OF
+	VisionSensorParttype.None:
+		tempEvaluatedCode := VisionSensorParttype.None;
+		tempEvaluationSuccessfully := TRUE;
+	VisionSensorParttype.BlueRawMaterial:
+		tempEvaluatedCode := VisionSensorParttype.BlueRawMaterial;
+		tempEvaluationSuccessfully := TRUE;
+	VisionSensorParttype.BlueProductLid:
+		tempEvaluatedCode := VisionSensorParttype.BlueProductLid;
+		tempEvaluationSuccessfully := TRUE;
+	VisionSensorParttype.BlueProductBase:
+		tempEvaluatedCode := VisionSensorParttype.BlueProductBase;
+		tempEvaluationSuccessfully := TRUE;
+	VisionSensorParttype.GreenRawMaterial:
+		tempEvaluatedCode := VisionSensorParttype.GreenRawMaterial;
+		tempEvaluationSuccessfully := TRUE;
+	VisionSensorParttype.GreenProductLid:
+		tempEvaluatedCode := VisionSensorParttype.GreenProductLid;
+		tempEvaluationSuccessfully := TRUE;
+	VisionSensorParttype.GreenProductBase:
+		tempEvaluatedCode := VisionSensorParttype.GreenProductBase;
+		tempEvaluationSuccessfully := TRUE;
+	VisionSensorParttype.MetalRawMaterial:
+		tempEvaluatedCode := VisionSensorParttype.MetalRawMaterial;
+		tempEvaluationSuccessfully := TRUE;
+	VisionSensorParttype.MetalProductLid:
+		tempEvaluatedCode := VisionSensorParttype.MetalProductLid;
+		tempEvaluationSuccessfully := TRUE;
+	VisionSensorParttype.MetalProductBase:
+		tempEvaluatedCode := VisionSensorParttype.MetalProductBase;
+		tempEvaluationSuccessfully := TRUE;
+	ELSE
+		tempEvaluatedCode := VisionSensorParttype.NotDectedable;
+		tempEvaluationSuccessfully := FALSE;
+END_CASE
+
+statDetectedPart := tempEvaluatedCode;
+GetParttype := tempEvaluationSuccessfully;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Parttype" Id="{ffa49307-b663-4d98-80d9-dae53920dafd}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Parttype : VisionSensorParttype]]></Declaration>
+      <Get Name="Get" Id="{57852000-00ca-4546-a604-1e1f1a81ae28}">
+        <Declaration><![CDATA[
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Parttype := statDetectedPart;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_VisionSensor" Id="{d50b5f90-bab1-414f-90c9-61597ce78258}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_VisionSensor
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[instVisionSensorConveyor(PartPresent := PartDetectedVisionSensor,
+													ValueCode := ReadPartCode,
+													Error => ErrorVisionSensor);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

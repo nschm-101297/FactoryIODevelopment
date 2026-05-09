@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="VisionSensor" Id="{5e2260a8-5b75-46d1-bb1f-6f71dc8a3cd4}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	PartDetectedVisionSensor	:	BOOL;
+	ErrorVisionSensor	:	BOOL;
+	ReadPartCode	:	WORD;
+	
+	instVisionSensorConveyor	:	FB_VisionSensor;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

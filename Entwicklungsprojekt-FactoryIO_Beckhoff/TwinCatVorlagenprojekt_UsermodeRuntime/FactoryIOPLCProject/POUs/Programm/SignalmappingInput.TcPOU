@@ -21,13 +21,15 @@ AufzugSensorAuslaufFoerderband := GVL.mb_Output_Coils[12];
 RBGEndlageMitte := GVL.mb_Output_Coils[13];
 RBGEndlageLinks := GVL.mb_Output_Coils[14];
 RBGEndlageRechts := GVL.mb_Output_Coils[15];
+PartDetectedVisionSensor := GVL.mb_Output_Coils[18];
 (* ==================================== Analoge Eingaenge ====================================*)
 AufzugIstwert := GVL.mb_Output_Registers[0];
 RBGIstwertX := GVL.mb_Output_Registers[1];
 RBGIstwertZ := GVL.mb_Output_Registers[2];
 RFIDCommandID := GVL.mb_Output_Registers[3];
 RFIDReadData := GVL.mb_Output_Registers[4];
-RFIDStatus := GVL.mb_Output_Registers[5];]]></ST>
+RFIDStatus := GVL.mb_Output_Registers[5];
+ReadPartCode := GVL.mb_Output_Registers[6];]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
