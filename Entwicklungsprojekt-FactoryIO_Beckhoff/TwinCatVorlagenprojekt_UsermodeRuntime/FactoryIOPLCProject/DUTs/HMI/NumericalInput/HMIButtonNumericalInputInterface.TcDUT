@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIButtonNumericalInputInterface" Id="{9cc8cd21-676b-4a52-9373-99f7a05031db}">
+    <Declaration><![CDATA[TYPE HMIButtonNumericalInputInterface :
+STRUCT
+	IsEnabled	:	BOOL;
+	IsPressed	:	BOOL;
+	InPosition	:	BOOL;
+	IsVisibleButton	:	BOOL;
+	CaptionButton	:	STRING;
+	PathImageButton	:	STRING;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

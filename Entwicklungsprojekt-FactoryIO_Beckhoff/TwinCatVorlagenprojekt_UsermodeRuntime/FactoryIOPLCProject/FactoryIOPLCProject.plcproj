@@ -54,6 +54,15 @@
     <Compile Include="DUTs\HMI\MachineSection\MachineSectionHMIInterface.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\HMI\NumericalInput\HMIButtonNumericalInputInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\NumericalInput\HMINumericalInputInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\NumericalInput\HMINumericalInputLineInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\HMI\SettingLine\HMIButtonSettingLineInterface.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -219,6 +228,7 @@
     <Folder Include="DUTs\Communication" />
     <Folder Include="DUTs\HMI\MachineSection" />
     <Folder Include="DUTs\HMI\Header" />
+    <Folder Include="DUTs\HMI\NumericalInput" />
     <Folder Include="DUTs\HMI\SettingLine" />
     <Folder Include="DUTs\VisionSensor" />
     <Folder Include="DUTs\Program" />

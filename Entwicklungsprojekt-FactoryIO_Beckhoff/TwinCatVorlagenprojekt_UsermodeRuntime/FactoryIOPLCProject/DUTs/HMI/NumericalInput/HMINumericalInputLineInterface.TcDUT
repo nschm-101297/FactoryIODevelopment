@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMINumericalInputLineInterface" Id="{5826f568-2635-4280-a5f8-e95b72d53c03}">
+    <Declaration><![CDATA[TYPE HMINumericalInputLineInterface :
+STRUCT
+	CaptionDescription	:	STRING;
+	UnitInput	:	STRING;
+	ValueInput	:	REAL;
+	IsEnabledInput	:	BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

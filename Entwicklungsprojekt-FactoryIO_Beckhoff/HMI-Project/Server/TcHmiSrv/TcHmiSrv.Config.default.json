@@ -47,6 +47,30 @@
                 "minItems": 128,
                 "type": "array"
             },
+            "ADS-PLC1.ARRAY_0..1_OF-HMIButtonNumericalInputInterface": {
+                "items": {
+                    "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIButtonNumericalInputInterface"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+            },
+            "ADS-PLC1.ARRAY_0..1_OF-HMINumericalInputLineInterface": {
+                "items": {
+                    "$ref": "tchmi:server#/definitions/ADS-PLC1.HMINumericalInputLineInterface"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+            },
+            "ADS-PLC1.ARRAY_0..1_OF-NumericalInputLineInterface": {
+                "items": {
+                    "$ref": "tchmi:server#/definitions/ADS-PLC1.NumericalInputLineInterface"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+            },
             "ADS-PLC1.ARRAY_0..1_OF-STRING-80": {
                 "items": {
                     "$ref": "tchmi:general#/definitions/STRING%2880%29"
@@ -61,6 +85,24 @@
                 },
                 "maxItems": 3,
                 "minItems": 3,
+                "type": "array"
+            },
+            "ADS-PLC1.ARRAY_1..2_OF-HMIButtonNumericalInputInterface": {
+                "items": {
+                    "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIButtonNumericalInputInterface"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "startOffset": 1,
+                "type": "array"
+            },
+            "ADS-PLC1.ARRAY_1..2_OF-HMINumericalInputLineInterface": {
+                "items": {
+                    "$ref": "tchmi:server#/definitions/ADS-PLC1.HMINumericalInputLineInterface"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "startOffset": 1,
                 "type": "array"
             },
             "ADS-PLC1.ARRAY_1..3_OF-HMIButtonSettingLineInterface": {
@@ -80,6 +122,80 @@
                 "minItems": 3,
                 "startOffset": 1,
                 "type": "array"
+            },
+            "ADS-PLC1.HMIButtonNumericalInputInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "CaptionButton": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 5
+                            }
+                        ]
+                    },
+                    "InPosition": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    },
+                    "IsEnabled": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "IsPressed": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    },
+                    "IsVisibleButton": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 4
+                            }
+                        ]
+                    },
+                    "PathImageButton": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 6
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "IsEnabled",
+                    "IsPressed",
+                    "InPosition",
+                    "IsVisibleButton",
+                    "CaptionButton",
+                    "PathImageButton"
+                ],
+                "type": "object"
             },
             "ADS-PLC1.HMIButtonSettingLineInterface": {
                 "additionalProperties": false,
@@ -208,10 +324,125 @@
                                 "propertyOrder": 1
                             }
                         ]
+                    },
+                    "NumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.HMINumericalInputInterface"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
                     }
                 },
                 "required": [
-                    "MovementSettingLines"
+                    "MovementSettingLines",
+                    "NumericalInput"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.HMINumericalInputInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "ButtonsNumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..2_OF-HMIButtonNumericalInputInterface"
+                            },
+                            {
+                                "propertyOrder": 4
+                            }
+                        ]
+                    },
+                    "CaptionNumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "IsVisibleNumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    },
+                    "ValueLinesNumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..2_OF-HMINumericalInputLineInterface"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "CaptionNumericalInput",
+                    "IsVisibleNumericalInput",
+                    "ValueLinesNumericalInput",
+                    "ButtonsNumericalInput"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.HMINumericalInputLineInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "CaptionDescription": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "IsEnabledInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 4
+                            }
+                        ]
+                    },
+                    "UnitInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    },
+                    "ValueInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/REAL"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "CaptionDescription",
+                    "UnitInput",
+                    "ValueInput",
+                    "IsEnabledInput"
                 ],
                 "type": "object"
             },
@@ -492,6 +723,121 @@
                     }
                 ],
                 "type": "integer"
+            },
+            "ADS-PLC1.NumericalInputInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "CaptionButtonNumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    },
+                    "CaptionNumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "IsEnabledButtonNumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 4
+                            }
+                        ]
+                    },
+                    "LinesNumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..1_OF-NumericalInputLineInterface"
+                            },
+                            {
+                                "propertyOrder": 5
+                            }
+                        ]
+                    },
+                    "VisibilityNumericalInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "CaptionNumericalInput",
+                    "VisibilityNumericalInput",
+                    "CaptionButtonNumericalInput",
+                    "IsEnabledButtonNumericalInput",
+                    "LinesNumericalInput"
+                ],
+                "type": "object"
+            },
+            "ADS-PLC1.NumericalInputLineInterface": {
+                "additionalProperties": false,
+                "properties": {
+                    "CaptionDescription": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "IsEnabledInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 4
+                            }
+                        ]
+                    },
+                    "UnitInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    },
+                    "ValueInput": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/REAL"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "CaptionDescription",
+                    "UnitInput",
+                    "ValueInput",
+                    "IsEnabledInput"
+                ],
+                "type": "object"
             }
         }
     },
