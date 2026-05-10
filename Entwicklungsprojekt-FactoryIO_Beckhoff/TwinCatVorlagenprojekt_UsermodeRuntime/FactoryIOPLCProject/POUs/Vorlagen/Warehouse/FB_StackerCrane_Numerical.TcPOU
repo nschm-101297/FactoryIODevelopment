@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_StackerCrane_Numerical" Id="{9afc9ace-5467-4ff1-b14d-6365352949ef}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StackerCrane_Numerical
+VAR_INPUT
+	StackerCraneCurrentPositionXAxis	:	WORD;
+	StackerCraneCurrentPositionZAxis	:	WORD;
+	ActorInstanceIndex	:	INT;	//Index in DropDown HMI
+	ActorInstanceName	:	STRING;		//Name of the instance
+END_VAR
+VAR_OUTPUT
+	SetPointToXAxis : WORD;
+	SetPointToZAxis : WORD;
+	MoveForkLeft	:	BOOL;
+	MoveForkRight	:	BOOL;
+END_VAR
+VAR_IN_OUT
+	OperatingMode	:	OperatingMode;	//Schnittstelle für Betriebsarten
+	HMIInterface	:	MachineSectionHMIInterface;	//HMI-Interface
+END_VAR
+VAR
+	statMoveStackerCrane	:	BOOL;
+	statStackerCraneInPositionXAxis	:	BOOL;
+	statStackerCraneInPositionZAxis	:	BOOL;
+	statMoveForkLeft	:	BOOL;
+	statMoveForkRight	:	BOOL;
+	statCurrentPositionXAxis	: REAL;
+	statCurrentPositionZAxis	: REAL;
+	statSelectedSetPointXAxis	: REAL;
+	statSelectedSetPointZAxis	: REAL;
+	statSetPointXAxis	:	REAL;
+	statSetPointZAxis	:	REAL;
+	statSetPointToXaxis	:	WORD;
+	statSetPointToZaxis	:	WORD;
+	
+	internHMIInterface	:	MachineSectionHMIInterface;
+	internInstanceActivatedFirstTime	:	BOOL;
+	internRisingEdgePressButtonUpXAxis	:	R_TRIG;
+	internRisingEdgePressButtonDownXAxis	:	R_TRIG;
+	internRisingEdgePressButtonStopXAxis	:	R_TRIG;
+	internRisingEdgePressButtonUpZAxis	:	R_TRIG;
+	internRisingEdgePressButtonDownZAxis	:	R_TRIG;
+	internRisingEdgePressButtonStopZAxis	:	R_TRIG;
+	internRisingEdgePressButtonForkLeft	:	R_TRIG;
+	internRisingEdgePressButtonForkRight	:	R_TRIG;
+	internRisingEdgePressButtonMiddleFork	:	R_TRIG;
+	internStopXAxis	:	BOOL;
+	internStopZAxis	:	BOOL;
+	internMiddleFork	:	BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== CurrentPosition Axes =====================*)
+FC_AnalogInputValueHandling(RowValue:= StackerCraneCurrentPositionXAxis, 
+							UpperLimit:= 10.5, 
+							LowerLimit:= 0.0, 
+							ConvertedValue=> statCurrentPositionXAxis);
+FC_AnalogInputValueHandling(RowValue:= StackerCraneCurrentPositionZAxis, 
+							UpperLimit:= 6.625, 
+							LowerLimit:= 0.0, 
+							ConvertedValue=> statCurrentPositionZAxis);
+(*===================== HMI INTERFACE =====================*)
+internHMIInterface := HMIInterface;
+
+IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
+	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Initializing HMI-Interface =====================*)
+	IF NOT internInstanceActivatedFirstTime THEN
+		FC_InitializingSettingLines(HMIInterface := internHMIInterface);
+		internInstanceActivatedFirstTime := TRUE;
+	END_IF
+	(*===================== Button Handling Movement =====================*)
+	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('StackerCrane X-Axis Control ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[1].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveStackerCrane AND
+																							statSetPointXAxis < 10.5;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].InPosition := statStackerCraneInPositionXAxis;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].CaptionButton := 'Right';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\ForwardConveyor.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsVisibleAxisPosition := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsEnabled := OperatingMode.ManuelIsActive;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].InPosition := NOT statMoveStackerCrane;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].AxisPosition := statCurrentPositionXAxis;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].CaptionButton := 'Stop';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].PathImageButton := 'Images\StopConveyor.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveStackerCrane AND
+																							statSetPointXAxis > 0;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].InPosition := statStackerCraneInPositionXAxis;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].CaptionButton := 'Left';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\BackwardConveyor.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[2].CaptionSettingLine := CONCAT('StackerCrane Z-Axis Control ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[2].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveStackerCrane AND
+																							statSetPointZAxis < 10.5;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].InPosition := statStackerCraneInPositionZAxis;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].CaptionButton := 'Up';
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].PathImageButton := 'Images\UpElevator.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsVisibleAxisPosition := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsEnabled := OperatingMode.ManuelIsActive;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].InPosition := NOT statMoveStackerCrane;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].AxisPosition := statCurrentPositionZAxis;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].CaptionButton := 'Stop';
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].PathImageButton := 'Images\StopConveyor.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveStackerCrane AND
+																							statSetPointZAxis > 0;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].InPosition := statStackerCraneInPositionXAxis;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].CaptionButton := 'Down';
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].PathImageButton := 'Images\DownElevator.svg';
+	
+	internHMIInterface.Forks.ForkMovementSettingLines[1].CaptionSettingLine := CONCAT('Fork Control ', ActorInstanceName);
+	internHMIInterface.Forks.ForkMovementSettingLines[1].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[1].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveStackerCrane AND
+																							statStackerCraneInPositionXAxis AND
+																							statStackerCraneInPositionZAxis;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[1].InPosition := statMoveForkLeft;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[1].CaptionButton := 'Left';
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\BackwardConveyor.svg';
+	
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[2].IsVisibleButton := TRUE;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[2].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[2].IsEnabled := OperatingMode.ManuelIsActive;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[2].InPosition := NOT statMoveForkLeft AND NOT statMoveForkRight;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[2].CaptionButton := 'Stop';
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[2].PathImageButton := 'Images\StopConveyor.svg';
+	
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[3].IsVisibleButton := TRUE;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[3].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[3].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statMoveStackerCrane AND
+																							statStackerCraneInPositionXAxis AND
+																							statStackerCraneInPositionZAxis;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[3].InPosition := statMoveForkRight;
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[3].CaptionButton := 'Right';
+	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\ForwardConveyor.svg';
+	
+	(*===================== X-Axis Up =====================*)
+	internRisingEdgePressButtonUpXAxis(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsPressed);
+	IF internRisingEdgePressButtonUpXAxis.Q THEN
+		statSetPointXAxis := statSetPointXAxis + 0.2;
+		statMoveStackerCrane := TRUE;
+	END_IF
+	(*===================== X-Axis Down =====================*)
+	internRisingEdgePressButtonDownXAxis(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsPressed);
+	IF internRisingEdgePressButtonDownXAxis.Q THEN
+		statSetPointXAxis := statSetPointXAxis - 0.2;
+		statMoveStackerCrane := TRUE;
+	END_IF
+	(*===================== X-Axis Stop =====================*)
+	internRisingEdgePressButtonStopXAxis(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsPressed);
+	IF internRisingEdgePressButtonStopXAxis.Q THEN
+		internStopXAxis := TRUE;
+	END_IF
+	(*===================== Z-Axis Up =====================*)
+	internRisingEdgePressButtonUpZAxis(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsPressed);
+	IF internRisingEdgePressButtonUpZAxis.Q THEN
+		statSetPointZAxis := statSetPointZAxis + 0.2;
+		statMoveStackerCrane := TRUE;
+	END_IF
+	(*===================== Z-Axis Down =====================*)
+	internRisingEdgePressButtonDownZAxis(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsPressed);
+	IF internRisingEdgePressButtonDownZAxis.Q THEN
+		statSetPointZAxis := statSetPointZAxis - 0.2;
+		statMoveStackerCrane := TRUE;
+	END_IF
+	(*===================== Z-Axis Stop =====================*)
+	internRisingEdgePressButtonStopZAxis(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsPressed);
+	IF internRisingEdgePressButtonStopZAxis.Q THEN
+		internStopZAxis := TRUE;
+	END_IF
+	(*===================== Fork Left =====================*)
+	internRisingEdgePressButtonForkLeft(CLK := internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[1].IsPressed);
+	IF internRisingEdgePressButtonForkLeft.Q THEN
+		statMoveForkLeft := TRUE;
+	END_IF
+	(*===================== Fork Right =====================*)
+	internRisingEdgePressButtonForkRight(CLK := internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[3].IsPressed);
+	IF internRisingEdgePressButtonForkRight.Q THEN
+		statMoveForkRight := TRUE;
+	END_IF
+	(*===================== Fork Middle =====================*)
+	internRisingEdgePressButtonMiddleFork(CLK := internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[2].IsPressed);
+	IF internRisingEdgePressButtonMiddleFork.Q THEN
+		statMoveForkLeft := FALSE;
+		statMoveForkRight := FALSE;
+	END_IF
+	
+	(*===================== Write Interface =====================*)
+	HMIInterface := internHMIInterface;
+ELSE
+		internInstanceActivatedFirstTime := FALSE;
+END_IF
+(*===================== Stacker crane in Position =====================*)
+EvaluatePosition();
+(*===================== Positioning Stacker crane =====================*)
+IF ((OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive) OR
+	(OperatingMode.ManuelIsActive)) 
+   AND statMoveStackerCrane 
+THEN
+	statSelectedSetPointXAxis := statSetPointXAxis;
+	statSelectedSetPointZAxis := statSetPointZAxis;
+END_IF
+IF OperatingMode.EStop.IsActive OR OperatingMode.Fault.IsActive OR 
+((OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStop.IsActive) OR
+(OperatingMode.ManuelIsActive AND (internStopXAxis OR internStopZAxis)))
+THEN
+	statSelectedSetPointXAxis := statCurrentPositionXAxis;
+	statSelectedSetPointZAxis := statCurrentPositionZAxis;
+	statMoveStackerCrane := FALSE;
+END_IF
+(*===================== SetPoint X-Axis =====================*)
+FC_AnalogOutputValueHandling(Setpoint:= statSelectedSetPointXAxis, 
+						     UpperLimit:= 10.5, 
+							 LowerLimit:= 0.0, 
+							 ConvertedValue=> statSetPointToXaxis);
+(*===================== SetPoint Z-Axis =====================*)
+FC_AnalogOutputValueHandling(Setpoint:= statSelectedSetPointZAxis, 
+						     UpperLimit:= 6.625, 
+							 LowerLimit:= 0.0, 
+							 ConvertedValue=> statSetPointToZaxis);
+(*===================== Outputs writting =====================*)
+SetPointToXAxis := statSetPointToXaxis;
+SetPointToZAxis := statSetPointToZaxis;
+MoveForkLeft := statMoveForkLeft;
+MoveForkRight := statMoveForkRight;]]></ST>
+    </Implementation>
+    <Method Name="EvaluatePosition" Id="{1576aec5-20b5-4d6e-9b0c-567456fdb025}">
+      <Declaration><![CDATA[METHOD PUBLIC EvaluatePosition]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF statStackerCraneInPositionXAxis AND statStackerCraneInPositionZAxis THEN
+	statMoveStackerCrane := FALSE;
+END_IF
+IF (statCurrentPositionXAxis >= statSetPointXAxis - 0.1) AND (statCurrentPositionXAxis <= statSetPointXAxis + 0.1) THEN
+	statStackerCraneInPositionXAxis := TRUE;
+ELSE
+	statStackerCraneInPositionXAxis := FALSE;
+END_IF
+IF (statCurrentPositionZAxis >= statSetPointZAxis - 0.1) AND (statCurrentPositionZAxis <= statSetPointZAxis + 0.1) THEN
+	statStackerCraneInPositionZAxis := TRUE;
+ELSE
+	statStackerCraneInPositionZAxis := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="InPositionXAxis" Id="{2f255af5-0af6-4bdd-9a75-e284eeb704d2}">
+      <Declaration><![CDATA[PROPERTY PUBLIC InPositionXAxis : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d4052036-c730-437f-91c7-694ba88094d4}">
+        <Declaration><![CDATA[
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InPositionXAxis := statStackerCraneInPositionXAxis;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="InPositionZAxis" Id="{62eede1c-91e1-4754-9dee-1f47e5138b54}">
+      <Declaration><![CDATA[PROPERTY PUBLIC InPositionZAxis : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f0c5b644-46d4-44d3-8a5d-546eef57b0e1}">
+        <Declaration><![CDATA[
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InPositionZAxis := statStackerCraneInPositionZAxis; ]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MoveAxesStackerCrane_ON" Id="{45f4018a-4c93-4f1e-a4a8-1893a015a401}">
+      <Declaration><![CDATA[METHOD PUBLIC MoveAxesStackerCrane_ON : BOOL
+VAR_INPUT
+	StartMoveStackerCrane	:	BOOL;
+	PositionXAxis	:	REAL;
+	PositionZAxis	:	REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND
+	NOT statMoveStackerCrane AND StartMoveStackerCrane THEN
+	SetPointXAxis := PositionXAxis;
+	SetPointZAxis := PositionZAxis;
+	statMoveStackerCrane := TRUE;
+// 	statStackerCraneInPositionXAxis := FALSE;
+// 	statStackerCraneInPositionZAxis := FALSE;
+END_IF ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveForkToLeft_ON" Id="{7e6d1e28-1e4b-4d50-8b77-e34cbdc13991}">
+      <Declaration><![CDATA[METHOD PUBLIC MoveForkToLeft_ON : BOOL
+VAR_INPUT
+	StartMovingForkLeft	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND
+	InPositionXAxis AND InPositionZAxis AND StartMovingForkLeft AND NOT statMoveStackerCrane 
+THEN
+	statMoveForkLeft := TRUE;
+	MoveForkToLeft_ON := TRUE;
+ELSE
+	MoveForkToLeft_ON := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveForkToMiddle_ON" Id="{3611b250-eb3f-4e1d-acf9-8d7aa866d3f4}">
+      <Declaration><![CDATA[METHOD PUBLIC MoveForkToMiddle_ON : BOOL
+VAR_INPUT
+	StartMovingForkMiddle: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND 
+	StartMovingForkMiddle THEN
+	statMoveForkLeft := FALSE;
+	statMoveForkRight := FALSE;
+	MoveForkToMiddle_ON := TRUE;
+ELSE
+	MoveForkToMiddle_ON := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MoveForkToRight_ON" Id="{05a11c55-6128-4b50-9bdc-a32b5ac11d8b}">
+      <Declaration><![CDATA[METHOD PUBLIC MoveForkToRight_ON : BOOL
+VAR_INPUT
+	StartMovingForkRight	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND
+	InPositionXAxis AND InPositionZAxis AND StartMovingForkRight  AND NOT statMoveStackerCrane
+THEN
+	statMoveForkRight := TRUE;
+	MoveForkToRight_ON := TRUE;
+ELSE
+	MoveForkToRight_ON := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="SetPointXAxis" Id="{032c3284-ff45-4096-8d47-4b3c4ccae688}">
+      <Declaration><![CDATA[PROPERTY PUBLIC SetPointXAxis : REAL]]></Declaration>
+      <Get Name="Get" Id="{328e46e7-310e-4e51-9040-ee07d0be5077}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SetPointXAxis := statSetPointXAxis;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{77251579-9364-478b-8452-a48c0f05bb77}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF SetPointXAxis < 10.5 THEN
+	statSetPointXAxis := SetPointXAxis;
+END_IF]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="SetPointZAxis" Id="{0042c6b4-a47d-4d69-9cdf-d55bc12a10d9}">
+      <Declaration><![CDATA[PROPERTY PUBLIC SetPointZAxis : REAL]]></Declaration>
+      <Get Name="Get" Id="{79fc81a6-28b8-4271-8fc2-f7f38ffd6f52}">
+        <Declaration><![CDATA[
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SetPointZAxis := statSetPointZAxis;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{48e82ef7-baa6-42e3-a483-83eb0acd8fb8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF SetPointZAxis < 6.125 THEN
+	statSetPointZAxis := SetPointZAxis;	
+END_IF]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_StackerCrane" Id="{b4e2a7dd-fd58-4b61-a413-e8e9cbb651c1}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_StackerCrane
+  <POU Name="FB_StackerCrane_Analog" Id="{b4e2a7dd-fd58-4b61-a413-e8e9cbb651c1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StackerCrane_Analog
 VAR_INPUT
 	StackerCraneCurrentPositionXAxis	:	WORD;
 	StackerCraneCurrentPositionZAxis	:	WORD;

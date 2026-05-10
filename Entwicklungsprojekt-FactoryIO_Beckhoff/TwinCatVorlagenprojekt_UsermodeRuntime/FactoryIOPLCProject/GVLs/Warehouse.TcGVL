@@ -29,7 +29,7 @@
 	InUnloading	:	BOOL;
 	RBGSollwertXSimu	:	REAL;
 	RBGSollwertZSimu	:	REAL;
-	instStackerCrane	:	FB_StackerCrane;
+	instStackerCrane	:	FB_StackerCrane_Analog;
 	processSteps	: StackerCraneSteps;
 END_VAR]]></Declaration>
   </GVL>
