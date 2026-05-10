@@ -18,13 +18,17 @@
 	GVL.mb_Input_Coils[14] := RBGGabelLinks;
 	GVL.mb_Input_Coils[15] := RBGGabelRechts;
 	GVL.mb_Input_Coils[17] := RFIDExecuteCommand;
+	GVL.mb_Input_Coils[20] := DigitalStackerCraneGabelLinks;
+	GVL.mb_Input_Coils[21] := DigitalStackerCraneGabelRechts;
+	GVL.mb_Input_Coils[22] := DigitalStackerCraneLiftGabel;
 (* ==================================== Analoge Ausgaenge ====================================*)
 	GVL.mb_Input_Registers[0] := AufzugSollwert;
 	GVL.mb_Input_Registers[1] := RBGSollwertX;
 	GVL.mb_Input_Registers[2] := RBGSollwertZ;
 	GVL.mb_Input_Registers[3] := RFIDCommand;
 	GVL.mb_Input_Registers[4] := RFIDWriteData;
-	GVL.mb_Input_Registers[5] := RFIDMemoryIndex;]]></ST>
+	GVL.mb_Input_Registers[5] := RFIDMemoryIndex;
+	GVL.mb_Input_Registers[7] := DigitalStackerCraneTargetPos;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

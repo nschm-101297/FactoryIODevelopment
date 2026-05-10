@@ -11,6 +11,16 @@
 	RBGGabelRechts	:	BOOL;
 	RBGSollwertX	:	WORD;
 	RBGSollwertZ	:	WORD;
+	
+	DigitalStackerCraneEndlageMitte	:	BOOL;
+	DigitalStackerCraneEndlageLinks	:	BOOL;
+	DigitalStackerCraneEndlageRechts :	BOOL;
+	DigitalStackerCraneGabelLinks	:	BOOL;
+	DigitalStackerCraneGabelRechts	:	BOOL;
+	DigitalStackerCraneLiftGabel	:	BOOL;
+	DigitalStackerCraneXAxisIsMoving	:	BOOL;
+	DigitalStackerCraneZAxisIsMoving	:	BOOL;
+	DigitalStackerCraneTargetPos	:	WORD;
 (*======================= Simulation* =======================*)
 	RBGStartMove	:	BOOL;
 	RBGStartForkLeftMove	:	BOOL;

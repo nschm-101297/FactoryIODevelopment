@@ -22,6 +22,11 @@ RBGEndlageMitte := GVL.mb_Output_Coils[13];
 RBGEndlageLinks := GVL.mb_Output_Coils[14];
 RBGEndlageRechts := GVL.mb_Output_Coils[15];
 PartDetectedVisionSensor := GVL.mb_Output_Coils[18];
+DigitalStackerCraneEndlageLinks := GVL.mb_Output_Coils[20];
+DigitalStackerCraneEndlageMitte := GVL.mb_Output_Coils[21];
+DigitalStackerCraneEndlageRechts := GVL.mb_Output_Coils[22];
+DigitalStackerCraneXAxisIsMoving := GVL.mb_Output_Coils[23];
+DigitalStackerCraneZAxisIsMoving := GVL.mb_Output_Coils[24];
 (* ==================================== Analoge Eingaenge ====================================*)
 AufzugIstwert := GVL.mb_Output_Registers[0];
 RBGIstwertX := GVL.mb_Output_Registers[1];
