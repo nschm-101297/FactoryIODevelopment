@@ -409,6 +409,16 @@
                                 "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..3_OF-HMIButtonSettingLineInterface"
                             },
                             {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    },
+                    "VisibilitySettingLine": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
                                 "propertyOrder": 2
                             }
                         ]
@@ -416,6 +426,7 @@
                 },
                 "required": [
                     "CaptionSettingLine",
+                    "VisibilitySettingLine",
                     "SettingLineButtons"
                 ],
                 "type": "object"

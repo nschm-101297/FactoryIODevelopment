@@ -56,6 +56,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Conveyor AND
 	END_IF
 	(*===================== Button Handling Movement =====================*)
 	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('Conveyor Control ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[1].VisibilitySettingLine := TRUE;
 	
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
@@ -86,6 +87,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Conveyor AND
 	
 	(*===================== Button Handling Runcontrol =====================*)
 	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].CaptionSettingLine := CONCAT('Runcontrol Forward ', ActorInstanceName);
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].VisibilitySettingLine := TRUE;
 	
 	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
@@ -102,6 +104,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Conveyor AND
 	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[2].PathImageButton := 'Images\ResetRuncontrol.svg';
 	
 	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].CaptionSettingLine := CONCAT('Runcontrol Backward ', ActorInstanceName);
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].VisibilitySettingLine := TRUE;
 	
 	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;

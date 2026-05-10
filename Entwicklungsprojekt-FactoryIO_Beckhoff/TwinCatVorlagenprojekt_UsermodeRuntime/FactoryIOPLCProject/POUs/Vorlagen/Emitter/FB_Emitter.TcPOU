@@ -34,6 +34,8 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Emitter AND
 	END_IF
 	(*===================== Button Handling =====================*)
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].CaptionSettingLine := CONCAT('Creation Part ', ActorInstanceName);
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].VisibilitySettingLine := TRUE;
+	
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsEnabled := NOT PartPresent;

@@ -71,6 +71,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	END_IF
 	(*===================== Button Handling Movement =====================*)
 	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('StackerCrane X-Axis Control ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[1].VisibilitySettingLine := TRUE;
 	
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
@@ -103,6 +104,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\BackwardConveyor.svg';
 	
 	internHMIInterface.Movements.MovementSettingLines[2].CaptionSettingLine := CONCAT('StackerCrane Z-Axis Control ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[2].VisibilitySettingLine := TRUE;
 	
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
@@ -135,6 +137,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].PathImageButton := 'Images\DownElevator.svg';
 	
 	internHMIInterface.Forks.ForkMovementSettingLines[1].CaptionSettingLine := CONCAT('Fork Control ', ActorInstanceName);
+	internHMIInterface.Forks.ForkMovementSettingLines[1].VisibilitySettingLine := TRUE;
 	
 	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Forks.ForkMovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;

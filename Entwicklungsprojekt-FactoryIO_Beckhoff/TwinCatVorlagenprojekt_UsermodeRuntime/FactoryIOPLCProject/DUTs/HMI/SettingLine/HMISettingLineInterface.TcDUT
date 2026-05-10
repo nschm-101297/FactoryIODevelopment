@@ -4,6 +4,7 @@
     <Declaration><![CDATA[TYPE HMISettingLineInterface :
 STRUCT
 	CaptionSettingLine	:	STRING;
+	VisibilitySettingLine	:	BOOL;
 	SettingLineButtons	:	ARRAY[1..3] OF HMIButtonSettingLineInterface;
 END_STRUCT
 END_TYPE

@@ -64,6 +64,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Elevator AND
 	END_IF
 	(*===================== Button Handling Movement =====================*)
 	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('Elevator Axis Control ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[1].VisibilitySettingLine := TRUE;
 	
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
@@ -96,6 +97,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Elevator AND
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\DownElevator.svg';
 	
 	internHMIInterface.Movements.MovementSettingLines[2].CaptionSettingLine := CONCAT('Elevator Conveyor Control ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[2].VisibilitySettingLine := TRUE;
 	
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
