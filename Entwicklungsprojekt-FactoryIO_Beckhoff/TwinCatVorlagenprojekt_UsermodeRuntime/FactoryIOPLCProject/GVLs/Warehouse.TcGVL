@@ -2,6 +2,7 @@
 <TcPlcObject Version="1.1.0.1">
   <GVL Name="Warehouse" Id="{77d69743-90e2-4276-a87d-95431fe3fc7c}">
     <Declaration><![CDATA[VAR_GLOBAL
+	(*======================= Analog Stacker crane* =======================*)
 	RBGEndlageMitte	:	BOOL;
 	RBGEndlageLinks	:	BOOL;
 	RBGEndlageRechts :	BOOL;
@@ -12,6 +13,18 @@
 	RBGSollwertX	:	WORD;
 	RBGSollwertZ	:	WORD;
 	
+(*======================= Simulation* =======================*)
+	RBGStartMove	:	BOOL;
+	RBGStartForkLeftMove	:	BOOL;
+	RBGStartForkRightMove	:	BOOL;
+	RBGStartForkMiddleMove	:	BOOL;
+	InUnloadingAnalog	:	BOOL;
+	RBGSollwertXSimu	:	REAL;
+	RBGSollwertZSimu	:	REAL;
+	instStackerCraneAnalog	:	FB_StackerCrane_Analog;
+	processStepsAnalogStackerCrane	: StackerCraneSteps;
+	
+(*======================= Numerical Stacker crane* =======================*)	
 	DigitalStackerCraneEndlageMitte	:	BOOL;
 	DigitalStackerCraneEndlageLinks	:	BOOL;
 	DigitalStackerCraneEndlageRechts :	BOOL;
@@ -21,16 +34,17 @@
 	DigitalStackerCraneXAxisIsMoving	:	BOOL;
 	DigitalStackerCraneZAxisIsMoving	:	BOOL;
 	DigitalStackerCraneTargetPos	:	WORD;
-(*======================= Simulation* =======================*)
-	RBGStartMove	:	BOOL;
-	RBGStartForkLeftMove	:	BOOL;
-	RBGStartForkRightMove	:	BOOL;
-	RBGStartForkMiddleMove	:	BOOL;
-	InUnloading	:	BOOL;
-	RBGSollwertXSimu	:	REAL;
-	RBGSollwertZSimu	:	REAL;
-	instStackerCrane	:	FB_StackerCrane_Analog;
-	processSteps	: StackerCraneSteps;
+	
+	(*======================= Simulation* =======================*)
+	DigtalStackerCraneStartMove	:	BOOL;
+	DigtalStackerCraneStartForkLeftMove	:	BOOL;
+	DigtalStackerCraneStartForkRightMove	:	BOOL;
+	DigtalStackerCraneStartForkMiddleMove	:	BOOL;
+	DigitalStackerCraneStartLiftFork	:	BOOL;
+	InUnloadingNumerical	:	BOOL;
+	DigitalTargetPosSimu	:	WORD := 7;
+	instStackerCraneNumerical	:	FB_StackerCrane_Numerical;
+	processStepsNumericalStackerCrane	: StackerCraneSteps;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

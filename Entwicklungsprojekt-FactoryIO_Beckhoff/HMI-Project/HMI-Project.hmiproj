@@ -250,6 +250,13 @@
       <SubType>Content</SubType>
       <DependentUpon>UserControls\Movement.usercontrol</DependentUpon>
     </Content>
+    <Content Include="UserControls\NumericalInputLine.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UserControls\NumericalInputLine.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>UserControls\NumericalInputLine.usercontrol</DependentUpon>
+    </Content>
     <Content Include="UserControls\RFID.usercontrol">
       <SubType>Content</SubType>
     </Content>

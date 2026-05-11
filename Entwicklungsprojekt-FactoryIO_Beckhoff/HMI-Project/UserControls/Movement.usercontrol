@@ -181,5 +181,70 @@
 ]
 </script>
 </div>
+<div id="MovementNumericalInputLineOne" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="200" data-tchmi-height-unit="px" data-tchmi-target-user-control="UserControls/NumericalInputLine.usercontrol" data-tchmi-width="300" data-tchmi-width-unit="px" data-tchmi-interface="%pp%HMIMovementInterface::NumericalInput%/pp%">
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "%pp%HMIMovementInterface::NumericalInput::IsVisibleNumericalInput%/pp%",
+    "actions": [
+      {
+        "objectType": "Condition",
+        "active": true,
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "symbolExpression": "%pp%HMIMovementInterface::NumericalInput::IsVisibleNumericalInput%/pp%"
+                },
+                "compare2": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": false
+                },
+                "compareOperator": "==",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%MovementNumericalInputLineOne::Visibility%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Visibility",
+                  "value": "Collapsed"
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%MovementNumericalInputLineOne::Visibility%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Visibility",
+                  "value": "Visible"
+                },
+                "asyncWait": true
+              }
+            ]
+          }
+        ],
+        "asyncWait": true
+      }
+    ]
+  }
+]
+</script>
+</div>
 </div>
 </div>

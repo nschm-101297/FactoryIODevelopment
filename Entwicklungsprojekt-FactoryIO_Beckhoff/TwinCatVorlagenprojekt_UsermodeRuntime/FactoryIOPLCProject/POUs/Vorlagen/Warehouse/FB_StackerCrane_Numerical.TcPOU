@@ -271,9 +271,9 @@ END_VAR
 	InPositionXAxis AND InPositionZAxis AND StartLoweringFork AND NOT statMoveStackerCrane 
 THEN
 	statLiftFork := FALSE;
-	LiftForkUp := TRUE;
+	LowerForkUp := TRUE;
 ELSE
-	LiftForkUp := FALSE;
+	LowerForkUp := FALSE;
 END_IF]]></ST>
       </Implementation>
     </Method>
