@@ -11,7 +11,7 @@ END_VAR
 Call_HMI();
 Call_Emitter();
 Call_OperatingMode();
-Call_Foerderband();
+// Call_Foerderband();
 Call_Aufzug();
 Call_Warehouse();
 Call_RFID();

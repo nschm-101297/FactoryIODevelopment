@@ -23,6 +23,7 @@ VAR_IN_OUT
 END_VAR
 VAR
 	statMoveStackerCrane	:	BOOL;
+	statStackerCraneNewOrder	:	BOOL;
 	statStackerCraneInPositionXAxis	:	BOOL;
 	statStackerCraneInPositionZAxis	:	BOOL;
 	statMoveForkLeft	:	BOOL;
@@ -32,8 +33,8 @@ VAR
 	statPropTargetPos	:	WORD;
 	statREXAxisMoving	:	R_TRIG;
 	statREZAxisMoving	:	R_TRIG;
-	statFEXAxisMoving	:	R_TRIG;
-	statFEZAxisMoving	:	R_TRIG;
+	statFEXAxisMoving	:	F_TRIG;
+	statFEZAxisMoving	:	F_TRIG;
 	
 	internHMIInterface	:	MachineSectionHMIInterface;
 	internInstanceActivatedFirstTime	:	BOOL;
@@ -66,8 +67,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	internHMIInterface.Movements.NumericalInput.ButtonsNumericalInput[1].IsEnabled := OperatingMode.ManuelIsActive AND NOT
 									 														OperatingMode.EStop.IsActive AND NOT
 																							OperatingMode.Fault.IsActive AND NOT
-																							statMoveStackerCrane AND
-																							statPropTargetPos < 10.5;
+																							statMoveStackerCrane;
 	internHMIInterface.Movements.NumericalInput.ButtonsNumericalInput[1].InPosition := FALSE;
 	internHMIInterface.Movements.NumericalInput.ButtonsNumericalInput[1].CaptionButton := 'Confirm';
 	internHMIInterface.Movements.NumericalInput.ButtonsNumericalInput[1].PathImageButton := 'Images\ForwardConveyor.svg';
@@ -153,6 +153,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	internRisingEdgePressButtonMove(CLK := internHMIInterface.Movements.NumericalInput.ButtonsNumericalInput[2].IsPressed);
 	IF internRisingEdgePressButtonMove.Q THEN
 		statMoveStackerCrane := TRUE;
+		statStackerCraneNewOrder := TRUE;
 	END_IF
 	(*===================== Fork Lift =====================*)
 	internRisingEdgePressButtonForkLift(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsPressed);
@@ -160,7 +161,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 		statLiftFork := TRUE;
 	END_IF
 	(*===================== Fork Lower =====================*)
-	internRisingEdgePressButtonForkLower(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsPressed);
+	internRisingEdgePressButtonForkLower(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsPressed);
 	IF internRisingEdgePressButtonForkLower.Q THEN
 		statLiftFork := FALSE;
 	END_IF
@@ -192,24 +193,32 @@ statFEXAxisMoving(CLK := XAxisMoving);
 statREZAxisMoving(CLK := ZAxisMoving);
 statFEZAxisMoving(CLK := ZAxisMoving);
 
+IF statStackerCraneInPositionXAxis AND statStackerCraneInPositionZAxis AND
+NOT statStackerCraneNewOrder
+THEN
+	statMoveStackerCrane := FALSE;
+END_IF
 IF statREXAxisMoving.Q THEN
 	statStackerCraneInPositionXAxis := FALSE;
+	statStackerCraneNewOrder := FALSE;
 END_IF
 IF statFEXAxisMoving.Q THEN
 	statStackerCraneInPositionXAxis := TRUE;
 END_IF
 IF statREZAxisMoving.Q THEN
 	statStackerCraneInPositionZAxis := FALSE;
+	statStackerCraneNewOrder := FALSE;
 END_IF
 IF statFEZAxisMoving.Q THEN
 	statStackerCraneInPositionZAxis := TRUE;
-END_IF
+END_IF 
 (*===================== Positioning Stacker crane =====================*)
 IF ((OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive) OR
 	(OperatingMode.ManuelIsActive)) 
    AND statMoveStackerCrane 
 THEN
 	statSelectedTargetPos := statPropTargetPos;
+// 	statStackerCraneNewOrder := FALSE;
 END_IF
 IF OperatingMode.EStop.IsActive OR OperatingMode.Fault.IsActive OR 
 OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStop.IsActive
@@ -286,9 +295,12 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND
-	NOT statMoveStackerCrane AND StartMoveStackerCrane THEN
+	NOT statMoveStackerCrane AND StartMoveStackerCrane AND 
+NumericalTargetPos <> TargetPosStackerCrane 
+THEN
 	NumericalTargetPos := TargetPosStackerCrane;
 	statMoveStackerCrane := TRUE;
+	statStackerCraneNewOrder := TRUE;
 END_IF ]]></ST>
       </Implementation>
     </Method>
@@ -343,6 +355,25 @@ ELSE
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Property Name="NewOrderActive" Id="{eda29e26-2656-4004-b53b-ed1ed3f968ca}">
+      <Declaration><![CDATA[PROPERTY PUBLIC NewOrderActive : BOOL]]></Declaration>
+      <Get Name="Get" Id="{dc2f091f-0a81-4640-a4ed-0dde7112ca1b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[NewOrderActive := statStackerCraneNewOrder;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d0eebc5a-1374-41e1-8c2e-3747ed7a4e04}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[statStackerCraneNewOrder := NewOrderActive;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Property Name="NumericalTargetPos" Id="{08238c48-d6dc-4d95-bd58-773f858097d8}">
       <Declaration><![CDATA[PROPERTY PUBLIC NumericalTargetPos : WORD]]></Declaration>
       <Get Name="Get" Id="{58664657-1b78-4c55-a8a3-08b99582c4fc}">

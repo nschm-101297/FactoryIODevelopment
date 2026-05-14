@@ -7,6 +7,9 @@
     <RootNamespace>Dg_Writing_RFID</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="NumericalStackerCrane.tcscopex">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="YT Scope Project.tcscopex">
       <SubType>Content</SubType>
     </Content>

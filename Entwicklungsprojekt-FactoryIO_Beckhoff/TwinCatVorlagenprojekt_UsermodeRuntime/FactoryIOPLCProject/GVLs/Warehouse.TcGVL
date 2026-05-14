@@ -42,6 +42,8 @@
 	DigtalStackerCraneStartForkMiddleMove	:	BOOL;
 	DigitalStackerCraneStartLiftFork	:	BOOL;
 	InUnloadingNumerical	:	BOOL;
+	Lifting	:	BOOL;
+	Lowering	:	BOOL;
 	DigitalTargetPosSimu	:	WORD := 7;
 	instStackerCraneNumerical	:	FB_StackerCrane_Numerical;
 	processStepsNumericalStackerCrane	: StackerCraneSteps;

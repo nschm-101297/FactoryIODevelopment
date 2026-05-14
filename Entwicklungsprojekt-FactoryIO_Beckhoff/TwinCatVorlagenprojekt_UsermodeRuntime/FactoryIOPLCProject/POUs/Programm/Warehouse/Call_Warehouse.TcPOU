@@ -2,95 +2,99 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="Call_Warehouse" Id="{f88e7ae7-f95a-4d34-9fc0-142f9b7746fc}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION Call_Warehouse
-
+VAR
+	iCounter	:	INT := -1;
+END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[(*================ Analog Stacker crane ================*)
-instStackerCraneAnalog(StackerCraneCurrentPositionXAxis := RBGIstwertX,
-                 StackerCraneCurrentPositionZAxis := RBGIstwertZ,
-				 ActorInstanceIndex := 0,
-				 ActorInstanceName := 'Einlagerung',
-				 HMIInterface := HMI.hmiMachineSectionInterface,
-				 OperatingMode := instOperatingMode.StateOperatingMode,
-				 SetPointToXAxis => RBGSollwertX, 
-                 SetPointToZAxis => RBGSollwertZ, 
-                 MoveForkLeft => RBGGabelLinks,	
-                 MoveForkRight => RBGGabelRechts);
-instStackerCraneAnalog.MoveAxesStackerCrane_ON(RBGStartMove, RBGSollwertXSimu, RBGSollwertZSimu);
-instStackerCraneAnalog.MoveForkToLeft_ON(RBGStartForkLeftMove);
-instStackerCraneAnalog.MoveForkToRight_ON(RBGStartForkRightMove);
-instStackerCraneAnalog.MoveForkToMiddle_ON(RBGStartForkMiddleMove);
-(*================ Steps ================*)
-IF instOperatingMode.StateOperatingMode.Reset.IsActive THEN
-	processStepsAnalogStackerCrane := StackerCraneSteps.Waiting;
-END_IF
-
-CASE processStepsAnalogStackerCrane OF
-	StackerCraneSteps.Waiting:
-		instStackerCraneAnalog.MoveForkToMiddle_ON(TRUE);
-		IF instOperatingMode.StateOperatingMode.AutomaticStart.IsActive THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToLoadingPosition;
-		END_IF
-StackerCraneSteps.DriveToLoadingPosition:
-		instStackerCraneAnalog.MoveAxesStackerCrane_ON(TRUE, 0.0, 0.0);
-		instStackerCraneAnalog.EvaluatePosition();
-		IF instStackerCraneAnalog.InPositionXAxis AND instStackerCraneAnalog.InPositionZAxis   
-		AND TRUE
-		THEN
-			InUnloadingAnalog	:= FALSE;
-			processStepsAnalogStackerCrane := StackerCraneSteps.ForkUnderLoad;
-		END_IF
-StackerCraneSteps.ForkUnderLoad:
-		InUnloadingAnalog	:= FALSE;
-		instStackerCraneAnalog.MoveForkToLeft_ON(TRUE);
-		IF RBGEndlageLinks THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.LiftLoadItem;
-		END_IF
-StackerCraneSteps.LiftLoadItem:
-		instStackerCraneAnalog.MoveForkToLeft_ON(TRUE);
-		instStackerCraneAnalog.MoveAxesStackerCrane_ON(TRUE, 0.0, 1.0);
-		instStackerCraneAnalog.EvaluatePosition();
-		IF instStackerCraneAnalog.InPositionXAxis AND instStackerCraneAnalog.InPositionZAxis 
-		AND TRUE
-		THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.ForkToMiddle;
-		END_IF
-StackerCraneSteps.ForkToMiddle:
-		instStackerCraneAnalog.MoveForkToMiddle_ON(TRUE);
-		IF RBGEndlageMitte AND NOT InUnloadingAnalog THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToUnloadPrePosition;
-		ELSIF RBGEndlageMitte AND InUnloadingAnalog THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToLoadingPosition;
-		END_IF
-StackerCraneSteps.DriveToUnloadPrePosition:
-		instStackerCraneAnalog.MoveAxesStackerCrane_ON(TRUE, 1.10, 1.86);
-		instStackerCraneAnalog.EvaluatePosition();
-		IF instStackerCraneAnalog.InPositionXAxis AND instStackerCraneAnalog.InPositionZAxis   
-		AND TRUE
-		THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.ForkInWarehouse;
-		END_IF
-StackerCraneSteps.ForkInWarehouse:
-		instStackerCraneAnalog.MoveForkToRight_ON(TRUE);
-		IF RBGEndlageRechts THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToUnloadPosition;
-		END_IF
-StackerCraneSteps.DriveToUnloadPosition:
-		instStackerCraneAnalog.MoveForkToRight_ON(TRUE);
-		instStackerCraneAnalog.MoveAxesStackerCrane_ON(TRUE, 1.15, 1.26);
-		instStackerCraneAnalog.EvaluatePosition();
-		IF instStackerCraneAnalog.InPositionXAxis AND instStackerCraneAnalog.InPositionZAxis  
-		AND TRUE
-		THEN
-			InUnloadingAnalog	:= TRUE;
-			processStepsAnalogStackerCrane := StackerCraneSteps.ForkToMiddle;
-		END_IF
-END_CASE
+      <ST><![CDATA[// (*================ Analog Stacker crane ================*)
+// instStackerCraneAnalog(StackerCraneCurrentPositionXAxis := RBGIstwertX,
+//                  StackerCraneCurrentPositionZAxis := RBGIstwertZ,
+// 				 ActorInstanceIndex := 0,
+// 				 ActorInstanceName := 'Einlagerung',
+// 				 HMIInterface := HMI.hmiMachineSectionInterface,
+// 				 OperatingMode := instOperatingMode.StateOperatingMode,
+// 				 SetPointToXAxis => RBGSollwertX, 
+//                  SetPointToZAxis => RBGSollwertZ, 
+//                  MoveForkLeft => RBGGabelLinks,	
+//                  MoveForkRight => RBGGabelRechts);
+// instStackerCraneAnalog.MoveAxesStackerCrane_ON(RBGStartMove, RBGSollwertXSimu, RBGSollwertZSimu);
+// instStackerCraneAnalog.MoveForkToLeft_ON(RBGStartForkLeftMove);
+// instStackerCraneAnalog.MoveForkToRight_ON(RBGStartForkRightMove);
+// instStackerCraneAnalog.MoveForkToMiddle_ON(RBGStartForkMiddleMove);
+// (*================ Steps ================*)
+// IF instOperatingMode.StateOperatingMode.Reset.IsActive THEN
+// 	processStepsAnalogStackerCrane := StackerCraneSteps.Waiting;
+// END_IF
+// 
+// CASE processStepsAnalogStackerCrane OF
+// 	StackerCraneSteps.Waiting:
+// 		instStackerCraneAnalog.MoveForkToMiddle_ON(TRUE);
+// 		IF instOperatingMode.StateOperatingMode.AutomaticStart.IsActive THEN
+// 			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToLoadingPosition;
+// 		END_IF
+// StackerCraneSteps.DriveToLoadingPosition:
+// 		instStackerCraneAnalog.MoveAxesStackerCrane_ON(TRUE, 0.0, 0.0);
+// 		instStackerCraneAnalog.EvaluatePosition();
+// 		IF instStackerCraneAnalog.InPositionXAxis AND instStackerCraneAnalog.InPositionZAxis   
+// 		AND TRUE
+// 		THEN
+// 			InUnloadingAnalog	:= FALSE;
+// 			processStepsAnalogStackerCrane := StackerCraneSteps.ForkUnderLoad;
+// 		END_IF
+// StackerCraneSteps.ForkUnderLoad:
+// 		InUnloadingAnalog	:= FALSE;
+// 		instStackerCraneAnalog.MoveForkToLeft_ON(TRUE);
+// 		IF RBGEndlageLinks THEN
+// 			processStepsAnalogStackerCrane := StackerCraneSteps.LiftLoadItem;
+// 		END_IF
+// StackerCraneSteps.LiftLoadItem:
+// 		instStackerCraneAnalog.MoveForkToLeft_ON(TRUE);
+// 		instStackerCraneAnalog.MoveAxesStackerCrane_ON(TRUE, 0.0, 1.0);
+// 		instStackerCraneAnalog.EvaluatePosition();
+// 		IF instStackerCraneAnalog.InPositionXAxis AND instStackerCraneAnalog.InPositionZAxis 
+// 		AND TRUE
+// 		THEN
+// 			processStepsAnalogStackerCrane := StackerCraneSteps.ForkToMiddle;
+// 		END_IF
+// StackerCraneSteps.ForkToMiddle:
+// 		instStackerCraneAnalog.MoveForkToMiddle_ON(TRUE);
+// 		IF RBGEndlageMitte AND NOT InUnloadingAnalog THEN
+// 			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToUnloadPrePosition;
+// 		ELSIF RBGEndlageMitte AND InUnloadingAnalog THEN
+// 			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToLoadingPosition;
+// 		END_IF
+// StackerCraneSteps.DriveToUnloadPrePosition:
+// 		instStackerCraneAnalog.MoveAxesStackerCrane_ON(TRUE, 1.10, 1.86);
+// 		instStackerCraneAnalog.EvaluatePosition();
+// 		IF instStackerCraneAnalog.InPositionXAxis AND instStackerCraneAnalog.InPositionZAxis   
+// 		AND TRUE
+// 		THEN
+// 			processStepsAnalogStackerCrane := StackerCraneSteps.ForkInWarehouse;
+// 		END_IF
+// StackerCraneSteps.ForkInWarehouse:
+// 		instStackerCraneAnalog.MoveForkToRight_ON(TRUE);
+// 		IF RBGEndlageRechts THEN
+// 			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToUnloadPosition;
+// 		END_IF
+// StackerCraneSteps.DriveToUnloadPosition:
+// 		instStackerCraneAnalog.MoveForkToRight_ON(TRUE);
+// 		instStackerCraneAnalog.MoveAxesStackerCrane_ON(TRUE, 1.15, 1.26);
+// 		instStackerCraneAnalog.EvaluatePosition();
+// 		IF instStackerCraneAnalog.InPositionXAxis AND instStackerCraneAnalog.InPositionZAxis  
+// 		AND TRUE
+// 		THEN
+// 			InUnloadingAnalog	:= TRUE;
+// 			processStepsAnalogStackerCrane := StackerCraneSteps.ForkToMiddle;
+// 		END_IF
+// END_CASE
 
 
 (*================ Numerical Stacker crane ================*)
 instStackerCraneNumerical(XAxisMoving := DigitalStackerCraneXAxisIsMoving,
 						  ZAxisMoving := DigitalStackerCraneZAxisIsMoving,
+						  ActorInstanceIndex := 1,
+						  ActorInstanceName := 'Zufuehrung',
 						  ForkInPosLeft := DigitalStackerCraneEndlageLinks,
 						  ForkInPosMiddle := DigitalStackerCraneEndlageMitte,
 						  ForkInPosRight := DigitalStackerCraneEndlageRechts,
@@ -100,12 +104,12 @@ instStackerCraneNumerical(XAxisMoving := DigitalStackerCraneXAxisIsMoving,
 						  MoveForkLeft => DigitalStackerCraneGabelLinks,
 						  MoveForkRight => DigitalStackerCraneGabelRechts,
 						  TargetPos => DigitalStackerCraneTargetPos);
-instStackerCraneNumerical.MoveAxesStackerCrane_ON(RBGStartMove, DigitalTargetPosSimu);
-instStackerCraneNumerical.MoveForkToLeft_ON(RBGStartForkLeftMove);
-instStackerCraneNumerical.MoveForkToRight_ON(RBGStartForkRightMove);
-instStackerCraneNumerical.MoveForkToMiddle_ON(RBGStartForkMiddleMove);						  
-instStackerCraneNumerical.LiftForkUp(DigitalStackerCraneStartLiftFork);
-instStackerCraneNumerical.LowerForkUp(NOT DigitalStackerCraneStartLiftFork);						  
+// instStackerCraneNumerical.MoveAxesStackerCrane_ON(DigtalStackerCraneStartMove, DigitalTargetPosSimu);
+// instStackerCraneNumerical.MoveForkToLeft_ON(DigtalStackerCraneStartForkLeftMove);
+// instStackerCraneNumerical.MoveForkToRight_ON(DigtalStackerCraneStartForkRightMove);
+// instStackerCraneNumerical.MoveForkToMiddle_ON(DigtalStackerCraneStartForkMiddleMove);						  
+// instStackerCraneNumerical.LiftForkUp(DigitalStackerCraneStartLiftFork);
+// instStackerCraneNumerical.LowerForkUp(NOT DigitalStackerCraneStartLiftFork);						  
 
 (*================ Steps ================*)
 IF instOperatingMode.StateOperatingMode.Reset.IsActive THEN
@@ -114,56 +118,64 @@ END_IF
 
 CASE processStepsNumericalStackerCrane OF
 	StackerCraneSteps.Waiting:
+	iCounter := 0;
 		instStackerCraneNumerical.MoveForkToMiddle_ON(TRUE);
 		IF instOperatingMode.StateOperatingMode.AutomaticStart.IsActive THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToLoadingPosition;
+			processStepsNumericalStackerCrane := StackerCraneSteps.DriveToLoadingPosition;
 		END_IF
 StackerCraneSteps.DriveToLoadingPosition:
 		instStackerCraneNumerical.MoveAxesStackerCrane_ON(TRUE, 55);
 		IF instStackerCraneNumerical.InPositionXAxis AND instStackerCraneNumerical.InPositionZAxis
+			AND NOT instStackerCraneNumerical.NewOrderActive
 		THEN
-// 			InUnloading	:= FALSE;
-			processStepsAnalogStackerCrane := StackerCraneSteps.ForkUnderLoad;
+ 			InUnloadingNumerical	:= FALSE;
+			processStepsNumericalStackerCrane := StackerCraneSteps.ForkUnderLoad;
 		END_IF
 StackerCraneSteps.ForkUnderLoad:
-		instStackerCraneNumerical.MoveForkToLeft_ON(TRUE);
-		IF DigitalStackerCraneEndlageLinks THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.LiftLoadItem;
+		instStackerCraneNumerical.MoveForkToRight_ON(TRUE);
+		IF DigitalStackerCraneEndlageRechts THEN
+			processStepsNumericalStackerCrane := StackerCraneSteps.LiftLoadItem;
 		END_IF
 StackerCraneSteps.LiftLoadItem:
-		instStackerCraneNumerical.MoveForkToLeft_ON(TRUE);
+		instStackerCraneNumerical.MoveForkToRight_ON(TRUE);
 		instStackerCraneNumerical.LiftForkUp(TRUE);
-		IF instStackerCraneNumerical.InPositionXAxis AND instStackerCraneNumerical.InPositionZAxis 
-		AND TRUE
+		IF instStackerCraneNumerical.InPositionXAxis AND instStackerCraneNumerical.InPositionZAxis
+			AND Lifting
 		THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.ForkToMiddle;
+			processStepsNumericalStackerCrane := StackerCraneSteps.ForkToMiddle;
 		END_IF
+		Lifting := TRUE;
 StackerCraneSteps.ForkToMiddle:
+		Lifting := FALSE;
+		Lowering := FALSE;
 		instStackerCraneNumerical.MoveForkToMiddle_ON(TRUE);
-		IF RBGEndlageMitte AND NOT InUnloadingAnalog THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToUnloadPrePosition;
-		ELSIF RBGEndlageMitte AND InUnloadingAnalog THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToLoadingPosition;
+		IF DigitalStackerCraneEndlageMitte AND NOT InUnloadingNumerical THEN
+			processStepsNumericalStackerCrane := StackerCraneSteps.DriveToUnloadPrePosition;
+		ELSIF DigitalStackerCraneEndlageMitte AND InUnloadingNumerical THEN
+			processStepsNumericalStackerCrane := StackerCraneSteps.DriveToLoadingPosition;
 		END_IF
 StackerCraneSteps.DriveToUnloadPrePosition:
 		instStackerCraneNumerical.MoveAxesStackerCrane_ON(TRUE, 7);
 		IF instStackerCraneNumerical.InPositionXAxis AND instStackerCraneNumerical.InPositionZAxis
+			AND NOT instStackerCraneNumerical.NewOrderActive
 		THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.ForkInWarehouse;
+			processStepsNumericalStackerCrane := StackerCraneSteps.ForkInWarehouse;
 		END_IF
 StackerCraneSteps.ForkInWarehouse:
-		instStackerCraneNumerical.MoveForkToRight_ON(TRUE);
-		IF DigitalStackerCraneEndlageRechts THEN
-			processStepsAnalogStackerCrane := StackerCraneSteps.DriveToUnloadPosition;
+		instStackerCraneNumerical.MoveForkToLeft_ON(TRUE);
+		IF DigitalStackerCraneEndlageLinks THEN
+			processStepsNumericalStackerCrane := StackerCraneSteps.DriveToUnloadPosition;
 		END_IF
 StackerCraneSteps.DriveToUnloadPosition:
-		instStackerCraneNumerical.MoveForkToRight_ON(TRUE);
+		instStackerCraneNumerical.MoveForkToLeft_ON(TRUE);
 		instStackerCraneNumerical.LowerForkUp(TRUE);
 		IF instStackerCraneNumerical.InPositionXAxis AND instStackerCraneNumerical.InPositionZAxis
+			AND Lowering
 		THEN
-			InUnloadingAnalog	:= TRUE;
-			processStepsAnalogStackerCrane := StackerCraneSteps.ForkToMiddle;
+			InUnloadingNumerical	:= TRUE;
+			processStepsNumericalStackerCrane := StackerCraneSteps.ForkToMiddle;
 		END_IF
+		Lowering := TRUE;
 END_CASE]]></ST>
     </Implementation>
   </POU>

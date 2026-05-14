@@ -324,7 +324,7 @@
 </div>
 <div id="txtDescriptionTwo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::ValueLinesNumericalInput[1]::CaptionDescription%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-font-size="20">
 </div>
-<div id="niValueOne" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiNumericInput" data-tchmi-auto-focus-out="True" data-tchmi-decimal-digits="0" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-reset-to-last-valid-value="True" data-tchmi-value="%pp%Interface::ValueLinesNumericalInput[0]::ValueInput%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-value-horizontal-alignment="Center" data-tchmi-value-font-size="20" data-tchmi-unit="%pp%Interface::ValueLinesNumericalInput[0]::UnitInput%/pp%" data-tchmi-is-enabled="%pp%Interface::ValueLinesNumericalInput[0]::IsEnabledInput%/pp%">
+<div id="niValueOne" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiNumericInput" data-tchmi-auto-focus-out="True" data-tchmi-decimal-digits="0" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="0" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-reset-to-last-valid-value="True" data-tchmi-value="%pp%Interface::ValueLinesNumericalInput[0]::ValueInput|BindingMode=TwoWay%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-value-horizontal-alignment="Center" data-tchmi-value-font-size="20" data-tchmi-unit="%pp%Interface::ValueLinesNumericalInput[0]::UnitInput%/pp%" data-tchmi-is-enabled="%pp%Interface::ValueLinesNumericalInput[0]::IsEnabledInput%/pp%">
 <script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
 {
   "top": 3,
@@ -335,7 +335,7 @@
 </script>
 
 </div>
-<div id="niValueTwo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiNumericInput" data-tchmi-auto-focus-out="True" data-tchmi-decimal-digits="0" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-reset-to-last-valid-value="True" data-tchmi-value="%pp%Interface::ValueLinesNumericalInput[1]::ValueInput%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-value-horizontal-alignment="Center" data-tchmi-value-font-size="20" data-tchmi-unit="%pp%Interface::ValueLinesNumericalInput[1]::UnitInput%/pp%" data-tchmi-is-enabled="%pp%Interface::ValueLinesNumericalInput[1]::IsEnabledInput%/pp%">
+<div id="niValueTwo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiNumericInput" data-tchmi-auto-focus-out="True" data-tchmi-decimal-digits="0" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-reset-to-last-valid-value="True" data-tchmi-value="%pp%Interface::ValueLinesNumericalInput[1]::ValueInput|BindingMode=TwoWay%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-value-horizontal-alignment="Center" data-tchmi-value-font-size="20" data-tchmi-unit="%pp%Interface::ValueLinesNumericalInput[1]::UnitInput%/pp%" data-tchmi-is-enabled="%pp%Interface::ValueLinesNumericalInput[1]::IsEnabledInput%/pp%">
 <script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
 {
   "top": 3,
@@ -346,7 +346,7 @@
 </script>
 
 </div>
-<div id="btnNumericalInputOne" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::ButtonsNumericalInput[0]::CaptionButton%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Bottom" data-tchmi-text-font-size="20" data-tchmi-is-enabled="%pp%Interface::ButtonsNumericalInput[0]::IsEnabled%/pp%" data-tchmi-background-image="%pp%Interface::ButtonsNumericalInput[0]::PathImageButton%/pp%" data-tchmi-background-image-width="30" data-tchmi-background-image-height="30" data-tchmi-background-image-vertical-alignment="Top">
+<div id="btnNumericalInputOne" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::ButtonsNumericalInput[0]::CaptionButton%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Bottom" data-tchmi-text-font-size="20" data-tchmi-is-enabled="%pp%Interface::ButtonsNumericalInput[0]::IsEnabled%/pp%" data-tchmi-background-image="%pp%Interface::ButtonsNumericalInput[0]::PathImageButton%/pp%" data-tchmi-background-image-width="10" data-tchmi-background-image-height="10" data-tchmi-background-image-vertical-alignment="Top">
 
 <script data-tchmi-target-attribute="data-tchmi-border-radius" type="application/json">
 {
@@ -456,7 +456,7 @@
 ]
 </script>
 </div>
-<div id="btnNumericalInputTwo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::ButtonsNumericalInput[1]::CaptionButton%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Bottom" data-tchmi-text-font-size="20" data-tchmi-is-enabled="%pp%Interface::ButtonsNumericalInput[1]::IsEnabled%/pp%" data-tchmi-background-image="%pp%Interface::ButtonsNumericalInput[1]::PathImageButton%/pp%" data-tchmi-background-image-width="30" data-tchmi-background-image-height="30" data-tchmi-background-image-vertical-alignment="Top">
+<div id="btnNumericalInputTwo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text="%pp%Interface::ButtonsNumericalInput[1]::CaptionButton%/pp%" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Bottom" data-tchmi-text-font-size="20" data-tchmi-is-enabled="%pp%Interface::ButtonsNumericalInput[1]::IsEnabled%/pp%" data-tchmi-background-image="%pp%Interface::ButtonsNumericalInput[1]::PathImageButton%/pp%" data-tchmi-background-image-width="10" data-tchmi-background-image-height="10" data-tchmi-background-image-vertical-alignment="Top">
 
 <script data-tchmi-target-attribute="data-tchmi-border-radius" type="application/json">
 {
