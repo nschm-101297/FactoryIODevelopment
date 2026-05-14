@@ -9,7 +9,7 @@
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>FactoryIOLibrary</Name>
-    <ProgramVersion>3.1.4026.20</ProgramVersion>
+    <ProgramVersion>3.1.4026.21</ProgramVersion>
     <Application>{24e5a045-6c4b-4f70-a454-3fcf67754812}</Application>
     <TypeSystem>{270e808c-0bf4-488a-9a63-e8634b75116d}</TypeSystem>
     <Implicit_Task_Info>{1e5940e0-9b89-4295-9a1c-20a96f3a6bd0}</Implicit_Task_Info>
@@ -19,7 +19,7 @@
     <Company>Privat</Company>
     <Released>false</Released>
     <Title>FactoryIO_Library</Title>
-    <ProjectVersion>0.0.2</ProjectVersion>
+    <ProjectVersion>0.0.3</ProjectVersion>
     <GlobalVersionStructureIncluded>true</GlobalVersionStructureIncluded>
     <DefaultNamespace>FactoryIO</DefaultNamespace>
     <LibraryCategories>
@@ -43,24 +43,95 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\Communication" />
+    <Folder Include="DUTs\Communication\ADS" />
+    <Folder Include="DUTs\HMI" />
+    <Folder Include="DUTs\HMI\Header" />
+    <Folder Include="DUTs\HMI\MachineSection" />
+    <Folder Include="DUTs\HMI\NumericalInput" />
+    <Folder Include="DUTs\HMI\SettingLine" />
     <Folder Include="DUTs\OperatingMode" />
     <Folder Include="DUTs\RFID" />
-    <Folder Include="DUTs\Warehouse" />
+    <Folder Include="DUTs\VisionSensor" />
     <Folder Include="POUs" />
     <Folder Include="POUs\AnalogValueHandling" />
     <Folder Include="POUs\Aufzug" />
+    <Folder Include="POUs\Communication" />
+    <Folder Include="POUs\Communication\ADS" />
     <Folder Include="POUs\Emitter" />
     <Folder Include="POUs\Foerderband" />
+    <Folder Include="POUs\HMI" />
     <Folder Include="POUs\OperatingMode" />
     <Folder Include="POUs\RFID" />
+    <Folder Include="POUs\VisionSensor" />
     <Folder Include="POUs\Warehouse" />
     <Folder Include="Version" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DUTs\Communication\ADS\ADSCommunicationInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\Header\HMIHeader.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIMovementForkInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIMovementInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIRFIDControlInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIRFIDDataInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIRFIDInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIRFIDStatusInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIRuncontrolInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIWorkpieceInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\MachineSection.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\MachineSectionHMIInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\NumericalInput\HMIButtonNumericalInputInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\NumericalInput\HMINumericalInputInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\NumericalInput\HMINumericalInputLineInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\SettingLine\HMIButtonSettingLineInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\SettingLine\HMISettingLineInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\OperatingMode\ActionState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\OperatingMode\FaultWarningState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OperatingMode\HMIActionState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OperatingMode\HMIInterfaceOperatingMode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\OperatingMode\HMIToPLCOperatingMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\OperatingMode\OperatingMode.TcDUT">
@@ -69,13 +140,16 @@
     <Compile Include="DUTs\OperatingMode\OperatingModeHomeing.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\OperatingMode\PLCToHMIOperatingMode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\RFID\RFIDReadSerialnumberStates.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\RFID\RFIDReadWriteDataStates.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Warehouse\StackerCranePosition.TcDUT">
+    <Compile Include="DUTs\VisionSensor\VisionSensorParttype.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\AnalogValueHandling\FC_AnalogInputValueHandling.TcPOU">
@@ -87,10 +161,19 @@
     <Compile Include="POUs\Aufzug\FB_Elevator.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Communication\ADS\FB_ADSCommunicationStatus.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Emitter\FB_Emitter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Foerderband\FB_Foerderband.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\HMI\FB_HMIHeader.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\HMI\FC_InitializingSettingLines.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\OperatingMode\FB_OperatingMode.TcPOU">
@@ -99,7 +182,13 @@
     <Compile Include="POUs\RFID\FB_RFID.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Warehouse\FB_StackerCrane.TcPOU">
+    <Compile Include="POUs\VisionSensor\FB_VisionSensor.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Warehouse\FB_StackerCrane_Analog.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Warehouse\FB_StackerCrane_Numerical.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Version\Global_Version.TcGVL">

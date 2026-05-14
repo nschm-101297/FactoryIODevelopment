@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIInterfaceOperatingMode" Id="{79f78aa5-5406-4384-8bf8-b6e18272cd9d}">
+    <Declaration><![CDATA[TYPE HMIInterfaceOperatingMode :
+STRUCT
+	PLCToHMI	:	PLCToHMIOperatingMode;
+	HMIToPLC	:	HMIToPLCOperatingMode;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -5,7 +5,7 @@
   <Children>
     <Node>
       <Title>NumericalStackerCrane</Title>
-      <Expanded>True</Expanded>
+      <Expanded>False</Expanded>
       <FileName>E:\Beckhoff\Projekte\Entwicklungsprojekt-FactoryIO\Entwicklungsprojekt-FactoryIO_Beckhoff\Dg_Writing_RFID\NumericalStackerCrane.tcscopex</FileName>
       <Children>
         <Node>
@@ -179,12 +179,12 @@
         </Node>
         <Node>
           <Title>NumericalTargetPos</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group (6)</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -222,12 +222,6 @@
               <Children />
             </Node>
             <Node>
-              <Title>processStepsNumericalStackerCrane</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
               <Title>statMoveStackerCrane</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
@@ -254,7 +248,7 @@
           <Children>
             <Node>
               <Title>Axis Group</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -314,31 +308,11 @@
           <Children>
             <Node>
               <Title>Axis Group (3)</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
                   <Title>processSteps</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>StackerCraneNumerical</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (4)</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>processStepsNumericalStackerCrane</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

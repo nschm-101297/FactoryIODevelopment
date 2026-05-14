@@ -6,6 +6,11 @@ VAR_INPUT
 	SensorInfeed	:	BOOL;	//Sensor am Band Einlauf
 	SensorOutfeed	:	BOOL;	//Sensor am Band Auslauf
 	MaximumTimeRuncontrol	:	TIME;	//Maximale Zeit bis Fehler Laufkontrolle aktiviert wird
+	ActorInstanceIndex	:	INT;
+	ActorInstanceName	:	STRING;
+END_VAR
+VAR_IN_OUT
+	HMIInterface	:	MachineSectionHMIInterface;
 END_VAR
 VAR_OUTPUT
 	MotorForward	:	BOOL;	//Motor vorwaerts drehen
@@ -26,32 +31,152 @@ VAR
 	statErrorRuncontrolBackward	:	BOOL;
 	statTimeRuncontrolForward	:	TON;
 	statTimeRuncontrolBackward	:	TON;
+	
+	internHMIInterface	:	MachineSectionHMIInterface;
+	internInstanceActivatedFirstTime	:	BOOL;
+	internRisingEdgePressButtonForward	:	R_TRIG;
+	internRisingEdgePressButtonBackward	:	R_TRIG;
+	internRisingEdgePressButtonStop	:	R_TRIG;
+	internRisingEdgePressButtonRuncontrolForwardReset	:	R_TRIG;
+	internRisingEdgePressButtonRuncontrolBackwardReset	:	R_TRIG;
+	internResetRuncontrolForward	:	BOOL;
+	internResetRuncontrolBackward	:	BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[(*===================== Motor Forward =====================*)
-statMotorForward := statMotorForward AND OperatingMode.AutomaticIsActive
+      <ST><![CDATA[(*===================== HMI INTERFACE =====================*)
+internHMIInterface := HMIInterface;
+
+IF internHMIInterface.ActiveMachineSection = MachineSection.Conveyor AND
+	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Initializing HMI-Interface =====================*)
+ 	IF NOT internInstanceActivatedFirstTime THEN
+		FC_InitializingSettingLines(HMIInterface := internHMIInterface);
+		internInstanceActivatedFirstTime := TRUE;
+	END_IF
+	(*===================== Button Handling Movement =====================*)
+	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('Conveyor Control ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[1].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+																							statMotorBackward AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							statErrorRuncontrolForward;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].InPosition := statMotorForward;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].CaptionButton := 'Forward';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\ForwardConveyor.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsEnabled := OperatingMode.ManuelIsActive;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].InPosition := NOT statMotorForward AND NOT statMotorBackward;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].CaptionButton := 'Stop';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].PathImageButton := 'Images\StopConveyor.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+																							statMotorForward AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							statErrorRuncontrolBackward;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].InPosition := statMotorBackward;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].CaptionButton := 'Backward';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\BackwardConveyor.svg';
+	
+	(*===================== Button Handling Runcontrol =====================*)
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].CaptionSettingLine := CONCAT('Runcontrol Forward ', ActorInstanceName);
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[1].IsEnabled := FALSE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[1].InPosition := statRuncontrolForward;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[1].CaptionButton := 'Active';
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\ActiveRuncontrol.svg';
+	
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[2].IsVisibleButton := TRUE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[2].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[2].IsEnabled := statRuncontrolForward;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[2].InPosition := NOT statRuncontrolForward;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[2].CaptionButton := 'Reset';
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[2].PathImageButton := 'Images\ResetRuncontrol.svg';
+	
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].CaptionSettingLine := CONCAT('Runcontrol Backward ', ActorInstanceName);
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[1].IsEnabled := FALSE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[1].InPosition := statRuncontrolBackward;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[1].CaptionButton := 'Active';
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[1].PathImageButton := 'Images\ActiveRuncontrol.svg';
+	
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[2].IsVisibleButton := TRUE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[2].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[2].IsEnabled := statRuncontrolBackward;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[2].InPosition := NOT statRuncontrolBackward;
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[2].CaptionButton := 'Reset';
+	internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[2].PathImageButton := 'Images\ResetRuncontrol.svg';
+	
+	(*===================== Conveyor Forward =====================*)
+	internRisingEdgePressButtonForward(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsPressed);
+	IF(internRisingEdgePressButtonForward.Q) THEN
+		statMotorForward := TRUE;
+	END_IF
+	(*===================== Conveyor Backward =====================*)
+	internRisingEdgePressButtonBackward(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsPressed);
+	IF(internRisingEdgePressButtonBackward.Q) THEN
+		statMotorBackward := TRUE;
+	END_IF
+	(*===================== Conveyor Stop =====================*)
+	internRisingEdgePressButtonStop(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsPressed);
+	IF(internRisingEdgePressButtonStop.Q) THEN
+		statMotorForward := FALSE;
+		statMotorBackward := FALSE;
+	END_IF
+	(*===================== Runcontrol Forward =====================*)
+	internRisingEdgePressButtonRuncontrolForwardReset(CLK := internHMIInterface.Runcontrols.RuncontrolSettingLines[1].SettingLineButtons[2].IsPressed);
+	IF(internRisingEdgePressButtonRuncontrolForwardReset.Q) THEN
+		internResetRuncontrolForward := TRUE;
+	END_IF
+	(*===================== Runcontrol Backward =====================*)
+	internRisingEdgePressButtonRuncontrolBackwardReset(CLK := internHMIInterface.Runcontrols.RuncontrolSettingLines[2].SettingLineButtons[2].IsPressed);
+	IF(internRisingEdgePressButtonRuncontrolBackwardReset.Q) THEN
+		internResetRuncontrolBackward := TRUE;
+	END_IF
+	(*===================== Write Interface =====================*)
+	HMIInterface := internHMIInterface;
+ELSE
+		internInstanceActivatedFirstTime := FALSE;
+END_IF
+(*===================== Motor Forward =====================*)
+statMotorForward := statMotorForward AND ((OperatingMode.AutomaticIsActive
 									 AND(OperatingMode.AutomaticStart.IsActive OR 
 										 OperatingMode.AutomaticHome.IsActive) AND NOT
+									 	 OperatingMode.AutomaticStop.IsActive) OR
+										 OperatingMode.ManuelIsActive) AND NOT
 										 statMotorBackward AND NOT
-									 	 OperatingMode.AutomaticStop.IsActive AND NOT
 									 	 OperatingMode.EStop.IsActive AND NOT
 										 statErrorRuncontrolForward;
 (*===================== Motor Backward =====================*)
-statMotorBackward := statMotorBackward AND OperatingMode.AutomaticIsActive
+statMotorBackward := statMotorBackward AND ((OperatingMode.AutomaticIsActive
 									   AND(OperatingMode.AutomaticStart.IsActive OR 
 										   OperatingMode.AutomaticHome.IsActive) AND NOT
+									 	   OperatingMode.AutomaticStop.IsActive) OR
+											OperatingMode.ManuelIsActive) AND NOT
 										   statMotorForward AND NOT
-									 	   OperatingMode.AutomaticStop.IsActive AND NOT
 									 	   OperatingMode.EStop.IsActive AND NOT
 										   statErrorRuncontrolBackward;
 (*===================== Runcontrol Forward =====================*)
 IF statMotorForward AND NOT statRuncontrolForward THEN
 	statRuncontrolForward := TRUE;
 ELSIF (statRuncontrolForward AND SensorOutfeed) OR
-	(OperatingMode.Reset.IsActive AND statErrorRuncontrolForward)
+	(OperatingMode.ManuelIsActive AND internResetRuncontrolForward AND statErrorRuncontrolForward)
 THEN
 		statRuncontrolForward := FALSE;
+		internResetRuncontrolForward := FALSE;
 END_IF
 
 statTimeRuncontrolForward(IN:= statRuncontrolForward,
@@ -66,9 +191,10 @@ END_IF
 IF statMotorBackward AND NOT statRuncontrolBackward THEN
 	statRuncontrolBackward := TRUE;
 ELSIF statRuncontrolBackward AND SensorInfeed OR
-	(OperatingMode.Reset.IsActive AND statErrorRuncontrolBackward)
+	(OperatingMode.ManuelIsActive AND internResetRuncontrolBackward AND statErrorRuncontrolBackward)
 THEN
 		statRuncontrolBackward := FALSE;
+		internResetRuncontrolBackward := FALSE;
 END_IF
 
 statTimeRuncontrolBackward(IN:= statRuncontrolBackward,

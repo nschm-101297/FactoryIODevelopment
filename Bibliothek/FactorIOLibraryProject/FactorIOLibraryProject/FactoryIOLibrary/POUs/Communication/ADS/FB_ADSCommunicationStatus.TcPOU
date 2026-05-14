@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ADSCommunicationStatus" Id="{fc26bda7-2b0c-49ee-914f-e68b93c48878}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ADSCommunicationStatus
+VAR_INPUT
+	Timeout	:	TIME := T#1S;
+	TimeoutHMI	:	TIME := T#1S;
+	LocalAdsPort	:	T_AmsPort := 851;
+	HeartbeatHMI	:	BOOL;
+END_VAR
+VAR
+	instReadLocalAMSNetId	:	FB_GetLocalAmsNetId;
+	statExecuteReadingLocalAMSNetId	:	BOOL := TRUE;
+	statBusyReadLocalAMSNetId	:	BOOL;
+	statErrorReadLocalAMSNetId	:	BOOL;
+	statErrorNumberReadLocalAMSNetId	:	UDINT;
+	statReadLocalAMSNetId	:	T_AmsNetID;
+	statReadLocalAMSNetIdSeprated	:	T_AmsNetIdArr;
+	
+	statGettingIpAddress	:	BOOL;
+	statLocalIpAddress	:	STRING;
+	
+	instReadADSState	:	ADSRDSTATE;
+	statExecuteReadingAdsState	:	BOOL;
+	statBusyReadAdsState	:	BOOL;
+	statErrorReadAdsState	:	BOOL;
+	statErrorNumberAdsState	:	UDINT;
+	statReadAdsState	:	UDINT;
+	
+	statConvertingAdsState	:	BOOL;
+	statConvertedAdsState	:	STRING;
+	
+	instHearbeatEvaluationHMITrue	:	TON;
+	instHearbeatEvaluationHMIFalse	:	TON;
+	statErrorHeartbeatHMIToLongTrue	:	BOOL;
+	statErrorHeartbeatHMIToLongFalse	:	BOOL;
+	statHearbeatHMIIsKeepAlive	:	BOOL;
+	
+	instHearbeatPLCTrue	:	TON;
+	statHeartbeatPLCTrue	:	BOOL;
+	statHearbeatPLC	:	BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== Reading local AMSNetId =====================*)
+instReadLocalAMSNetId(bExecute := statExecuteReadingLocalAMSNetId,
+					  tTimeOut := Timeout,
+					  bBusy => statBusyReadLocalAMSNetId,
+					  bError => statErrorReadLocalAMSNetId,
+					  nErrId => statErrorNumberReadLocalAMSNetId,
+					  AddrString => statReadLocalAMSNetId,
+					  AddrBytes => statReadLocalAMSNetIdSeprated);
+					  
+IF NOT statBusyReadLocalAMSNetId AND NOT statErrorReadLocalAMSNetId AND
+	statExecuteReadingLocalAMSNetId THEN
+	statExecuteReadingLocalAMSNetId := FALSE;
+	statGettingIpAddress := TRUE;
+	statExecuteReadingAdsState := TRUE;
+END_IF
+
+(*===================== Getting IP-Address =====================*)
+IF statGettingIpAddress THEN
+	statLocalIpAddress := GetDeviceIpAddress(statReadLocalAMSNetIdSeprated);
+	statGettingIpAddress := FALSE;
+END_IF
+
+(*===================== Reading Ads state =====================*)
+instReadADSState(NETID := statReadLocalAMSNetId,
+				 PORT := LocalAdsPort,
+				 RDSTATE := statExecuteReadingAdsState,
+			     TMOUT := Timeout,
+				 BUSY => statBusyReadAdsState,
+				 ERR => statErrorReadAdsState,
+				 ERRID => statErrorNumberAdsState,
+				 ADSSTATE => statReadAdsState);
+					  
+IF NOT statBusyReadAdsState AND NOT statErrorReadAdsState AND
+	statExecuteReadingAdsState THEN
+	statExecuteReadingAdsState := FALSE;
+	statConvertingAdsState := TRUE;
+END_IF
+
+(*===================== Converting Ads state =====================*)
+IF statConvertingAdsState THEN
+	statConvertedAdsState := ConvertRuntimestatusInString(statReadAdsState);
+	statConvertingAdsState := FALSE;
+END_IF
+
+(*===================== Evaluating Heartbeat HMI =====================*)
+instHearbeatEvaluationHMITrue(IN := HeartbeatHMI,
+							  PT := TimeoutHMI,
+							  Q => statErrorHeartbeatHMIToLongTrue);
+instHearbeatEvaluationHMIFalse(IN := NOT HeartbeatHMI,
+							  PT := TimeoutHMI,
+							  Q => statErrorHeartbeatHMIToLongFalse);
+							  
+
+statHearbeatHMIIsKeepAlive := NOT statErrorHeartbeatHMIToLongTrue AND NOT statErrorHeartbeatHMIToLongFalse;
+
+(*===================== Creating Heartbeat PLC =====================*)
+instHearbeatPLCTrue(IN := NOT statHeartbeatPLCTrue,
+					PT := TimeoutHMI,
+					Q => statHeartbeatPLCTrue);
+							  
+IF statHeartbeatPLCTrue THEN
+	statHearbeatPLC := NOT statHearbeatPLC;
+END_IF]]></ST>
+    </Implementation>
+    <Property Name="AdsState" Id="{6eea6bc8-e6ea-44d5-bd0c-846554110dc1}">
+      <Declaration><![CDATA[PROPERTY PUBLIC AdsState : String]]></Declaration>
+      <Get Name="Get" Id="{c2761746-ba33-4cfe-8a11-d4f8556c770c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AdsState := statConvertedAdsState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ConvertRuntimestatusInString" Id="{adee1e1a-fac9-4303-8fe0-be4d2ba8a723}">
+      <Declaration><![CDATA[METHOD PRIVATE ConvertRuntimestatusInString : String
+VAR_INPUT
+	CurrentDeviceStatus 	: 	UDINT;
+END_VAR
+VAR
+	tempConvertedDeviceStatus	:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE CurrentDeviceStatus OF
+	0:
+		tempConvertedDeviceStatus := 'Invalid';
+	1:
+		tempConvertedDeviceStatus := 'Idle';
+	2:
+		tempConvertedDeviceStatus := 'Reset';
+	3:
+		tempConvertedDeviceStatus := 'Init';
+	4:
+		tempConvertedDeviceStatus := 'Start';
+	5:
+		tempConvertedDeviceStatus := 'Run';
+	6:
+		tempConvertedDeviceStatus := 'Stop';
+	7:
+		tempConvertedDeviceStatus := 'Save cfg';
+	8:
+		tempConvertedDeviceStatus := 'Load cfg';
+	9:
+		tempConvertedDeviceStatus := 'Power failure';
+	10:
+		tempConvertedDeviceStatus := 'Power good';
+	11:
+		tempConvertedDeviceStatus := 'Error';
+	12:
+		tempConvertedDeviceStatus := 'Shutdown';
+	13:
+		tempConvertedDeviceStatus := 'Suspend';
+	14:
+		tempConvertedDeviceStatus := 'Resume';
+	15:
+		tempConvertedDeviceStatus := 'Config';
+	16:
+		tempConvertedDeviceStatus := 'Reconfig';
+	17:
+		tempConvertedDeviceStatus := 'Stopping';
+	18:
+		tempConvertedDeviceStatus := 'Incompatible';
+	19:
+		tempConvertedDeviceStatus := 'Execption';
+	ELSE
+		tempConvertedDeviceStatus := 'Not defined in system';			
+END_CASE
+
+ConvertRuntimestatusInString := tempConvertedDeviceStatus;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetDeviceIpAddress" Id="{6b460412-9514-4e9a-b6c9-8eebbe2fbb84}">
+      <Declaration><![CDATA[METHOD PRIVATE GetDeviceIpAddress : String
+VAR_INPUT
+	CurrentAMSNetId	:	T_AmsNetIdArr;
+END_VAR
+VAR
+	tempRunCounter	:	INT;
+	tempIpAddressConverted	:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR tempRunCounter := 0 TO 3 DO
+	tempIpAddressConverted := CONCAT(tempIpAddressConverted, BYTE_TO_STRING(CurrentAMSNetId[tempRunCounter]));
+	IF tempRunCounter < 3 THEN
+		tempIpAddressConverted := CONCAT(tempIpAddressConverted, '.');
+	END_IF
+END_FOR
+
+GetDeviceIpAddress := tempIpAddressConverted;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="HMICommunicationIsActive" Id="{e805ff58-23f1-4af4-aaae-14de3ec10f3c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC HMICommunicationIsActive : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d4981860-2bac-4116-9294-1887ea65a5e7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HMICommunicationIsActive := statHearbeatHMIIsKeepAlive;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LocalAMSNetId" Id="{7b71f754-a9bd-4d11-a914-4354786a1931}">
+      <Declaration><![CDATA[PROPERTY PUBLIC LocalAMSNetId : String]]></Declaration>
+      <Get Name="Get" Id="{219b9a17-cb1d-486e-8706-680f14c1b592}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LocalAMSNetId := statReadLocalAMSNetId;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LocalIpAddress" Id="{6000413c-bfbf-43ca-8c0b-09816ce2d821}">
+      <Declaration><![CDATA[PROPERTY PUBLIC LocalIpAddress : String]]></Declaration>
+      <Get Name="Get" Id="{020ecc30-ae91-4c39-9568-5747342c3c80}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LocalIpAddress := statLocalIpAddress;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="PLCHeartbeatHMICommunication" Id="{232ac622-fecd-4261-a26d-ddae9432b361}">
+      <Declaration><![CDATA[PROPERTY PUBLIC PLCHeartbeatHMICommunication : BOOL]]></Declaration>
+      <Get Name="Get" Id="{4a1c8c71-25cf-4be1-a2af-224a9c2e4b2d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PLCHeartbeatHMICommunication := statHearbeatPLC;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

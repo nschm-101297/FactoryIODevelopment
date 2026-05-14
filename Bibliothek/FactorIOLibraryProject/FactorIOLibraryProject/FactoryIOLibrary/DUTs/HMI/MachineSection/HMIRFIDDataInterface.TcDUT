@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIRFIDDataInterface" Id="{273f5c2b-c243-47cc-a622-124862ad9d1e}">
+    <Declaration><![CDATA[TYPE HMIRFIDDataInterface :
+STRUCT
+	SingleReadValue	:	WORD;
+	SingleWriteValue	:	WORD;
+	AllReadData	:	ARRAY[0..127] OF WORD;
+	AllWriteData	:	ARRAY[0..127] OF WORD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

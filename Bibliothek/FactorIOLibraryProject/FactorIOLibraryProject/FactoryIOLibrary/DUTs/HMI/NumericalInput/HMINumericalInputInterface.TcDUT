@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMINumericalInputInterface" Id="{5f02c26b-fc6c-4bc4-a35c-6dc125e5a3b2}">
+    <Declaration><![CDATA[TYPE HMINumericalInputInterface :
+STRUCT
+	CaptionNumericalInput	:	STRING;
+	IsVisibleNumericalInput	:	BOOL;
+	ValueLinesNumericalInput	:	ARRAY[1..2] OF HMINumericalInputLineInterface;
+	ButtonsNumericalInput	:	ARRAY[1..2] OF HMIButtonNumericalInputInterface;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

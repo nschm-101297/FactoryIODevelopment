@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="VisionSensorParttype" Id="{83d0baef-b30e-49f9-b2ae-a4ac54fc9d0f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE VisionSensorParttype :
+(
+	None := 0,
+	BlueRawMaterial,
+	BlueProductLid,
+	BlueProductBase,
+	GreenRawMaterial,
+	GreenProductLid,
+	GreenProductBase,
+	MetalRawMaterial,
+	MetalProductLid,
+	MetalProductBase,
+	NotDectedable := 100
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

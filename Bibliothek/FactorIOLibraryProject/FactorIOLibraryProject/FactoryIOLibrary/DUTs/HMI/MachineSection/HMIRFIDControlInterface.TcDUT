@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIRFIDControlInterface" Id="{552c278b-4581-4bf4-a1dc-5fd4902fa588}">
+    <Declaration><![CDATA[TYPE HMIRFIDControlInterface :
+STRUCT
+	ExecuteCommand	:	BOOL;
+	SelectedCommand	:	WORD;
+	SelectedMemoryIndex	:	WORD;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

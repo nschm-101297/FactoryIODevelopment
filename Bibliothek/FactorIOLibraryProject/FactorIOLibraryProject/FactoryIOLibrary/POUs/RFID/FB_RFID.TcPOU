@@ -10,6 +10,8 @@ VAR_INPUT
 	CommandID	:	WORD;	//Wird nach einem Befehl immer um 1 erhoeht
 	ReadData	:	WORD;	//Gelesener Wert an der Stelle vom MemoryIndex
 	Status	:	WORD;	//Status ungleich 0 = Fehler
+	ActorInstanceIndex	:	INT;	//Index in DropDown HMI
+	ActorInstanceName	:	STRING;		//Name of the instance
 END_VAR
 VAR_OUTPUT
 	ExecuteCommand	:	BOOL;
@@ -22,6 +24,9 @@ VAR_OUTPUT
 	WriteData	:	WORD;	//Daten die geschrieben werden
 	MemoryIndex	:	WORD;	//Angewaehlten Memory-Index der gelesen/geschrieben werden soll
 	ReadDataTag	:	ARRAY[0..127] OF WORD;	//Array mit allen gelesenen Daten
+END_VAR
+VAR_IN_OUT
+	HMIInterface	:	MachineSectionHMIInterface;	//HMI-Interface
 END_VAR
 VAR
 	statReadingSerialNumber	:	BOOL;
@@ -47,6 +52,10 @@ VAR
 	statTONDelayWritting	:	TON;
 	statTONDelayReading	:	TON;
 	debugStepMemory	:	INT;
+	
+	internHMIInterface	:	MachineSectionHMIInterface;
+	internRisingEdgeExecuteCommand	:	R_TRIG;
+	internRisingEdgeReadAllDataFinished	:	R_TRIG;
 END_VAR
 VAR CONSTANT
 	NOCOMMAND	:	WORD := 0;
@@ -57,7 +66,45 @@ VAR CONSTANT
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[(*===================== Error Handling =====================*)
+      <ST><![CDATA[(*===================== HMI INTERFACE =====================*)
+internHMIInterface := HMIInterface;
+
+IF internHMIInterface.ActiveMachineSection = MachineSection.RFID AND
+	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Status-Interface =====================*)
+	internHMIInterface.RFID.RFIDStatus.PermissionHardware := PermissionHardware;
+	internHMIInterface.RFID.RFIDStatus.PartPresent := SensorPartDetected;
+	internHMIInterface.RFID.RFIDStatus.ErrorActive := statErrorActive;
+	internHMIInterface.RFID.RFIDStatus.FMReading := statReadingDataFinished OR statReadingSerialnumberFinished;
+	internHMIInterface.RFID.RFIDStatus.FMWritting := statWritingDataFinished;
+	(*===================== Data-Interface =====================*)
+	internHMIInterface.RFID.RFIDData.AllReadData := statReadDataCompelete; 
+	IF internRisingEdgeReadAllDataFinished.Q THEN
+		internHMIInterface.RFID.RFIDData.AllWriteData := statReadDataCompelete;
+	END_IF
+	(*===================== Execute Command =====================*)
+	internRisingEdgeExecuteCommand(CLK := internHMIInterface.RFID.RFIDControl.ExecuteCommand);
+	IF internRisingEdgeExecuteCommand.Q THEN
+		CASE internHMIInterface.RFID.RFIDControl.SelectedCommand OF
+			NOCOMMAND :
+				statReadingSerialNumber := FALSE;
+				statReadingData := FALSE;
+				statWritingData := FALSE;
+			READSERIALNUMBERCOMMAND:
+				statReadingSerialNumber := TRUE;
+			READDATACOMMAND:
+				statReadingData := TRUE;
+			WRITEDATACOMMAND:
+				statCompleteDataToWrite := internHMIInterface.RFID.RFIDData.AllWriteData;
+				statWritingData := TRUE;	
+		END_CASE
+	END_IF
+	
+	(*===================== Write Interface =====================*)
+	HMIInterface := internHMIInterface;
+END_IF
+
+(*===================== Error Handling =====================*)
 IF QuitError AND statErrorActive THEN
 	statErrorActive := FALSE;
 	statErrorID := 0;
@@ -160,6 +207,7 @@ IF PermissionHardware AND SensorPartDetected THEN
 			statSelectedCommand := NOCOMMAND;
 			statStateReadData := RFIDReadWriteDataStates.WAITINGTRIGGER;
 	END_CASE;
+	internRisingEdgeReadAllDataFinished(CLK := statReadingDataFinished);
 	(*===================== Write Data =====================*)
 	statTONDelayWritting(IN:= statStateWriteData = RFIDReadWriteDataStates.SETTRIGGER, 
 						 PT:= T#100MS);

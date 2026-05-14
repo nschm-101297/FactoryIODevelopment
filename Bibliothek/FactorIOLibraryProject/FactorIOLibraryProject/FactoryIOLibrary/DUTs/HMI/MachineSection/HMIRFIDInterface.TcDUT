@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIRFIDInterface" Id="{1b526505-33bd-42a4-a645-94e60f72605b}">
+    <Declaration><![CDATA[TYPE HMIRFIDInterface :
+STRUCT
+	RFIDStatus	:	HMIRFIDStatusInterface;
+	RFIDControl	:	HMIRFIDControlInterface;
+	RFIDData	:	HMIRFIDDataInterface;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

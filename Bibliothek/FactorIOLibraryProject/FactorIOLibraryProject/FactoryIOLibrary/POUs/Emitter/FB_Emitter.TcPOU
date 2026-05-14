@@ -4,16 +4,56 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Emitter
 VAR_INPUT
 	PartPresent	:	BOOL;
+	ActorInstanceIndex	:	INT;
+	ActorInstanceName	:	STRING;
+END_VAR
+VAR_IN_OUT
+	HMIInterface	:	MachineSectionHMIInterface;
 END_VAR
 VAR_OUTPUT
 	CreatePart	:	BOOL;
 END_VAR
 VAR
 	internCreatePart	: BOOL;
+	
+	internHMIInterface	:	MachineSectionHMIInterface;
+	internInstanceActivatedFirstTime	:	BOOL;
+	internRisingEdgePressButton	:	R_TRIG;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF PartPresent THEN
+      <ST><![CDATA[(*===================== HMI Interface =====================*)
+internHMIInterface := HMIInterface;
+
+IF internHMIInterface.ActiveMachineSection = MachineSection.Emitter AND
+	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Initializing HMI-Interface =====================*)
+	IF NOT internInstanceActivatedFirstTime THEN
+		FC_InitializingSettingLines(HMIInterface := internHMIInterface);
+		internInstanceActivatedFirstTime := TRUE;
+	END_IF
+	(*===================== Button Handling =====================*)
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].CaptionSettingLine := CONCAT('Creation Part ', ActorInstanceName);
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsEnabled := NOT PartPresent;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].InPosition := PartPresent;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].CaptionButton := 'Create';
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\CreatePartEmitter.svg';
+	
+	internRisingEdgePressButton(CLK := internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsPressed);
+	IF internRisingEdgePressButton.Q THEN
+		internCreatePart := TRUE;
+	END_IF
+	(*===================== Write Interface =====================*)
+	HMIInterface := internHMIInterface;
+ELSE
+		internInstanceActivatedFirstTime := FALSE;
+END_IF
+(*===================== Create Parts =====================*)
+IF PartPresent THEN
 	internCreatePart := FALSE;
 END_IF
 

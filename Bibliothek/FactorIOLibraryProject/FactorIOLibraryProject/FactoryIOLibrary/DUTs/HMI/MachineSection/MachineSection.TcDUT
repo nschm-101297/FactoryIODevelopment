@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="MachineSection" Id="{f3f32ccf-a4c7-4675-945b-014f0904a71a}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE MachineSection :
+(
+	None := 0,
+	Conveyor,
+	Emitter,
+	Elevator,
+	StackerCrane,
+	RFID
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
