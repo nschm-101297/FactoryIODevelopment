@@ -732,17 +732,18 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO\\HMI\\FactoryIOHMI\\FactoryIOHMI\\FactoryIOHMI.csproj",
+      "projectUniqueName": "E:\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO\\HMI\\FactoryIOHMI\\FactoryIOHMI\\FactoryIOHMI.csproj",
       "projectName": "FactoryIOHMI",
-      "projectPath": "Z:\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO\\HMI\\FactoryIOHMI\\FactoryIOHMI\\FactoryIOHMI.csproj",
+      "projectPath": "E:\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO\\HMI\\FactoryIOHMI\\FactoryIOHMI\\FactoryIOHMI.csproj",
       "packagesPath": "C:\\Users\\schme\\.nuget\\packages\\",
-      "outputPath": "Z:\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO\\HMI\\FactoryIOHMI\\FactoryIOHMI\\obj\\",
+      "outputPath": "E:\\Beckhoff\\Projekte\\Entwicklungsprojekt-FactoryIO\\HMI\\FactoryIOHMI\\FactoryIOHMI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\schme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Beckhoff.Offline.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -751,6 +752,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\ProgramData\\Beckhoff\\NuGetPackages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -799,7 +801,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.310/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.314/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

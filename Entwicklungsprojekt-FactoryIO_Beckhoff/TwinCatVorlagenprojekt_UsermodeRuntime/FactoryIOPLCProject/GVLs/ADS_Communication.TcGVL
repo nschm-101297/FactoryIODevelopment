@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="ADS_Communication" Id="{9a880f75-e160-411e-8dfd-65a4dbd5cf59}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	Data_Ready	:	BOOL;
+	Detected_Material	:	INT;
+	
+	RF_Data_Ready	:	R_TRIG;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

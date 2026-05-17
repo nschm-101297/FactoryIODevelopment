@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_ADSCommunication" Id="{6a0c7f72-4ce4-4ca7-9795-4028d2ce8ab4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_ADSCommunication]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[RF_Data_Ready(CLK := instVisionSensorConveyor.Finished);
+
+IF RF_Data_Ready.Q THEN
+	Detected_Material := instVisionSensorConveyor.Parttype;
+	Data_Ready := TRUE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
