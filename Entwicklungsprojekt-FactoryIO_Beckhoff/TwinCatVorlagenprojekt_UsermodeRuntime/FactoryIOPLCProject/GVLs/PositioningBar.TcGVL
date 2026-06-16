@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="PositioningBar" Id="{93bed95a-dcb1-49b3-a7bf-8028c1278755}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	PositionerIsClamped	:	BOOL;
+	PositionerIsRaised	:	BOOL;
+	PositionerClamp	:	BOOL;
+	PositionerRaise	:	BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -21,6 +21,9 @@
 	GVL.mb_Input_Coils[20] := DigitalStackerCraneGabelLinks;
 	GVL.mb_Input_Coils[21] := DigitalStackerCraneGabelRechts;
 	GVL.mb_Input_Coils[22] := DigitalStackerCraneLiftGabel;
+	GVL.mb_Input_Coils[26]	:=	PositionerClamp;
+	GVL.mb_Input_Coils[27]	:=	PositionerRaise;
+
 (* ==================================== Analoge Ausgaenge ====================================*)
 	GVL.mb_Input_Registers[0] := AufzugSollwert;
 	GVL.mb_Input_Registers[1] := RBGSollwertX;

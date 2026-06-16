@@ -27,6 +27,9 @@ DigitalStackerCraneEndlageMitte := GVL.mb_Output_Coils[21];
 DigitalStackerCraneEndlageRechts := GVL.mb_Output_Coils[22];
 DigitalStackerCraneXAxisIsMoving := GVL.mb_Output_Coils[23];
 DigitalStackerCraneZAxisIsMoving := GVL.mb_Output_Coils[24];
+PositionerIsClamped	:=	GVL.mb_Output_Coils[26];
+PositionerIsRaised	:=	GVL.mb_Output_Coils[27];
+
 (* ==================================== Analoge Eingaenge ====================================*)
 AufzugIstwert := GVL.mb_Output_Registers[0];
 RBGIstwertX := GVL.mb_Output_Registers[1];
