@@ -93,6 +93,9 @@
     <Compile Include="DUTs\OperatingMode\PLCToHMIOperatingMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\PositingBar\PositingBarAlignmentDirection.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\Program\Warehouse\StackerCraneSteps.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -219,6 +222,9 @@
     <Compile Include="POUs\Vorlagen\OperatingMode\FB_OperatingMode.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Vorlagen\PositingBar\FB_PositingBar.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Vorlagen\RFID\FB_RFID.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -241,6 +247,7 @@
     <Folder Include="DUTs\HMI\Header" />
     <Folder Include="DUTs\HMI\NumericalInput" />
     <Folder Include="DUTs\HMI\SettingLine" />
+    <Folder Include="DUTs\PositingBar" />
     <Folder Include="DUTs\VisionSensor" />
     <Folder Include="DUTs\Program" />
     <Folder Include="DUTs\Program\Warehouse" />
@@ -265,6 +272,7 @@
     <Folder Include="POUs\Vorlagen\Aufzug" />
     <Folder Include="POUs\Vorlagen\HMI" />
     <Folder Include="POUs\Vorlagen\Communication" />
+    <Folder Include="POUs\Vorlagen\PositingBar" />
     <Folder Include="POUs\Vorlagen\VisionSensor" />
     <Folder Include="POUs\Vorlagen\RFID" />
     <Folder Include="POUs\Vorlagen\Warehouse" />
@@ -303,8 +311,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -374,14 +382,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

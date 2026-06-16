@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_PositingBar" Id="{f060d6c4-9625-4dbb-998f-f3d2865ae772}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PositingBar
+VAR_INPUT
+	PartIsClamped	:	BOOL;	//Positining bar is clamped
+	VerticalLimitReached	:	BOOL;	//Positining bar Raised
+	AlignmentDirection	:	PositingBarAlignmentDirection;	//Alingment of the positining bar
+	ActorInstanceIndex	:	INT;	//Index in DropDown HMI
+	ActorInstanceName	:	STRING;		//Name of the instance
+END_VAR
+VAR_OUTPUT
+	Clamp	:	BOOL;	//1 = Positining bar should clamp, 0 = Positining bar should unclamp
+	Raise	:	BOOL;	//1 = Positining bar should raise, 0 = Positining bar should lower
+END_VAR
+VAR_IN_OUT
+	OperatingMode	:	OperatingMode;	//Schnittstelle für Betriebsarten
+	HMIInterface	:	MachineSectionHMIInterface;	//HMI-Interface
+END_VAR
+VAR
+	statExecuteClamp	:	BOOL;	//Internal command that the positining bar should clamp
+	statExecuteRaise	:	BOOL;	//Internal command that the positining bar should raise
+	statPositingBarIsClamped	:	BOOL;	//Internal feedback that positing bar is clamped (Property: IsClamped)
+	statPositingBarIsRaised	:	BOOL;	//Internal feedback that positing bar is raised (Property: IsRaised)
+	
+	internOperatingMode	:	OperatingMode;	//Internal structure
+	internHMIInterface	:	MachineSectionHMIInterface;	//Internal structure
+	internInstanceActivatedFirstTime	:	BOOL;	//Instance the first time active
+	internRisingEdgePressButtonClamp	:	R_TRIG;
+	internRisingEdgePressButtonUnclamp	:	R_TRIG;
+	internRisingEdgePressButtonRaise	:	R_TRIG;
+	internRisingEdgePressButtonLower	:	R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== Operating Mode =====================*)
+internOperatingMode := OperatingMode;
+(*===================== HMI INTERFACE =====================*)
+internHMIInterface := HMIInterface;
+
+IF internHMIInterface.ActiveMachineSection = MachineSection.PositingBar AND
+	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Initializing HMI-Interface =====================*)
+	IF NOT internInstanceActivatedFirstTime THEN
+		FC_InitializingSettingLines(HMIInterface := internHMIInterface);
+		internInstanceActivatedFirstTime := TRUE;
+	END_IF
+	(*===================== Button Handling Movement =====================*)
+	internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('Positining bar horizontal ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[1].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statPositingBarIsClamped;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].InPosition := statPositingBarIsClamped;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].CaptionButton := 'Clamp';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\UpElevator.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND
+																							statPositingBarIsClamped;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].InPosition := NOT statPositingBarIsClamped;
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].CaptionButton := 'Unclamp';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\UpElevator.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[2].CaptionSettingLine := CONCAT('Positining bar vertical ', ActorInstanceName);
+	internHMIInterface.Movements.MovementSettingLines[2].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND NOT
+																							statPositingBarIsRaised;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].InPosition := statPositingBarIsRaised;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].CaptionButton := 'Raise';
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].PathImageButton := 'Images\UpElevator.svg';
+	
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsVisibleButton := TRUE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsEnabled := OperatingMode.ManuelIsActive AND NOT
+									 														OperatingMode.EStop.IsActive AND NOT
+																							OperatingMode.Fault.IsActive AND
+																							statPositingBarIsRaised;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].InPosition := NOT statPositingBarIsRaised;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].CaptionButton := 'Lower';
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].PathImageButton := 'Images\DownElevator.svg';
+	
+	(*===================== Clamp =====================*)
+	internRisingEdgePressButtonClamp(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].IsPressed);
+	IF internRisingEdgePressButtonClamp.Q THEN
+		statExecuteClamp := TRUE;
+	END_IF
+	(*===================== Unclamp =====================*)
+	internRisingEdgePressButtonUnclamp(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsPressed);
+	IF internRisingEdgePressButtonUnclamp.Q THEN
+		statExecuteClamp := FALSE;
+	END_IF
+	(*===================== Raise =====================*)
+	internRisingEdgePressButtonRaise(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsPressed);
+	IF internRisingEdgePressButtonRaise.Q THEN
+		statExecuteRaise := TRUE;
+	END_IF
+	(*===================== Lower =====================*)
+	internRisingEdgePressButtonLower(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsPressed);
+	IF internRisingEdgePressButtonLower.Q THEN
+		statExecuteRaise := FALSE;
+	END_IF
+	
+	(*===================== Write Interface =====================*)
+	HMIInterface := internHMIInterface;
+ELSE
+		internInstanceActivatedFirstTime := FALSE;
+END_IF
+
+(*===================== Operating Mode =====================*)
+statPositingBarIsClamped := PartIsClamped;
+statPositingBarIsRaised := VerticalLimitReached;
+
+(*===================== Outputs =====================*)
+Clamp := statExecuteClamp;
+Raise := statExecuteRaise;
+OperatingMode.Fault := internOperatingMode.Fault;]]></ST>
+    </Implementation>
+    <Property Name="IsClamped" Id="{dcc2176b-34ed-4a8b-9396-7851ffe7d27e}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsClamped : BOOL]]></Declaration>
+      <Get Name="Get" Id="{7217e3fe-1ee1-4a13-8e49-43a80eb5e18b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsClamped := statPositingBarIsClamped;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LimitVerticalReached" Id="{f28afcc2-d9bd-4174-9ff7-be7a7fb1578f}">
+      <Declaration><![CDATA[PROPERTY PUBLIC LimitVerticalReached : BOOL]]></Declaration>
+      <Get Name="Get" Id="{aca561b6-82a1-435a-b7ff-91f9fdb07c4d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LimitVerticalReached := statPositingBarIsRaised;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="PositingBarClamping" Id="{2b05368a-9ff1-4b5f-abed-876761c871ec}">
+      <Declaration><![CDATA[METHOD PUBLIC PositingBarClamping : BOOL
+VAR_INPUT
+	ClampPositiningBar	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart AND NOT
+	internOperatingMode.Fault.IsActive AND NOT internOperatingMode.EStop.IsActive AND NOT
+	IsClamped AND ClampPositiningBar THEN
+	statExecuteClamp := TRUE;
+	PositingBarClamping := TRUE;
+ELSE
+	PositingBarClamping := FALSE;		
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PositingBarLower" Id="{ad221c33-ac3c-4c29-8652-f1f8fdcc7b2b}">
+      <Declaration><![CDATA[METHOD PUBLIC PositingBarLower : BOOL
+VAR_INPUT
+	LowerPositiningBar	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart AND NOT
+	internOperatingMode.Fault.IsActive AND NOT internOperatingMode.EStop.IsActive AND 
+	LowerPositiningBar THEN
+	statExecuteRaise := FALSE;
+	PositingBarRaise := TRUE;
+ELSE
+	PositingBarRaise := FALSE;		
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PositingBarRaise" Id="{e1ef6014-a0e8-4a4f-b42f-831feef7b6c1}">
+      <Declaration><![CDATA[METHOD PUBLIC PositingBarRaise : BOOL
+VAR_INPUT
+	RaisePositiningBar	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart AND NOT
+	internOperatingMode.Fault.IsActive AND NOT internOperatingMode.EStop.IsActive AND NOT
+	LimitVerticalReached AND RaisePositiningBar THEN
+	statExecuteRaise := TRUE;
+	PositingBarRaise := TRUE;
+ELSE
+	PositingBarRaise := FALSE;		
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PositingBarUnclamping" Id="{591f5ae3-1d10-4b78-8213-b3d6f2573d1d}">
+      <Declaration><![CDATA[METHOD PUBLIC PositingBarUnclamping : BOOL
+VAR_INPUT
+	UnclampPositiningBar	:	BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart AND NOT
+	internOperatingMode.Fault.IsActive AND NOT internOperatingMode.EStop.IsActive AND 
+	UnclampPositiningBar THEN
+	statExecuteClamp := FALSE;
+	PositingBarUnclamping := TRUE;
+ELSE
+	PositingBarUnclamping := FALSE;		
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
