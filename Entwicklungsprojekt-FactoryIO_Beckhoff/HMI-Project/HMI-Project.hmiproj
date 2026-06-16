@@ -190,6 +190,9 @@
     <Content Include="Images\OverviewOperatingMode.svg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Images\PositingBar.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\ResetRuncontrol.svg">
       <SubType>Content</SubType>
     </Content>

@@ -31,7 +31,12 @@
 															'Einlagerung',
 															'Zufuehrung',
 															'Warehouse-Infeed'
-														 ];											 
+														 ];	
+	hmiPositingBarInstances	:	ARRAY[0..2] OF STRING := [
+															'Blau laden',
+															'Gruen laden',
+															'Grau laden'
+														 ];										 
 	
 END_VAR]]></Declaration>
   </GVL>

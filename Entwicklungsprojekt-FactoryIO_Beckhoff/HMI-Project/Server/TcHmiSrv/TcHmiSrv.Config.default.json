@@ -694,7 +694,8 @@
                     2,
                     3,
                     4,
-                    5
+                    5,
+                    6
                 ],
                 "options": [
                     {
@@ -720,6 +721,10 @@
                     {
                         "label": "RFID",
                         "value": 5
+                    },
+                    {
+                        "label": "PositingBar",
+                        "value": 6
                     }
                 ],
                 "type": "integer"
@@ -2272,6 +2277,16 @@
                         "propertyOrder": 2
                     }
                 ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiPositingBarInstances": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiPositingBarInstances",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..2_OF-STRING-80"
             },
             "USEMAPPING": true
         },
@@ -5344,6 +5359,7 @@
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Manuel.PreconditionsFullfilled": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Quit.IsActive": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Reset.IsActive": 3,
+                "ADS.PLC1.HMI.hmiPositingBarInstances": 3,
                 "ADS.PLC1.HMI.hmiRFIDInstances": 3,
                 "ADS.PLC1.HMI.hmiStackerCraneInstances": 3,
                 "ChangeUserSettings": 3,
