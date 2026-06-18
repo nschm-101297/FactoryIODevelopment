@@ -111,6 +111,8 @@
 </div>
 <div id="Button_Mainscreen_2" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-target-user-control="UserControls/Button_Mainscreen.usercontrol" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-pathimage="Images/Emitter.svg" data-tchmi-title="Emitters" data-tchmi-activatescreen="Contents/MachineSection.content" data-tchmi-regioncontent="%ctrl%DesktopRegion::TargetContent%/ctrl%" data-tchmi-usedasoverview="True" data-tchmi-machinesectiontitle="Emitter" data-tchmi-machinesection="%i%sActorGroupName%/i%">
 </div>
+<div id="PositingBar" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-grid-column-index="3" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-target-user-control="UserControls/Button_Mainscreen.usercontrol" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-pathimage="Images/PositingBar.svg" data-tchmi-title="PositingBar" data-tchmi-activatescreen="Contents/MachineSection.content" data-tchmi-regioncontent="%ctrl%DesktopRegion::TargetContent%/ctrl%" data-tchmi-usedasoverview="True" data-tchmi-machinesectiontitle="PositingBar" data-tchmi-machinesection="%i%sActorGroupName%/i%">
+</div>
 </div>
 </div>
 

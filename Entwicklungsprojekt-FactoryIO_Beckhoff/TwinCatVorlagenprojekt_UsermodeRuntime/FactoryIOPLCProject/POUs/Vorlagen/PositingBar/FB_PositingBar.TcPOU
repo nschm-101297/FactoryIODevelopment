@@ -57,7 +57,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.PositingBar AND
 																							statPositingBarIsClamped;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].InPosition := statPositingBarIsClamped;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].CaptionButton := 'Clamp';
-	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\UpElevator.svg';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\Clamp.svg';
 	
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleButton := TRUE;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsVisibleAxisPosition := FALSE;
@@ -67,7 +67,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.PositingBar AND
 																							statPositingBarIsClamped;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].InPosition := NOT statPositingBarIsClamped;
 	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].CaptionButton := 'Unclamp';
-	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\UpElevator.svg';
+	internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\Unclamp.svg';
 	
 	internHMIInterface.Movements.MovementSettingLines[2].CaptionSettingLine := CONCAT('Positining bar vertical ', ActorInstanceName);
 	internHMIInterface.Movements.MovementSettingLines[2].VisibilitySettingLine := TRUE;
@@ -78,7 +78,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.PositingBar AND
 									 														OperatingMode.EStop.IsActive AND NOT
 																							OperatingMode.Fault.IsActive AND NOT
 																							statPositingBarIsRaised;
-	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].InPosition := statPositingBarIsRaised;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].InPosition := VerticalLimitReached AND statExecuteRaise;
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].CaptionButton := 'Raise';
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].PathImageButton := 'Images\UpElevator.svg';
 	
@@ -88,7 +88,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.PositingBar AND
 									 														OperatingMode.EStop.IsActive AND NOT
 																							OperatingMode.Fault.IsActive AND
 																							statPositingBarIsRaised;
-	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].InPosition := NOT statPositingBarIsRaised;
+	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].InPosition := VerticalLimitReached AND NOT statExecuteRaise;
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].CaptionButton := 'Lower';
 	internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].PathImageButton := 'Images\DownElevator.svg';
 	
@@ -121,7 +121,7 @@ END_IF
 
 (*===================== Operating Mode =====================*)
 statPositingBarIsClamped := PartIsClamped;
-statPositingBarIsRaised := VerticalLimitReached;
+statPositingBarIsRaised := VerticalLimitReached AND statExecuteRaise;
 
 (*===================== Outputs =====================*)
 Clamp := statExecuteClamp;
@@ -157,7 +157,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart AND NOT
+        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart.IsActive AND NOT
 	internOperatingMode.Fault.IsActive AND NOT internOperatingMode.EStop.IsActive AND NOT
 	IsClamped AND ClampPositiningBar THEN
 	statExecuteClamp := TRUE;
@@ -174,13 +174,13 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart AND NOT
+        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart.IsActive AND NOT
 	internOperatingMode.Fault.IsActive AND NOT internOperatingMode.EStop.IsActive AND 
 	LowerPositiningBar THEN
 	statExecuteRaise := FALSE;
-	PositingBarRaise := TRUE;
+	PositingBarLower := TRUE;
 ELSE
-	PositingBarRaise := FALSE;		
+	PositingBarLower := FALSE;		
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -191,9 +191,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart AND NOT
-	internOperatingMode.Fault.IsActive AND NOT internOperatingMode.EStop.IsActive AND NOT
-	LimitVerticalReached AND RaisePositiningBar THEN
+        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart.IsActive AND NOT
+	internOperatingMode.Fault.IsActive AND NOT internOperatingMode.EStop.IsActive AND
+	RaisePositiningBar
+THEN
 	statExecuteRaise := TRUE;
 	PositingBarRaise := TRUE;
 ELSE
@@ -208,7 +209,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart AND NOT
+        <ST><![CDATA[IF internOperatingMode.AutomaticIsActive AND internOperatingMode.AutomaticStart.IsActive AND NOT
 	internOperatingMode.Fault.IsActive AND NOT internOperatingMode.EStop.IsActive AND 
 	UnclampPositiningBar THEN
 	statExecuteClamp := FALSE;

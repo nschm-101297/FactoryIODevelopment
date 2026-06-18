@@ -6,6 +6,13 @@
 	PositionerIsRaised	:	BOOL;
 	PositionerClamp	:	BOOL;
 	PositionerRaise	:	BOOL;
+	instControlBlockPositingBar	:	FB_PositingBar;
+	
+	(*================== Simulation ==================*)
+	SimuClampPositingBar	:	BOOL;
+	SimuUnclampPositingBar	:	BOOL;
+	SimuRaisePositingBar	:	BOOL;
+	SimuLowerPositingBar	:	BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

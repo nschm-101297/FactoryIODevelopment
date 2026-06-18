@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_PositingBar" Id="{371ad9e2-4cf0-498b-a263-772748bf8174}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_PositingBar
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[instControlBlockPositingBar(PartIsClamped := PositionerIsClamped,
+							VerticalLimitReached := PositionerIsRaised,
+							AlignmentDirection	:= PositingBarAlignmentDirection.AlingmentLeft,
+							ActorInstanceIndex := 1,
+							ActorInstanceName := '',
+							OperatingMode := instOperatingMode.StateOperatingMode,
+							HMIInterface := HMI.hmiMachineSectionInterface,
+							Clamp => PositionerClamp,
+							Raise =>PositionerRaise);
+							
+IF SimuClampPositingBar THEN
+	SimuUnclampPositingBar := FALSE;
+END_IF
+IF SimuUnclampPositingBar THEN
+	SimuClampPositingBar := FALSE;
+END_IF
+IF SimuRaisePositingBar THEN
+	SimuLowerPositingBar := FALSE;
+END_IF
+IF SimuLowerPositingBar THEN
+	SimuRaisePositingBar := FALSE;
+END_IF
+
+instControlBlockPositingBar.PositingBarClamping(SimuClampPositingBar);
+instControlBlockPositingBar.PositingBarUnclamping(SimuUnclampPositingBar);
+instControlBlockPositingBar.PositingBarRaise(SimuRaisePositingBar);
+instControlBlockPositingBar.PositingBarLower(SimuLowerPositingBar);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

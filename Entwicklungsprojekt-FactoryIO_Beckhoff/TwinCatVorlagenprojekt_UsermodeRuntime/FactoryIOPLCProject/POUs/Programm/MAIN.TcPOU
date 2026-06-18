@@ -17,6 +17,7 @@ Call_Warehouse();
 Call_RFID();
 Call_VisionSensor();
 Call_ADSCommunication();
+Call_PositingBar();
 SignalmappingOutput();]]></ST>
     </Implementation>
   </POU>
