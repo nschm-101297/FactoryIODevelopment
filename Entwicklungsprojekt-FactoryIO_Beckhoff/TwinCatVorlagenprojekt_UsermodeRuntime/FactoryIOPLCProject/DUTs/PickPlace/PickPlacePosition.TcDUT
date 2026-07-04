@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="PickPlacePosition" Id="{780cef99-1b06-4f1b-8721-f47e27fd916e}">
+    <Declaration><![CDATA[TYPE PickPlacePosition :
+STRUCT
+	PositionXAxis	:	REAL;
+	PositionYAxis	:	REAL;
+	PositionZAxis	:	REAL;
+	PositionCAxis	:	REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
