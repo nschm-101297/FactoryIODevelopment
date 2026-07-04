@@ -49,7 +49,92 @@
 }
 </script>
 </div>
-<div id="DesktopFooter" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-fourthbuttonvisibility="Collapsed" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-secondbuttonvisibility="Collapsed" data-tchmi-target-user-control="UserControls/Footer.usercontrol" data-tchmi-thirdbuttonvisibility="Collapsed" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-min-height="100" data-tchmi-regionpath="%ctrl%DesktopRegion::TargetContent%/ctrl%">
+<div id="DesktopFooter" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-fourthbuttonvisibility="Collapsed" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-secondbuttonvisibility="Collapsed" data-tchmi-target-user-control="UserControls/Footer.usercontrol" data-tchmi-thirdbuttonvisibility="Collapsed" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-min-height="100" data-tchmi-regionpath="%ctrl%DesktopRegion::TargetContent%/ctrl%" data-tchmi-secondbuttoncaption="Previous Page" data-tchmi-thirdbuttoncaption="Next Page">
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::MaxPage%/s%",
+    "actions": [
+      {
+        "objectType": "Condition",
+        "active": true,
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/INT",
+                  "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::MaxPage%/s%"
+                },
+                "compare2": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::MinPage%/s%"
+                },
+                "compareOperator": "==",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%DesktopFooter::SecondButtonVisibility%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Visibility",
+                  "value": "Collapsed"
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%DesktopFooter::ThirdButtonVisibility%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Visibility",
+                  "value": "Collapsed"
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%DesktopFooter::SecondButtonVisibility%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Visibility",
+                  "value": "Visible"
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%DesktopFooter::ThirdButtonVisibility%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Visibility",
+                  "value": "Visible"
+                },
+                "asyncWait": true
+              }
+            ]
+          }
+        ],
+        "asyncWait": true
+      }
+    ]
+  }
+]
+</script>
 </div>
 </div>
 

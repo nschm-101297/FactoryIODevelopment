@@ -5,6 +5,7 @@
 STRUCT
 	ActiveMachineSection : MachineSection;
 	SelectedActor : INT;
+	PageSwitch	:	HMIWindowSwitch;
 	Movements : HMIMovementInterface;
 	Forks : HMIMovementForkInterface;
 	Runcontrols : HMIRuncontrolInterface;

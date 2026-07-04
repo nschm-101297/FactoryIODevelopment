@@ -12,7 +12,7 @@
     <HmiTitle>HMI_Project</HmiTitle>
     <HmiVerboseLevel>2</HmiVerboseLevel>
     <HmiVersion>1.0.0.0</HmiVersion>
-    <HmiCommunicationServerPort>3001</HmiCommunicationServerPort>
+    <HmiCommunicationServerPort>3002</HmiCommunicationServerPort>
     <HmiLogTcHmiServerMessages>false</HmiLogTcHmiServerMessages>
     <HmiLogDesignerModeComMessages>false</HmiLogDesignerModeComMessages>
     <HmiDefaultLanguage>client</HmiDefaultLanguage>
@@ -27,7 +27,7 @@
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
     <TcHmi_Beckhoff_TwinCAT_HMI_Server_Engineering_IncludeInArchive>False</TcHmi_Beckhoff_TwinCAT_HMI_Server_Engineering_IncludeInArchive>
     <Name>HMI-Project</Name>
-    <HmiCommunicationServerAuthPort>13001</HmiCommunicationServerAuthPort>
+    <HmiCommunicationServerAuthPort>13002</HmiCommunicationServerAuthPort>
     <HmiCommunicationServerPublicPort>3443</HmiCommunicationServerPublicPort>
     <HmiInitial>14.3.617.1</HmiInitial>
     <HmiRecent>14.3.870.1</HmiRecent>
@@ -191,6 +191,12 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\OverviewOperatingMode.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\page_navigation_backward.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\page_navigation_forward.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\PositingBar.svg">

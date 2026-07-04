@@ -662,6 +662,102 @@
                 ],
                 "type": "object"
             },
+            "ADS-PLC1.HMIWindowSwitch": {
+                "additionalProperties": false,
+                "properties": {
+                    "MaxPage": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/INT"
+                            },
+                            {
+                                "propertyOrder": 2
+                            }
+                        ]
+                    },
+                    "MinPage": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/INT"
+                            },
+                            {
+                                "propertyOrder": 1
+                            }
+                        ]
+                    },
+                    "NextPageIsEnabled": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 5
+                            }
+                        ]
+                    },
+                    "NextPageIsPressed": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 6
+                            }
+                        ]
+                    },
+                    "PreviousPageIsEnabled": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 7
+                            }
+                        ]
+                    },
+                    "PreviousPageIsPressed": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 8
+                            }
+                        ]
+                    },
+                    "SelectedPage": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/INT"
+                            },
+                            {
+                                "propertyOrder": 3
+                            }
+                        ]
+                    },
+                    "SelectedTab": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 4
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "MinPage",
+                    "MaxPage",
+                    "SelectedPage",
+                    "SelectedTab",
+                    "NextPageIsEnabled",
+                    "NextPageIsPressed",
+                    "PreviousPageIsEnabled",
+                    "PreviousPageIsPressed"
+                ],
+                "type": "object"
+            },
             "ADS-PLC1.HMIWorkpieceInterface": {
                 "additionalProperties": false,
                 "properties": {
@@ -851,8 +947,8 @@
     "DISABLED_CONFIGURATION_HINTS": [],
     "DISCOVERY": 1,
     "ENDPOINTS": [
-        "http://127.0.0.1:13001",
-        "http://127.0.0.1:3001"
+        "http://127.0.0.1:13002",
+        "http://127.0.0.1:3002"
     ],
     "ETAGENABLED": true,
     "EXTENSIONS": {
@@ -1832,7 +1928,7 @@
                         "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIMovementForkInterface"
                     },
                     {
-                        "propertyOrder": 4
+                        "propertyOrder": 5
                     }
                 ]
             },
@@ -1847,6 +1943,23 @@
                 "allOf": [
                     {
                         "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIMovementInterface"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiMachineSectionInterface::PageSwitch",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIWindowSwitch"
                     },
                     {
                         "propertyOrder": 3
@@ -1917,7 +2030,7 @@
                         "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIRuncontrolInterface"
                     },
                     {
-                        "propertyOrder": 5
+                        "propertyOrder": 6
                     }
                 ]
             },
@@ -1951,7 +2064,7 @@
                         "$ref": "tchmi:server#/definitions/ADS-PLC1.HMIWorkpieceInterface"
                     },
                     {
-                        "propertyOrder": 7
+                        "propertyOrder": 8
                     }
                 ]
             },
@@ -5334,6 +5447,7 @@
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.ActiveMachineSection": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.Forks": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.Movements": 3,
+                "ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDControl": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDData": 3,
                 "ADS.PLC1.HMI.hmiMachineSectionInterface.RFID.RFIDStatus": 3,

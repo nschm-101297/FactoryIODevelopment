@@ -45,6 +45,9 @@
     <Compile Include="DUTs\HMI\MachineSection\HMIRuncontrolInterface.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIWindowSwitch.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\HMI\MachineSection\HMIWorkpieceInterface.TcDUT">
       <SubType>Code</SubType>
     </Compile>

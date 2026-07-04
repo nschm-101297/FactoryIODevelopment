@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="HMIWindowSwitch" Id="{38d5fac8-6f53-4907-b1d4-0d1bdb22b7b8}">
+    <Declaration><![CDATA[TYPE HMIWindowSwitch :
+STRUCT
+	MinPage	:	INT;
+	MaxPage	:	INT;
+	SelectedPage	:	INT;
+	SelectedTab	:	STRING;
+	NextPageIsEnabled	:	BOOL;
+	NextPageIsPressed	:	BOOL;
+	PreviousPageIsEnabled	:	BOOL;
+	PreviousPageIsPressed	:	BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

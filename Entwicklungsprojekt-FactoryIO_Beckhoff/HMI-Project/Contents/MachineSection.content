@@ -223,7 +223,7 @@
 </script>
 </div>
 </div>
-<div id="tbFunctionGroups" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTabNavigation" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-tab-overflow-mode="Popup" data-tchmi-text-font-size="20" data-tchmi-text-font-weight="Bold">
+<div id="tbFunctionGroups" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTabNavigation" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-tab-overflow-mode="Popup" data-tchmi-text-font-size="20" data-tchmi-text-font-weight="Bold" data-tchmi-active-tab-name="%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::SelectedTab|BindingMode=TwoWay%/s%">
 <script data-tchmi-target-attribute="data-tchmi-tabs" type="application/json">
 [
   {
@@ -402,6 +402,17 @@
                   "value": 3
                 },
                 "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::SelectedTab%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/STRING%2880%29",
+                  "value": "tbMovement"
+                },
+                "asyncWait": true
               }
             ]
           },
@@ -497,6 +508,17 @@
                   "objectType": "StaticValue",
                   "valueType": "tchmi:server#/definitions/ADS-PLC1.MachineSection",
                   "value": 1
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::SelectedTab%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/STRING%2880%29",
+                  "value": "tbMovement"
                 },
                 "asyncWait": true
               }
@@ -596,6 +618,17 @@
                   "value": 5
                 },
                 "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::SelectedTab%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/STRING%2880%29",
+                  "value": "tbRFID"
+                },
+                "asyncWait": true
               }
             ]
           },
@@ -691,6 +724,17 @@
                   "objectType": "StaticValue",
                   "valueType": "tchmi:server#/definitions/ADS-PLC1.MachineSection",
                   "value": 4
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::SelectedTab%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/STRING%2880%29",
+                  "value": "tbMovement"
                 },
                 "asyncWait": true
               }
@@ -790,6 +834,17 @@
                   "value": 2
                 },
                 "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::SelectedTab%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/STRING%2880%29",
+                  "value": "tbWorkpiece"
+                },
+                "asyncWait": true
               }
             ]
           },
@@ -887,6 +942,17 @@
                   "value": 6
                 },
                 "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::SelectedTab%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/STRING%2880%29",
+                  "value": "tbMovement"
+                },
+                "asyncWait": true
               }
             ]
           }
@@ -967,6 +1033,28 @@
           "objectType": "StaticValue",
           "valueType": "tchmi:server#/definitions/ADS-PLC1.MachineSection",
           "value": 0
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::MaxPage%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/INT",
+          "value": 1
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%ADS.PLC1.HMI.hmiMachineSectionInterface.PageSwitch::SelectedTab%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/STRING%2880%29",
+          "value": "None"
         },
         "asyncWait": true
       }
