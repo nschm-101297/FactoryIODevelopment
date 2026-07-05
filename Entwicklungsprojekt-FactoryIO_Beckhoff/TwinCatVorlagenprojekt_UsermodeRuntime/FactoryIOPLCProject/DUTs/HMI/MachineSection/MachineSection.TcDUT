@@ -12,7 +12,8 @@ TYPE MachineSection :
 	Elevator,
 	StackerCrane,
 	RFID,
-	PositingBar
+	PositingBar,
+	PickPlace
 );
 END_TYPE
 ]]></Declaration>
