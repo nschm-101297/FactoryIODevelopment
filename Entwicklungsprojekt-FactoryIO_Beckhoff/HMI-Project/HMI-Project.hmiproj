@@ -199,6 +199,9 @@
     <Content Include="Images\page_navigation_forward.svg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Images\PickPlaceDevice.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\PositingBar.svg">
       <SubType>Content</SubType>
     </Content>
@@ -223,6 +226,7 @@
     <Content Include="Images\UpElevator.svg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Server\ADS\ADS.Config.default.json" />
     <Content Include="UserControls\Button_Mainscreen.usercontrol">
       <SubType>Content</SubType>
     </Content>
