@@ -102,6 +102,9 @@
     <Compile Include="DUTs\PositingBar\PositingBarAlignmentDirection.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Program\PickPlace\PickPlaceSteps.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\Program\Warehouse\StackerCraneSteps.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -135,6 +138,10 @@
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="GVLs\HMI.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\PickPlace.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -184,6 +191,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Programm\OperatingMode\Call_OperatingMode.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Programm\PickPlace\Call_PickPlace.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Programm\PositingBar\Call_PositingBar.TcPOU">
@@ -261,6 +271,7 @@
     <Folder Include="DUTs\HMI\SettingLine" />
     <Folder Include="DUTs\PickPlace" />
     <Folder Include="DUTs\PositingBar" />
+    <Folder Include="DUTs\Program\PickPlace" />
     <Folder Include="DUTs\VisionSensor" />
     <Folder Include="DUTs\Program" />
     <Folder Include="DUTs\Program\Warehouse" />
@@ -272,6 +283,7 @@
     <Folder Include="POUs\Programm\Aufzug" />
     <Folder Include="POUs\Programm\HMI" />
     <Folder Include="POUs\Programm\ADS" />
+    <Folder Include="POUs\Programm\PickPlace" />
     <Folder Include="POUs\Programm\PositingBar" />
     <Folder Include="POUs\Programm\VisionSensor" />
     <Folder Include="POUs\Programm\RFID" />
@@ -326,8 +338,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -397,14 +409,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Boolean">System.Boolean</Type>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

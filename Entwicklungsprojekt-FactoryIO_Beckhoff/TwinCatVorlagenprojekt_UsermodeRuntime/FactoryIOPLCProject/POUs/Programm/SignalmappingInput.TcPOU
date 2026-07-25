@@ -29,6 +29,10 @@ DigitalStackerCraneXAxisIsMoving := GVL.mb_Output_Coils[23];
 DigitalStackerCraneZAxisIsMoving := GVL.mb_Output_Coils[24];
 PositionerIsClamped	:=	GVL.mb_Output_Coils[26];
 PositionerIsRaised	:=	GVL.mb_Output_Coils[27];
+PickPlaceX_YAxisIsMoving	:=	GVL.mb_Output_Coils[29];
+PickPlaceZAxisIsMoving	:=	GVL.mb_Output_Coils[30];
+PickPlaceBoxDetected	:=	GVL.mb_Output_Coils[31];
+PickPlaceCAxisInPos	:=	GVL.mb_Output_Coils[32];
 
 (* ==================================== Analoge Eingaenge ====================================*)
 AufzugIstwert := GVL.mb_Output_Registers[0];
@@ -37,7 +41,10 @@ RBGIstwertZ := GVL.mb_Output_Registers[2];
 RFIDCommandID := GVL.mb_Output_Registers[3];
 RFIDReadData := GVL.mb_Output_Registers[4];
 RFIDStatus := GVL.mb_Output_Registers[5];
-ReadPartCode := GVL.mb_Output_Registers[6];]]></ST>
+ReadPartCode := GVL.mb_Output_Registers[6];
+PickPlacePositionXAxis	:=	GVL.mb_Output_Registers[9];
+PickPlacePositionYAxis	:=	GVL.mb_Output_Registers[10];
+PickPlacePositionZAxis	:=	GVL.mb_Output_Registers[11];]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

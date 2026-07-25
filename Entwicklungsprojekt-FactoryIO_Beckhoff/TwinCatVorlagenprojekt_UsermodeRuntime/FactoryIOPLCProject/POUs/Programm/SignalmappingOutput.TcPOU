@@ -23,6 +23,9 @@
 	GVL.mb_Input_Coils[22] := DigitalStackerCraneLiftGabel;
 	GVL.mb_Input_Coils[26]	:=	PositionerClamp;
 	GVL.mb_Input_Coils[27]	:=	PositionerRaise;
+	GVL.mb_Input_Coils[29]	:=	PickPlaceCAxisMovePlus;
+	GVL.mb_Input_Coils[30]	:=	PickPlaceGrabBox;
+
 
 (* ==================================== Analoge Ausgaenge ====================================*)
 	GVL.mb_Input_Registers[0] := AufzugSollwert;
@@ -31,7 +34,11 @@
 	GVL.mb_Input_Registers[3] := RFIDCommand;
 	GVL.mb_Input_Registers[4] := RFIDWriteData;
 	GVL.mb_Input_Registers[5] := RFIDMemoryIndex;
-	GVL.mb_Input_Registers[7] := DigitalStackerCraneTargetPos;]]></ST>
+	GVL.mb_Input_Registers[7] := DigitalStackerCraneTargetPos;
+	GVL.mb_Input_Registers[9]	:=	PickPlaceSetpositionXAxis;
+	GVL.mb_Input_Registers[10]	:=	PickPlaceSetpositionYAxis;
+	GVL.mb_Input_Registers[11]	:=	PickPlaceSetpositionZAxis;
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

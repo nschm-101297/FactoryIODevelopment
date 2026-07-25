@@ -563,7 +563,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND
-	InPositionX_Y_Axis AND InPositionZAxis AND StartMovingGripperTo0 AND NOT statMoveStackerCrane 
+	InPositionX_Y_Axis AND InPositionZAxis AND StartMovingGripperTo0 AND NOT statMovePickPlace 
 THEN
 	statCAxisToPos90 := FALSE;
 	RotateGripperTo0 := TRUE;
@@ -580,7 +580,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND
-	InPositionX_Y_Axis AND InPositionZAxis AND StartMovingGripperTo90 AND NOT statMoveStackerCrane 
+	InPositionX_Y_Axis AND InPositionZAxis AND StartMovingGripperTo90 AND NOT statMovePickPlace 
 THEN
 	statCAxisToPos90 := TRUE;
 	RotateGripperTo90 := TRUE;

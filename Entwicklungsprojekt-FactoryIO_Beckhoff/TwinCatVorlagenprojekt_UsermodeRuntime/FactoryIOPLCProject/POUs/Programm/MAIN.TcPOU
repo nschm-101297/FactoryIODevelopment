@@ -18,6 +18,7 @@ Call_RFID();
 Call_VisionSensor();
 Call_ADSCommunication();
 Call_PositingBar();
+Call_PickPlace();
 SignalmappingOutput();]]></ST>
     </Implementation>
   </POU>

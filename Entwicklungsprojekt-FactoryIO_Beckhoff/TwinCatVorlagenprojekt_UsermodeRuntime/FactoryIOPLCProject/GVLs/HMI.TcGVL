@@ -37,7 +37,11 @@
 															'Gruen laden',
 															'Grau laden'
 														 ];										 
-	
+	hmiPickPlaceInstances	:	ARRAY[0..2] OF STRING := [
+															'Einlagerung',
+															'Zufuehrung',
+															'Warehouse-Infeed'
+														 ];	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
