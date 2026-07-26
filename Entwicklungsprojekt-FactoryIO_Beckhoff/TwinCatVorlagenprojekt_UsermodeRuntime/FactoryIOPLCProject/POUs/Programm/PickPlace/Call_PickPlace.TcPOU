@@ -21,6 +21,9 @@
 	GrabPart => PickPlaceGrabBox,
 	RotateGripper => PickPlaceCAxisMovePlus);
 	
+	IF instOperatingMode.StateOperatingMode.Reset.IsActive THEN
+			processStepsPickPlace := PickPlaceSteps.WaitingForAutomaticStart;
+		END_IF
 	WaitingTimeGrabPart(PT := T#2S);
 	
 	CASE processStepsPickPlace OF
@@ -38,36 +41,50 @@
 		instPickPlaceDigitalAnalog.RotateGripperTo0(TRUE);
 		IF instPickPlaceDigitalAnalog.InPositionX_Y_Axis AND 
 			instPickPlaceDigitalAnalog.InPositionZAxis AND
-			instPickPlaceDigitalAnalog.GripperInPos0 THEN
+		NOT instPickPlaceDigitalAnalog.NewOrderActive
+		THEN
 			processStepsPickPlace := PickPlaceSteps.DriveXYToPick;
+			DelayProcessStep := FALSE;
 		END_IF
 		
 		PickPlaceSteps.DriveXYToPick:
 		
 		instPickPlaceDigitalAnalog.MoveXYAxis_On(TRUE, PickPlacePosition);
-		IF instPickPlaceDigitalAnalog.InPositionX_Y_Axis THEN
+		IF instPickPlaceDigitalAnalog.InPositionX_Y_Axis AND
+		NOT instPickPlaceDigitalAnalog.NewOrderActive
+		THEN
 			processStepsPickPlace := PickPlaceSteps.DriveZDown;
+			DelayProcessStep := FALSE;
 		END_IF
 		
 		PickPlaceSteps.DriveZDown:
 		
 		instPickPlaceDigitalAnalog.MoveZAxis_On(TRUE, PickPlacePosition);
-		IF instPickPlaceDigitalAnalog.InPositionZAxis THEN
+		IF instPickPlaceDigitalAnalog.InPositionZAxis  AND
+		NOT instPickPlaceDigitalAnalog.NewOrderActive
+		THEN
 			processStepsPickPlace := PickPlaceSteps.GrabPart;
+			DelayProcessStep := FALSE;
 		END_IF
 		
 		PickPlaceSteps.GrabPart:
 		WaitingTimeGrabPart(IN := TRUE);
+		instPickPlaceDigitalAnalog.GrabPart_ON(TRUE);
+		instPickPlaceDigitalAnalog.RotateGripperTo90(TRUE);
 		IF WaitingTimeGrabPart.Q THEN
 			WaitingTimeGrabPart(IN := FALSE);
 			processStepsPickPlace := PickPlaceSteps.DriveZUp;
+			DelayProcessStep := FALSE;
 		END_IF
 		
 		PickPlaceSteps.DriveZUp:
 		
 		instPickPlaceDigitalAnalog.MoveZAxis_On(TRUE, HomePosition);
-		IF instPickPlaceDigitalAnalog.InPositionZAxis THEN
+		IF instPickPlaceDigitalAnalog.InPositionZAxis AND
+		NOT instPickPlaceDigitalAnalog.NewOrderActive
+		THEN
 			processStepsPickPlace := PickPlaceSteps.WaitingForAutomaticStart;
+			DelayProcessStep := FALSE;
 		END_IF
 	END_CASE]]></ST>
     </Implementation>

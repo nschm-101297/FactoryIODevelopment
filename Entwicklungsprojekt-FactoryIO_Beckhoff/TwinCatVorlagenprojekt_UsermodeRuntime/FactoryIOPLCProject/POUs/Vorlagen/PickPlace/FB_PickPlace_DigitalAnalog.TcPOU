@@ -25,10 +25,12 @@ VAR_IN_OUT
 	HMIInterface	:	MachineSectionHMIInterface;	//HMI-Interface
 END_VAR
 VAR
+	statInit	:	BOOL; //Memory for first cycle
 	statMovePickPlace	:	BOOL;
-	statPickPlaceInPositionXAxis	:	BOOL;
-	statPickPlaceInPositionYAxis	:	BOOL;
-	statPickPlaceInPositionZAxis	:	BOOL;
+	statPickPlaceNewOrder	:	BOOL;
+	statPickPlaceInPositionXAxis	:	BOOL := TRUE;
+	statPickPlaceInPositionYAxis	:	BOOL := TRUE;
+	statPickPlaceInPositionZAxis	:	BOOL := TRUE;
 	statPickPlaceInPositionCAxis90	:	BOOL;
 	statCurrentPositionXAxis	: REAL;
 	statCurrentPositionYAxis	: REAL;
@@ -90,7 +92,7 @@ FC_AnalogInputValueHandling(RowValue:= PickPlaceCurrentPositionZAxis,
 (*===================== HMI INTERFACE =====================*)
 internHMIInterface := HMIInterface;
 
-IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
+IF internHMIInterface.ActiveMachineSection = MachineSection.PickPlace AND
 	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
 	(*===================== Initializing HMI-Interface =====================*)
 	IF NOT internInstanceActivatedFirstTime THEN
@@ -106,11 +108,13 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	IF internRisingEdgePageSwitchDown.Q THEN
 		internHMIInterface.PageSwitch.SelectedPage := internHMIInterface.PageSwitch.SelectedPage - 1; 
 	END_IF
-	
+	IF internHMIInterface.PageSwitch.SelectedPage = 0 THEN
+		internHMIInterface.PageSwitch.SelectedPage := 1;
+	END_IF
 	internHMIInterface.PageSwitch.MinPage := 1;
 	internHMIInterface.PageSwitch.MaxPage := 2;
 	internHMIInterface.PageSwitch.NextPageIsEnabled := internHMIInterface.PageSwitch.SelectedPage < internHMIInterface.PageSwitch.MaxPage;
-	internHMIInterface.PageSwitch.PreviousPageIsEnabled := internHMIInterface.PageSwitch.SelectedPage < internHMIInterface.PageSwitch.MinPage;
+	internHMIInterface.PageSwitch.PreviousPageIsEnabled := internHMIInterface.PageSwitch.SelectedPage > internHMIInterface.PageSwitch.MinPage;
 	(*===================== Button Handling Movement =====================*)
 	IF internHMIInterface.PageSwitch.SelectedPage = 1 THEN
 		internHMIInterface.Movements.MovementSettingLines[1].CaptionSettingLine := CONCAT('StackerCrane X-Axis Control ', ActorInstanceName);
@@ -141,7 +145,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 										 														OperatingMode.EStop.IsActive AND NOT
 																								OperatingMode.Fault.IsActive AND NOT
 																								statMovePickPlace AND
-																								statSetPointXAxis > 0;
+																								statSetPointXAxis > 0.1;
 		internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].InPosition := statPickPlaceInPositionXAxis;
 		internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].CaptionButton := 'Minus';
 		internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\BackwardConveyor.svg';
@@ -174,7 +178,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 										 														OperatingMode.EStop.IsActive AND NOT
 																								OperatingMode.Fault.IsActive AND NOT
 																								statMovePickPlace AND
-																								statSetPointYAxis > 0;
+																								statSetPointYAxis > 0.1;
 		internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].InPosition := statPickPlaceInPositionYAxis;
 		internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].CaptionButton := 'Minus';
 		internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].PathImageButton := 'Images\DownElevator.svg';
@@ -189,7 +193,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 										 														OperatingMode.EStop.IsActive AND NOT
 																								OperatingMode.Fault.IsActive AND NOT
 																								statMovePickPlace AND
-																								statSetPointZAxis < 0.5;
+																								statSetPointZAxis > 0.1;
 		internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].InPosition := statPickPlaceInPositionZAxis;
 		internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].CaptionButton := 'Up';
 		internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\UpElevator.svg';
@@ -208,7 +212,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 										 														OperatingMode.EStop.IsActive AND NOT
 																								OperatingMode.Fault.IsActive AND NOT
 																								statMovePickPlace AND
-																								statSetPointZAxis > 0;
+																								statSetPointZAxis < 0.5;
 		internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].InPosition := statPickPlaceInPositionZAxis;
 		internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].CaptionButton := 'Down';
 		internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].PathImageButton := 'Images\DownElevator.svg';
@@ -288,6 +292,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	IF internRisingEdgePressButtonPlusXAxis.Q THEN
 		statSetPointXAxis := statSetPointXAxis + 0.2;
 		statMovePickPlace := TRUE;
+		statPickPlaceNewOrder := TRUE;
 	END_IF
 	(*===================== X-Axis Minus =====================*)
 	internRisingEdgePressButtonMinusXAxis(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsPressed AND 
@@ -296,6 +301,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	IF internRisingEdgePressButtonMinusXAxis.Q THEN
 		statSetPointXAxis := statSetPointXAxis - 0.2;
 		statMovePickPlace := TRUE;
+		statPickPlaceNewOrder := TRUE;
 	END_IF
 	(*===================== X-Axis Stop =====================*)
 	internRisingEdgePressButtonStopXAxis(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsPressed AND 
@@ -311,6 +317,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	IF internRisingEdgePressButtonPlusYAxis.Q THEN
 		statSetPointYAxis := statSetPointYAxis + 0.2;
 		statMovePickPlace := TRUE;
+		statPickPlaceNewOrder := TRUE;
 	END_IF
 	(*===================== Y-Axis Minus =====================*)
 	internRisingEdgePressButtonMinusYAxis(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsPressed AND 
@@ -319,6 +326,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 	IF internRisingEdgePressButtonMinusYAxis.Q THEN
 		statSetPointYAxis := statSetPointYAxis - 0.2;
 		statMovePickPlace := TRUE;
+		statPickPlaceNewOrder := TRUE;
 	END_IF
 	(*===================== Y-Axis Stop =====================*)
 	internRisingEdgePressButtonStopYAxis(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[2].IsPressed AND 
@@ -332,16 +340,18 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 												internHMIInterface.PageSwitch.SelectedPage = 2 AND 
 												internHMIInterface.PageSwitch.SelectedTab = 'tbMovement');
 	IF internRisingEdgePressButtonUpZAxis.Q THEN
-		statSetPointZAxis := statSetPointZAxis + 0.2;
+		statSetPointZAxis := statSetPointZAxis - 0.2;
 		statMovePickPlace := TRUE;
+		statPickPlaceNewOrder := TRUE;
 	END_IF
 	(*===================== Z-Axis Down =====================*)
 	internRisingEdgePressButtonDownZAxis(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[3].IsPressed AND 
 												internHMIInterface.PageSwitch.SelectedPage = 2 AND 
 												internHMIInterface.PageSwitch.SelectedTab = 'tbMovement');
 	IF internRisingEdgePressButtonDownZAxis.Q THEN
-		statSetPointZAxis := statSetPointZAxis - 0.2;
+		statSetPointZAxis := statSetPointZAxis + 0.2;
 		statMovePickPlace := TRUE;
+		statPickPlaceNewOrder := TRUE;
 	END_IF
 	(*===================== Z-Axis Stop =====================*)
 	internRisingEdgePressButtonStopZAxis(CLK := internHMIInterface.Movements.MovementSettingLines[1].SettingLineButtons[2].IsPressed AND 
@@ -351,12 +361,16 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.StackerCrane AND
 		internStopZAxis := TRUE;
 	END_IF
 	(*===================== C-Axis To 90 =====================*)
-	internRisingEdgePressButtonCAxisToPos90(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsPressed);
+	internRisingEdgePressButtonCAxisToPos90(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[1].IsPressed AND 
+												internHMIInterface.PageSwitch.SelectedPage = 2 AND 
+												internHMIInterface.PageSwitch.SelectedTab = 'tbMovement');
 	IF internRisingEdgePressButtonCAxisToPos90.Q THEN
 		statCAxisToPos90 := TRUE;
 	END_IF
 	(*===================== C-Axis To 0 =====================*)
-	internRisingEdgePressButtonCAxisToPos0(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsPressed);
+	internRisingEdgePressButtonCAxisToPos0(CLK := internHMIInterface.Movements.MovementSettingLines[2].SettingLineButtons[3].IsPressed AND 
+												internHMIInterface.PageSwitch.SelectedPage = 2 AND 
+												internHMIInterface.PageSwitch.SelectedTab = 'tbMovement');
 	IF internRisingEdgePressButtonCAxisToPos0.Q THEN
 		statCAxisToPos90 := FALSE;
 	END_IF
@@ -383,9 +397,15 @@ statFEZAxisMoving(CLK := PickPlaceZAxisStillMoving);
 statRECAxisMoving(CLK := PickPlaceCAxisLimitReached);
 statFECAxisMoving(CLK := PickPlaceCAxisLimitReached);
 
+IF statPickPlaceInPositionXAxis AND statPickPlaceInPositionYAxis AND
+ statPickPlaceInPositionZAxis AND NOT statPickPlaceNewOrder
+THEN
+	statMovePickPlace := FALSE;
+END_IF
 IF statREX_YAxisMoving.Q THEN
 	statPickPlaceInPositionXAxis := FALSE;
 	statPickPlaceInPositionYAxis := FALSE;
+	statPickPlaceNewOrder := FALSE;
 END_IF
 IF statFEX_YAxisMoving.Q THEN
 	statPickPlaceInPositionXAxis := TRUE;
@@ -393,6 +413,7 @@ IF statFEX_YAxisMoving.Q THEN
 END_IF
 IF statREZAxisMoving.Q THEN
 	statPickPlaceInPositionZAxis := FALSE;
+	statPickPlaceNewOrder := FALSE;
 END_IF
 IF statFEZAxisMoving.Q THEN
 	statPickPlaceInPositionZAxis := TRUE;
@@ -402,6 +423,10 @@ IF statRECAxisMoving.Q THEN
 END_IF
 IF statFECAxisMoving.Q THEN
 	statPickPlaceInPositionCAxis90 := FALSE;
+END_IF
+IF NOT statInit THEN
+	statPickPlaceInPositionCAxis90 := FALSE;
+	statInit := TRUE;
 END_IF
 (*===================== Positioning Stacker crane =====================*)
 IF ((OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive) OR
@@ -420,6 +445,7 @@ THEN
 	statSelectedSetPointYAxis := statCurrentPositionYAxis;
 	statSelectedSetPointZAxis := statCurrentPositionZAxis;
 	statMovePickPlace := FALSE;
+	internStopXAxis := FALSE;
 END_IF
 (*===================== SetPoint X-Axis =====================*)
 FC_AnalogOutputValueHandling(Setpoint:= statSelectedSetPointXAxis, 
@@ -443,8 +469,8 @@ SetPointToZAxis := statSetPointToZaxis;
 GrabPart := statGrabPart;
 RotateGripper := statCAxisToPos90;]]></ST>
     </Implementation>
-    <Method Name="GrabPart" Id="{0d434932-c9b0-4b95-9068-ff5f65ea57f3}">
-      <Declaration><![CDATA[METHOD PUBLIC GrabPart : BOOL
+    <Method Name="GrabPart_ON" Id="{0d434932-c9b0-4b95-9068-ff5f65ea57f3}">
+      <Declaration><![CDATA[METHOD PUBLIC GrabPart_ON : BOOL
 VAR_INPUT
 	StartGrabPart	:	BOOL;
 END_VAR
@@ -454,9 +480,9 @@ END_VAR
 	InPositionX_Y_Axis AND InPositionZAxis AND StartGrabPart AND NOT statMovePickPlace 
 THEN
 	statGrabPart := TRUE;
-	GrabPart := TRUE;
+	GrabPart_ON := TRUE;
 ELSE
-	GrabPart := FALSE;
+	GrabPart_ON := FALSE;
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -510,11 +536,22 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND
-	NOT statMovePickPlace AND StartMovePickPlaceX_YAxis THEN
-	SetPointXAxis := Positions.PositionXAxis;
-	SetPointYAxis := Positions.PositionYAxis;
-	statMovePickPlace := TRUE;
-	MoveXYAxis_On := TRUE;
+	NOT statMovePickPlace AND StartMovePickPlaceX_YAxis
+THEN
+	IF (
+    (Positions.PositionXAxis > statCurrentPositionXAxis + 0.1) OR
+       (Positions.PositionXAxis < statCurrentPositionXAxis - 0.1) OR
+       (Positions.PositionYAxis > statCurrentPositionYAxis + 0.1) OR
+       (Positions.PositionYAxis < statCurrentPositionYAxis - 0.1)
+	)  THEN
+		SetPointXAxis := Positions.PositionXAxis;
+		SetPointYAxis := Positions.PositionYAxis;
+		statMovePickPlace := TRUE;
+		statPickPlaceNewOrder := TRUE;
+		MoveXYAxis_On := TRUE;
+	ELSE		
+		MoveXYAxis_On := FALSE;
+	END_IF
 ELSE
 	MoveXYAxis_On := FALSE;
 END_IF ]]></ST>
@@ -530,14 +567,31 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF OperatingMode.AutomaticIsActive AND OperatingMode.AutomaticStart.IsActive AND
 	NOT statMovePickPlace AND StartMovePickPlaceZAxis THEN
-	SetPointZAxis := Positions.PositionZAxis;
-	statMovePickPlace := TRUE;
-	MoveZAxis_On := TRUE;
+	IF (Positions.PositionZAxis > statCurrentPositionZAxis + 0.1) OR
+       (Positions.PositionZAxis < statCurrentPositionZAxis - 0.1) THEN
+		SetPointZAxis := Positions.PositionZAxis;
+		statMovePickPlace := TRUE;
+		statPickPlaceNewOrder := TRUE;
+		MoveZAxis_On := TRUE;
+	ELSE
+		MoveZAxis_On := FALSE;		
+	END_IF
 ELSE
 	MoveZAxis_On := FALSE;
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Property Name="NewOrderActive" Id="{33d97e74-ca10-4b7b-ba15-97e16bf748ce}">
+      <Declaration><![CDATA[PROPERTY PUBLIC NewOrderActive : BOOL]]></Declaration>
+      <Get Name="Get" Id="{0f377e2b-f1e1-42b5-9fa4-17b73b225829}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[NewOrderActive := statPickPlaceNewOrder;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="ReleasePart" Id="{971e9852-3dda-4aed-a566-f8a18218139b}">
       <Declaration><![CDATA[METHOD PUBLIC ReleasePart : BOOL
 VAR_INPUT
@@ -625,7 +679,9 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[IF SetPointYAxis < 1.25 THEN
+	statSetPointYAxis := SetPointYAxis;	
+END_IF]]></ST>
         </Implementation>
       </Set>
     </Property>

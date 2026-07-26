@@ -2398,6 +2398,16 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.HMI.hmiPickPlaceInstances": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiPickPlaceInstances",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..2_OF-STRING-80"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.HMI.hmiPositingBarInstances": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -5478,6 +5488,7 @@
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Manuel.PreconditionsFullfilled": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Quit.IsActive": 3,
                 "ADS.PLC1.HMI.hmiOperatingmodeInterface.PLCToHMI.Reset.IsActive": 3,
+                "ADS.PLC1.HMI.hmiPickPlaceInstances": 3,
                 "ADS.PLC1.HMI.hmiPositingBarInstances": 3,
                 "ADS.PLC1.HMI.hmiRFIDInstances": 3,
                 "ADS.PLC1.HMI.hmiStackerCraneInstances": 3,

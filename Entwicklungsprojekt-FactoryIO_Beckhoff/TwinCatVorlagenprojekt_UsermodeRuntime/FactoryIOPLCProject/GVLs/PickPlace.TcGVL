@@ -34,6 +34,8 @@
 						PositionCAxis := 0.0
 						};
 	WaitingTimeGrabPart	:	TON;
+	
+	DelayProcessStep	:	BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
