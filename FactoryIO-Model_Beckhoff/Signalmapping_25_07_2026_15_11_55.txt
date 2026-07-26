@@ -1,0 +1,76 @@
+(*=============== Digitale Eingaenge ===============*)
+BauteilVorEmitter	:=	GVL.mb_Output_Coils[0];
+BetrMan	:=	GVL.mb_Output_Coils[1];
+BetrAuto	:=	GVL.mb_Output_Coils[2];
+StartButton	:=	GVL.mb_Output_Coils[3];
+StopButton	:=	GVL.mb_Output_Coils[4];
+HomeButton	:=	GVL.mb_Output_Coils[5];
+ResetButton	:=	GVL.mb_Output_Coils[6];
+QuitButton	:=	GVL.mb_Output_Coils[7];
+E_Stop	:=	GVL.mb_Output_Coils[8];
+Sensor_Band_Einlauf	:=	GVL.mb_Output_Coils[9];
+Sensor_Band_Auslauf	:=	GVL.mb_Output_Coils[10];
+AufzugSensorEinlaufFoerderband	:=	GVL.mb_Output_Coils[11];
+AufzugSensorAuslaufFoerderband	:=	GVL.mb_Output_Coils[12];
+RBGEndlageMitte	:=	GVL.mb_Output_Coils[13];
+RBGEndlageLinks	:=	GVL.mb_Output_Coils[14];
+RBGEndlageRechts	:=	GVL.mb_Output_Coils[15];
+PartDetectedVisionSensor	:=	GVL.mb_Output_Coils[18];
+DigitalStackerCraneEndlageLinks	:=	GVL.mb_Output_Coils[20];
+DigitalStackerCraneEndlageMitte	:=	GVL.mb_Output_Coils[21];
+DigitalStackerCraneEndlageRechts	:=	GVL.mb_Output_Coils[22];
+DigitalStackerCraneXAxisIsMoving	:=	GVL.mb_Output_Coils[23];
+DigitalStackerCraneZAxisIsMoving	:=	GVL.mb_Output_Coils[24];
+PositionerIsClamped	:=	GVL.mb_Output_Coils[26];
+PositionerIsRaised	:=	GVL.mb_Output_Coils[27];
+PickPlaceX_YAxisIsMoving	:=	GVL.mb_Output_Coils[29];
+PickPlaceZAxisIsMoving	:=	GVL.mb_Output_Coils[30];
+PickPlaceBoxDetected	:=	GVL.mb_Output_Coils[31];
+PickPlaceCAxisInPos	:=	GVL.mb_Output_Coils[32];
+
+(*=============== Digitale Ausgaenge ===============*)
+GVL.mb_Input_Coils[0]	:=	Emitter_Rollenband4m;
+GVL.mb_Input_Coils[3]	:=	StartLED;
+GVL.mb_Input_Coils[4]	:=	StopLED;
+GVL.mb_Input_Coils[5]	:=	ResetLED;
+GVL.mb_Input_Coils[6]	:=	HomeLED;
+GVL.mb_Input_Coils[7]	:=	QuitLED;
+GVL.mb_Input_Coils[9]	:=	Foerderband_Vorwaerts;
+GVL.mb_Input_Coils[10]	:=	Foerderband_Rueckwaerts;
+GVL.mb_Input_Coils[11]	:=	AufzugFoerderbandVorwaerts;
+GVL.mb_Input_Coils[12]	:=	AufzugFoerderbandRueckwaerts;
+GVL.mb_Input_Coils[14]	:=	RBGGabelLinks;
+GVL.mb_Input_Coils[15]	:=	RBGGabelRechts;
+GVL.mb_Input_Coils[17]	:=	RFIDExecuteCommand;
+GVL.mb_Input_Coils[20]	:=	DigitalStackerCraneGabelLinks;
+GVL.mb_Input_Coils[21]	:=	DigitalStackerCraneGabelRechts;
+GVL.mb_Input_Coils[22]	:=	DigitalStackerCraneLiftGabel;
+GVL.mb_Input_Coils[26]	:=	PositionerClamp;
+GVL.mb_Input_Coils[27]	:=	PositionerRaise;
+GVL.mb_Input_Coils[29]	:=	PickPlaceCAxisMovePlus;
+GVL.mb_Input_Coils[30]	:=	PickPlaceGrabBox;
+
+(*=============== Analoge Eingaenge ===============*)
+AufzugIstwert	:=	GVL.mb_Output_Registers[0];
+RBGIstwertX	:=	GVL.mb_Output_Registers[1];
+RBGIstwertZ	:=	GVL.mb_Output_Registers[2];
+RFIDCommandID	:=	GVL.mb_Output_Registers[3];
+RFIDReadData	:=	GVL.mb_Output_Registers[4];
+RFIDStatus	:=	GVL.mb_Output_Registers[5];
+ReadPartCode	:=	GVL.mb_Output_Registers[6];
+PickPlacePositionXAxis	:=	GVL.mb_Output_Registers[9];
+PickPlacePositionYAxis	:=	GVL.mb_Output_Registers[10];
+PickPlacePositionZAxis	:=	GVL.mb_Output_Registers[11];
+
+(*=============== Analoge Ausgaenge ===============*)
+GVL.mb_Input_Registers[0]	:=	AufzugSollwert;
+GVL.mb_Input_Registers[1]	:=	RBGSollwertX;
+GVL.mb_Input_Registers[2]	:=	RBGSollwertZ;
+GVL.mb_Input_Registers[3]	:=	RFIDCommand;
+GVL.mb_Input_Registers[4]	:=	RFIDWriteData;
+GVL.mb_Input_Registers[5]	:=	RFIDMemoryIndex;
+GVL.mb_Input_Registers[7]	:=	DigitalStackerCraneTargetPos;
+GVL.mb_Input_Registers[9]	:=	PickPlaceSetpositionXAxis;
+GVL.mb_Input_Registers[10]	:=	PickPlaceSetpositionYAxis;
+GVL.mb_Input_Registers[11]	:=	PickPlaceSetpositionZAxis;
+

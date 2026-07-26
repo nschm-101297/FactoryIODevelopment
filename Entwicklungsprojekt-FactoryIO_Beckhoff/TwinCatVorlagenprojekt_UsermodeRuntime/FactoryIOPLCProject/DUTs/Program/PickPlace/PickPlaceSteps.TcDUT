@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="PickPlaceSteps" Id="{5f2039d2-005d-4c2d-8e20-2159eea26a7f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE PickPlaceSteps :
+(
+	WaitingForAutomaticStart := 0,
+	DriveToHome,
+	DriveXYToPick,
+	DriveZDown,
+	GrabPart,
+	DriveZUp
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

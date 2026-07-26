@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_PickPlace" Id="{f0541c3e-4408-465a-adc2-d34d444b6d7b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_PickPlace]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[instPickPlaceDigitalAnalog(
+	PickPlaceCurrentPositionXAxis := PickPlacePositionXAxis,
+	PickPlaceCurrentPositionYAxis := PickPlacePositionYAxis,
+	PickPlaceCurrentPositionZAxis := PickPlacePositionZAxis,
+	PickPlaceX_YAxisStillMoving := PickPlaceX_YAxisIsMoving,
+	PickPlaceZAxisStillMoving := PickPlaceZAxisIsMoving,
+	PickPlaceBoxDetected := PickPlaceBoxDetected,
+	PickPlaceCAxisLimitReached := PickPlaceCAxisInPos,
+	ActorInstanceIndex := 0,
+	ActorInstanceName := 'Zufuehrband',
+	OperatingMode := instOperatingMode.StateOperatingMode,
+	HMIInterface := HMI.hmiMachineSectionInterface,
+	SetPointToXAxis => PickPlaceSetpositionXAxis,
+	SetPointToYAxis => PickPlaceSetpositionYAxis,
+	SetPointToZAxis => PickPlaceSetpositionZAxis,
+	GrabPart => PickPlaceGrabBox,
+	RotateGripper => PickPlaceCAxisMovePlus);
+	
+	WaitingTimeGrabPart(PT := T#2S);
+	
+	CASE processStepsPickPlace OF
+		PickPlaceSteps.WaitingForAutomaticStart:
+		
+		IF instOperatingMode.StateOperatingMode.AutomaticStart.IsActive THEN
+			processStepsPickPlace := PickPlaceSteps.DriveToHome;
+		END_IF
+		
+		PickPlaceSteps.DriveToHome:
+		
+		instPickPlaceDigitalAnalog.MoveXYAxis_On(TRUE, HomePosition);
+		instPickPlaceDigitalAnalog.MoveZAxis_On(TRUE, HomePosition);
+		instPickPlaceDigitalAnalog.ReleasePart(TRUE);
+		instPickPlaceDigitalAnalog.RotateGripperTo0(TRUE);
+		IF instPickPlaceDigitalAnalog.InPositionX_Y_Axis AND 
+			instPickPlaceDigitalAnalog.InPositionZAxis AND
+			instPickPlaceDigitalAnalog.GripperInPos0 THEN
+			processStepsPickPlace := PickPlaceSteps.DriveXYToPick;
+		END_IF
+		
+		PickPlaceSteps.DriveXYToPick:
+		
+		instPickPlaceDigitalAnalog.MoveXYAxis_On(TRUE, PickPlacePosition);
+		IF instPickPlaceDigitalAnalog.InPositionX_Y_Axis THEN
+			processStepsPickPlace := PickPlaceSteps.DriveZDown;
+		END_IF
+		
+		PickPlaceSteps.DriveZDown:
+		
+		instPickPlaceDigitalAnalog.MoveZAxis_On(TRUE, PickPlacePosition);
+		IF instPickPlaceDigitalAnalog.InPositionZAxis THEN
+			processStepsPickPlace := PickPlaceSteps.GrabPart;
+		END_IF
+		
+		PickPlaceSteps.GrabPart:
+		WaitingTimeGrabPart(IN := TRUE);
+		IF WaitingTimeGrabPart.Q THEN
+			WaitingTimeGrabPart(IN := FALSE);
+			processStepsPickPlace := PickPlaceSteps.DriveZUp;
+		END_IF
+		
+		PickPlaceSteps.DriveZUp:
+		
+		instPickPlaceDigitalAnalog.MoveZAxis_On(TRUE, HomePosition);
+		IF instPickPlaceDigitalAnalog.InPositionZAxis THEN
+			processStepsPickPlace := PickPlaceSteps.WaitingForAutomaticStart;
+		END_IF
+	END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

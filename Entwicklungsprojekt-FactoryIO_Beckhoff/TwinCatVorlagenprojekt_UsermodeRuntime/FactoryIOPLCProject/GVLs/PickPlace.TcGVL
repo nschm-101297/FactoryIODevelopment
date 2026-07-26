@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="PickPlace" Id="{3617cca3-2fec-4fbe-a073-a84d0dccd526}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	PickPlaceBoxDetected	:	BOOL;
+	PickPlaceCAxisInPos	:	BOOL;
+	PickPlaceZAxisIsMoving	:	BOOL;
+	PickPlaceX_YAxisIsMoving	:	BOOL;
+	
+	PickPlaceCAxisMovePlus	:	BOOL;
+	PickPlaceGrabBox	:	BOOL;
+	
+	PickPlacePositionYAxis	:	WORD;
+	PickPlacePositionZAxis	:	WORD;
+	PickPlacePositionXAxis	:	WORD;
+	
+	PickPlaceSetpositionYAxis	:	WORD;
+	PickPlaceSetpositionZAxis	:	WORD;
+	PickPlaceSetpositionXAxis	:	WORD;
+	
+	(*========================== Simulation ==========================*)
+	instPickPlaceDigitalAnalog	:	FB_PickPlace_DigitalAnalog;
+	processStepsPickPlace	:	PickPlaceSteps;
+	HomePosition	:	PickPlacePosition{
+						PositionXAxis := 0.0,
+						PositionYAxis := 0.0,
+						PositionZAxis := 0.0,
+						PositionCAxis := 0.0
+						};
+	PickPlacePosition	:	PickPlacePosition{
+						PositionXAxis := 1.0,
+						PositionYAxis := 1.0,
+						PositionZAxis := 1.0,
+						PositionCAxis := 0.0
+						};
+	WaitingTimeGrabPart	:	TON;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
