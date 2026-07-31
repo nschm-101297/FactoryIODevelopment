@@ -9,7 +9,7 @@
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>FactoryIOLibrary</Name>
-    <ProgramVersion>3.1.4026.21</ProgramVersion>
+    <ProgramVersion>3.1.4026.24</ProgramVersion>
     <Application>{24e5a045-6c4b-4f70-a454-3fcf67754812}</Application>
     <TypeSystem>{270e808c-0bf4-488a-9a63-e8634b75116d}</TypeSystem>
     <Implicit_Task_Info>{1e5940e0-9b89-4295-9a1c-20a96f3a6bd0}</Implicit_Task_Info>
@@ -19,7 +19,7 @@
     <Company>Privat</Company>
     <Released>false</Released>
     <Title>FactoryIO_Library</Title>
-    <ProjectVersion>0.0.3</ProjectVersion>
+    <ProjectVersion>0.0.4</ProjectVersion>
     <GlobalVersionStructureIncluded>true</GlobalVersionStructureIncluded>
     <DefaultNamespace>FactoryIO</DefaultNamespace>
     <LibraryCategories>
@@ -51,6 +51,8 @@
     <Folder Include="DUTs\HMI\NumericalInput" />
     <Folder Include="DUTs\HMI\SettingLine" />
     <Folder Include="DUTs\OperatingMode" />
+    <Folder Include="DUTs\PickPlace" />
+    <Folder Include="DUTs\PositingBar" />
     <Folder Include="DUTs\RFID" />
     <Folder Include="DUTs\VisionSensor" />
     <Folder Include="POUs" />
@@ -62,6 +64,8 @@
     <Folder Include="POUs\Foerderband" />
     <Folder Include="POUs\HMI" />
     <Folder Include="POUs\OperatingMode" />
+    <Folder Include="POUs\PickPlace" />
+    <Folder Include="POUs\PositingBar" />
     <Folder Include="POUs\RFID" />
     <Folder Include="POUs\VisionSensor" />
     <Folder Include="POUs\Warehouse" />
@@ -143,6 +147,12 @@
     <Compile Include="DUTs\OperatingMode\PLCToHMIOperatingMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\PickPlace\PickPlacePosition.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PositingBar\PositingBarAlignmentDirection.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\RFID\RFIDReadSerialnumberStates.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -177,6 +187,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\OperatingMode\FB_OperatingMode.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PickPlace\FB_PickPlace_DigitalAnalog.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PositingBar\FB_PositingBar.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\RFID\FB_RFID.TcPOU">

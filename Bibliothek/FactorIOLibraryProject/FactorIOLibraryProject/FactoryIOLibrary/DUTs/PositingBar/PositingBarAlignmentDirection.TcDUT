@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="PositingBarAlignmentDirection" Id="{3921d5cb-3fe0-41bf-95da-920f128ee3a3}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE PositingBarAlignmentDirection :
+(
+	AlingmentLeft := 0,
+	AlingmentRight
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
