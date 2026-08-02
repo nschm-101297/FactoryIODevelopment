@@ -19,7 +19,7 @@
     <Company>Privat</Company>
     <Released>false</Released>
     <Title>FactoryIO_Library</Title>
-    <ProjectVersion>0.0.4</ProjectVersion>
+    <ProjectVersion>0.0.5</ProjectVersion>
     <GlobalVersionStructureIncluded>true</GlobalVersionStructureIncluded>
     <DefaultNamespace>FactoryIO</DefaultNamespace>
     <LibraryCategories>
@@ -39,6 +39,18 @@
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_System">
+      <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_Module">
+      <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
