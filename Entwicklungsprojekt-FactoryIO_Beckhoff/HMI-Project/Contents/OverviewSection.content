@@ -115,6 +115,8 @@
 </div>
 <div id="PickPlace" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-grid-column-index="5" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-target-user-control="UserControls/Button_Mainscreen.usercontrol" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-pathimage="Images/PickPlaceDevice.svg" data-tchmi-title="PickPlace" data-tchmi-activatescreen="Contents/MachineSection.content" data-tchmi-regioncontent="%ctrl%DesktopRegion::TargetContent%/ctrl%" data-tchmi-usedasoverview="True" data-tchmi-machinesectiontitle="PickPlace" data-tchmi-machinesection="%i%sActorGroupName%/i%">
 </div>
+<div id="Remover" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-grid-column-index="7" data-tchmi-grid-row-index="1" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-target-user-control="UserControls/Button_Mainscreen.usercontrol" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-usedasoverview="True" data-tchmi-title="Remover" data-tchmi-pathimage="Images/RemovePartRemover.svg" data-tchmi-activatescreen="Contents/MachineSection.content" data-tchmi-regioncontent="%ctrl%DesktopRegion::TargetContent%/ctrl%" data-tchmi-machinesection="%i%sActorGroupName%/i%" data-tchmi-machinesectiontitle="Remover">
+</div>
 </div>
 </div>
 

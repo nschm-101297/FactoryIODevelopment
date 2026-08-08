@@ -792,7 +792,8 @@
                     4,
                     5,
                     6,
-                    7
+                    7,
+                    8
                 ],
                 "options": [
                     {
@@ -826,6 +827,10 @@
                     {
                         "label": "PickPlace",
                         "value": 7
+                    },
+                    {
+                        "label": "Remover",
+                        "value": 8
                     }
                 ],
                 "type": "integer"
