@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="Remover" Id="{7d463467-d51e-4781-88b6-5ca11176fe60}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	RemoverPartPresent	:	BOOL;
+	Remover	:	BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -25,6 +25,7 @@
 	GVL.mb_Input_Coils[27]	:=	PositionerRaise;
 	GVL.mb_Input_Coils[29]	:=	PickPlaceCAxisMovePlus;
 	GVL.mb_Input_Coils[30]	:=	PickPlaceGrabBox;
+	GVL.mb_Input_Coils[34]	:=	Remover;
 
 
 (* ==================================== Analoge Ausgaenge ====================================*)

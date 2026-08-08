@@ -33,6 +33,7 @@ PickPlaceX_YAxisIsMoving	:=	GVL.mb_Output_Coils[29];
 PickPlaceZAxisIsMoving	:=	GVL.mb_Output_Coils[30];
 PickPlaceBoxDetected	:=	GVL.mb_Output_Coils[31];
 PickPlaceCAxisInPos	:=	GVL.mb_Output_Coils[32];
+RemoverPartPresent	:=	GVL.mb_Output_Coils[34];
 
 (* ==================================== Analoge Eingaenge ====================================*)
 AufzugIstwert := GVL.mb_Output_Registers[0];

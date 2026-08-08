@@ -226,6 +226,9 @@
     <Content Include="Images\UpElevator.svg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Server\ADS\ADS.Config.default.json">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Server\ADS\ADS.Config.default.json" />
     <Content Include="UserControls\Button_Mainscreen.usercontrol">
       <SubType>Content</SubType>
