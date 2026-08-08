@@ -7,8 +7,11 @@
       <ST><![CDATA[instFBRemover(PartPresent := RemoverPartPresent,
 			  ActorInstanceIndex := 1,
 			  ActorInstanceName := 'Remover conveyor',
+			  OperatingModeSection := instOperatingMode.StateOperatingMode,
 			  HMIInterface := HMI.hmiMachineSectionInterface,
-			  RemovePart => Remover);]]></ST>
+			  RemovePart => Remover);
+			  
+instFBRemover.Remove();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

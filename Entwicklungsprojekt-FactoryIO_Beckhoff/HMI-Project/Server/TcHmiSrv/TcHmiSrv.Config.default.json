@@ -2433,6 +2433,16 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.HMI.hmiRemoverInstances": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::HMI::hmiRemoverInstances",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..1_OF-STRING-80"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.HMI.hmiStackerCraneInstances": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -5496,6 +5506,7 @@
                 "ADS.PLC1.HMI.hmiPickPlaceInstances": 3,
                 "ADS.PLC1.HMI.hmiPositingBarInstances": 3,
                 "ADS.PLC1.HMI.hmiRFIDInstances": 3,
+                "ADS.PLC1.HMI.hmiRemoverInstances": 3,
                 "ADS.PLC1.HMI.hmiStackerCraneInstances": 3,
                 "ChangeUserSettings": 3,
                 "ConfirmAlarm": 3,

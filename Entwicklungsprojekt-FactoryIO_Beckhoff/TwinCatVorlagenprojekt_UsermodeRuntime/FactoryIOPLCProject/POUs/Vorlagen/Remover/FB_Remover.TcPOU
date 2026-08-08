@@ -8,6 +8,7 @@ VAR_INPUT
 	ActorInstanceName	:	STRING;
 END_VAR
 VAR_IN_OUT
+	OperatingModeSection	:	OperatingMode;
 	HMIInterface	:	MachineSectionHMIInterface;
 END_VAR
 VAR_OUTPUT
@@ -15,6 +16,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	internRemovePart	: BOOL;
+	internOperatingMode	:	OperatingMode;
 	
 	internHMIInterface	:	MachineSectionHMIInterface;
 	internInstanceActivatedFirstTime	:	BOOL;
@@ -22,7 +24,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[(*===================== HMI Interface =====================*)
+      <ST><![CDATA[(*===================== Operating mode =====================*)
+internOperatingMode := OperatingModeSection;
+(*===================== HMI Interface =====================*)
 internHMIInterface := HMIInterface;
 
 IF internHMIInterface.ActiveMachineSection = MachineSection.Remover AND
@@ -38,7 +42,7 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Remover AND
 	
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
-	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsEnabled := PartPresent;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsEnabled := PartPresent AND internOperatingMode.ManuelIsActive;
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].InPosition := NOT PartPresent;
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].CaptionButton := 'Remove';
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\RemovePartRemover.svg';
@@ -65,11 +69,12 @@ RemovePart := internRemovePart;]]></ST>
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF PartPresent THEN
+        <ST><![CDATA[IF PartPresent AND internOperatingMode.AutomaticIsActive AND
+	internOperatingMode.AutomaticStart.IsActive
+THEN
 	internRemovePart := TRUE;
 	Remove := TRUE;
 ELSE
-	internRemovePart := FALSE;
 	Remove := FALSE;
 END_IF]]></ST>
       </Implementation>
