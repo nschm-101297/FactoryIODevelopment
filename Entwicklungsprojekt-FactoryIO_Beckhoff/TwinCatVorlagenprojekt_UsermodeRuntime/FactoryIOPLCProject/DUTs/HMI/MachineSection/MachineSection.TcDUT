@@ -13,7 +13,8 @@ TYPE MachineSection :
 	StackerCrane,
 	RFID,
 	PositingBar,
-	PickPlace
+	PickPlace,
+	Remover
 );
 END_TYPE
 ]]></Declaration>

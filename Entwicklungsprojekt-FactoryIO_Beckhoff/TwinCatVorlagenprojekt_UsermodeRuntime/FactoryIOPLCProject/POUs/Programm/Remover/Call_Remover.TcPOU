@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Call_Remover" Id="{124be3c7-c944-4f44-bd3e-c30afe3519a2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Call_Remover
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[instFBRemover(PartPresent := RemoverPartPresent,
+			  ActorInstanceIndex := 1,
+			  ActorInstanceName := 'Remover conveyor',
+			  HMIInterface := HMI.hmiMachineSectionInterface,
+			  RemovePart => Remover);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

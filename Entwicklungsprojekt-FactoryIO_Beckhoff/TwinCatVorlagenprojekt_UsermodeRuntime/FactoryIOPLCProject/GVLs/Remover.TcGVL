@@ -4,6 +4,10 @@
     <Declaration><![CDATA[VAR_GLOBAL
 	RemoverPartPresent	:	BOOL;
 	Remover	:	BOOL;
+	
+	(*=================== Simu ===================*)
+	instFBRemover	:	FB_Remover;
+	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

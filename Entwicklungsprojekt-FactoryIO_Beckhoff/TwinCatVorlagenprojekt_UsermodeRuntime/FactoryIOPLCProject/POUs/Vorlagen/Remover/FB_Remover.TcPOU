@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Remover" Id="{be23e13b-5eb1-4d31-817b-7302c8654880}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Remover
+VAR_INPUT
+	PartPresent	:	BOOL;
+	ActorInstanceIndex	:	INT;
+	ActorInstanceName	:	STRING;
+END_VAR
+VAR_IN_OUT
+	HMIInterface	:	MachineSectionHMIInterface;
+END_VAR
+VAR_OUTPUT
+	RemovePart	:	BOOL;
+END_VAR
+VAR
+	internRemovePart	: BOOL;
+	
+	internHMIInterface	:	MachineSectionHMIInterface;
+	internInstanceActivatedFirstTime	:	BOOL;
+	internRisingEdgePressButton	:	R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*===================== HMI Interface =====================*)
+internHMIInterface := HMIInterface;
+
+IF internHMIInterface.ActiveMachineSection = MachineSection.Remover AND
+	internHMIInterface.SelectedActor = ActorInstanceIndex THEN
+	(*===================== Initializing HMI-Interface =====================*)
+	IF NOT internInstanceActivatedFirstTime THEN
+		FC_InitializingSettingLines(HMIInterface := internHMIInterface);
+		internInstanceActivatedFirstTime := TRUE;
+	END_IF
+	(*===================== Button Handling =====================*)
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].CaptionSettingLine := CONCAT('Removing Part ', ActorInstanceName);
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].VisibilitySettingLine := TRUE;
+	
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsEnabled := NOT PartPresent;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].InPosition := PartPresent;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].CaptionButton := 'Remove';
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\RemovePartRemover.svg';
+	
+	internRisingEdgePressButton(CLK := internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsPressed);
+	IF internRisingEdgePressButton.Q THEN
+		internRemovePart := TRUE;
+	END_IF
+	(*===================== Write Interface =====================*)
+	HMIInterface := internHMIInterface;
+ELSE
+		internInstanceActivatedFirstTime := FALSE;
+END_IF
+(*===================== Remove Parts =====================*)
+
+IF NOT PartPresent THEN
+	internRemovePart := FALSE;
+END_IF
+
+RemovePart := internRemovePart;]]></ST>
+    </Implementation>
+    <Method Name="Remove" Id="{dd5d48ac-e1e4-4cb4-9372-889a1e25ed3c}">
+      <Declaration><![CDATA[METHOD PUBLIC Remove : BOOL
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF PartPresent THEN
+	internRemovePart := TRUE;
+	Remove := TRUE;
+ELSE
+	internRemovePart := FALSE;
+	Remove := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

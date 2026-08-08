@@ -19,6 +19,7 @@ Call_VisionSensor();
 Call_ADSCommunication();
 Call_PositingBar();
 Call_PickPlace();
+Call_Remover();
 SignalmappingOutput();]]></ST>
     </Implementation>
   </POU>
