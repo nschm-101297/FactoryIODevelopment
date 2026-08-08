@@ -38,8 +38,8 @@ IF internHMIInterface.ActiveMachineSection = MachineSection.Remover AND
 	
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleButton := TRUE;
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsVisibleAxisPosition := FALSE;
-	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsEnabled := NOT PartPresent;
-	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].InPosition := PartPresent;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].IsEnabled := PartPresent;
+	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].InPosition := NOT PartPresent;
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].CaptionButton := 'Remove';
 	internHMIInterface.Workpiece.WorkpieceSettingLines[1].SettingLineButtons[1].PathImageButton := 'Images\RemovePartRemover.svg';
 	
