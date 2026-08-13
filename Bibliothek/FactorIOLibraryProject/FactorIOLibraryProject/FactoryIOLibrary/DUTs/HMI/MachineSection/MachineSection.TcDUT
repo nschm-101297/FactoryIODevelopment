@@ -11,7 +11,10 @@ TYPE MachineSection :
 	Emitter,
 	Elevator,
 	StackerCrane,
-	RFID
+	RFID,
+	PositingBar,
+	PickPlace,
+	Remover
 );
 END_TYPE
 ]]></Declaration>

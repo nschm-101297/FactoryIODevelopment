@@ -19,7 +19,7 @@
     <Company>Privat</Company>
     <Released>false</Released>
     <Title>FactoryIO_Library</Title>
-    <ProjectVersion>0.0.6</ProjectVersion>
+    <ProjectVersion>0.0.7</ProjectVersion>
     <GlobalVersionStructureIncluded>true</GlobalVersionStructureIncluded>
     <DefaultNamespace>FactoryIO</DefaultNamespace>
     <LibraryCategories>
@@ -110,6 +110,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\HMI\MachineSection\HMIRuncontrolInterface.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\HMI\MachineSection\HMIWindowSwitch.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\HMI\MachineSection\HMIWorkpieceInterface.TcDUT">
