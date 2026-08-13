@@ -19,7 +19,7 @@
     <Company>Privat</Company>
     <Released>false</Released>
     <Title>FactoryIO_Library</Title>
-    <ProjectVersion>0.0.5</ProjectVersion>
+    <ProjectVersion>0.0.6</ProjectVersion>
     <GlobalVersionStructureIncluded>true</GlobalVersionStructureIncluded>
     <DefaultNamespace>FactoryIO</DefaultNamespace>
     <LibraryCategories>
@@ -78,6 +78,7 @@
     <Folder Include="POUs\OperatingMode" />
     <Folder Include="POUs\PickPlace" />
     <Folder Include="POUs\PositingBar" />
+    <Folder Include="POUs\Remover" />
     <Folder Include="POUs\RFID" />
     <Folder Include="POUs\VisionSensor" />
     <Folder Include="POUs\Warehouse" />
@@ -205,6 +206,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PositingBar\FB_PositingBar.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Remover\FB_Remover.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\RFID\FB_RFID.TcPOU">
