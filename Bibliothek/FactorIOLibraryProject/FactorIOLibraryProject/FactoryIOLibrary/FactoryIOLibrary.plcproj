@@ -19,7 +19,7 @@
     <Company>Privat</Company>
     <Released>false</Released>
     <Title>FactoryIO_Library</Title>
-    <ProjectVersion>0.0.7</ProjectVersion>
+    <ProjectVersion>0.0.8</ProjectVersion>
     <GlobalVersionStructureIncluded>true</GlobalVersionStructureIncluded>
     <DefaultNamespace>FactoryIO</DefaultNamespace>
     <LibraryCategories>
