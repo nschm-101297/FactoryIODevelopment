@@ -24,13 +24,13 @@ END_VAR
 VAR
 	statMoveStackerCrane	:	BOOL;
 	statStackerCraneNewOrder	:	BOOL;
-	statStackerCraneInPositionXAxis	:	BOOL;
-	statStackerCraneInPositionZAxis	:	BOOL;
+	statStackerCraneInPositionXAxis	:	BOOL := TRUE;
+	statStackerCraneInPositionZAxis	:	BOOL := TRUE;
 	statMoveForkLeft	:	BOOL;
 	statMoveForkRight	:	BOOL;
 	statLiftFork	:	BOOL;
 	statSelectedTargetPos	: WORD;
-	statPropTargetPos	:	WORD;
+	statPropTargetPos	:	WORD := 55;
 	statREXAxisMoving	:	R_TRIG;
 	statREZAxisMoving	:	R_TRIG;
 	statFEXAxisMoving	:	F_TRIG;
